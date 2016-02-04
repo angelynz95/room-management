@@ -10,3 +10,7 @@ build.xml
 manifest.mf
 .nb-gradle/
 /Room Management/nbproject/private/
+
+###Intellij###
+/Room Management/.idea/
+/Room Management/Room Management.iml
