@@ -9,41 +9,47 @@ package database;
  */
 
 public class Room {
-  String name;
-  int capacity;
-  String status;
-  
-  public Room() {
+    int id;
+    String name;
+    int capacity;
+    String status;
+        
+    public Room() {
+        
+    }
+
+    public Room(int id, String name, int capacity, String status) {
+        this.id = id;
+        this.name = name;
+        this.capacity = capacity;
+        this.status = status;
+    }
+
+    public int getId() { return id; }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setId(int id) { this.id = id; }
     
-  }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-  public Room(String name, int capacity, String status) {
-    this.name = name;
-    this.capacity = capacity;
-    this.status = status;
-  }
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
 
-  public String getName() {
-    return name;
-  }
-
-  public int getCapacity() {
-    return capacity;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setCapacity(int capacity) {
-    this.capacity = capacity;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

@@ -11,141 +11,141 @@ package database;
 import java.sql.*;
 
 public class Borrowing {
-  int id;
-  String borrowerId;
-  int roomID;
-  String roomName;
-  String borrowerName;
-  String borrowerStatus;
-  String borrowerAddress;
-  String borrowerPhone;
-  String organizationName;
-  String activityName;
-  int totalParticipant;
-  Timestamp start;
-  Timestamp finish;
-  
-  public Borrowing() {
+    int id;
+    String borrowerId;
+    int roomID;
+    String roomName;
+    String borrowerName;
+    String borrowerStatus;
+    String borrowerAddress;
+    String borrowerPhone;
+    String organizationName;
+    String activityName;
+    int totalParticipant;
+    Timestamp start;
+    Timestamp finish;
     
-  }
+    public Borrowing() {
+        
+    }
 
-  public Borrowing(int id, String borrowerId, int roomID, String roomName, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp start, Timestamp finish) {
-    this.id = id;
-    this.borrowerId = borrowerId;
-    this.roomID = roomID;
-    this.roomName = roomName;
-    this.borrowerName = borrowerName;
-    this.borrowerStatus = borrowerStatus;
-    this.borrowerAddress = borrowerAddress;
-    this.borrowerPhone = borrowerPhone;
-    this.organizationName = organizationName;
-    this.activityName = activityName;
-    this.totalParticipant = totalParticipant;
-    this.start = start;
-    this.finish = finish;
-  }
+    public Borrowing(int id, String borrowerId, int roomID, String roomName, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp start, Timestamp finish) {
+        this.id = id;
+        this.borrowerId = borrowerId;
+        this.roomID = roomID;
+        this.roomName = roomName;
+        this.borrowerName = borrowerName;
+        this.borrowerStatus = borrowerStatus;
+        this.borrowerAddress = borrowerAddress;
+        this.borrowerPhone = borrowerPhone;
+        this.organizationName = organizationName;
+        this.activityName = activityName;
+        this.totalParticipant = totalParticipant;
+        this.start = start;
+        this.finish = finish;
+    }
 
-  public int getId() {
-    return id;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public String getBorrowerId() {
-    return borrowerId;
-  }
+    public String getBorrowerId() {
+        return borrowerId;
+    }
 
-  public int getRoomID() {
-    return roomID;
-  }
-  
-  public String getRoomName() {
-    return roomName;
-  }
+    public int getRoomID() {
+        return roomID;
+    }
+    
+    public String getRoomName() {
+        return roomName;
+    }
 
-  public String getBorrowerName() {
-    return borrowerName;
-  }
+    public String getBorrowerName() {
+        return borrowerName;
+    }
 
-  public String getBorrowerStatus() {
-    return borrowerStatus;
-  }
+    public String getBorrowerStatus() {
+        return borrowerStatus;
+    }
 
-  public String getBorrowerAddress() {
-    return borrowerAddress;
-  }
+    public String getBorrowerAddress() {
+        return borrowerAddress;
+    }
 
-  public String getBorrowerPhone() {
-    return borrowerPhone;
-  }
+    public String getBorrowerPhone() {
+        return borrowerPhone;
+    }
 
-  public String getOrganizationName() {
-    return organizationName;
-  }
+    public String getOrganizationName() {
+        return organizationName;
+    }
 
-  public String getActivityName() {
-    return activityName;
-  }
+    public String getActivityName() {
+        return activityName;
+    }
 
-  public int getTotalParticipant() {
-    return totalParticipant;
-  }
+    public int getTotalParticipant() {
+        return totalParticipant;
+    }
 
-  public Timestamp getStart() {
-    return start;
-  }
+    public Timestamp getStart() {
+        return start;
+    }
 
-  public Timestamp getFinish() {
-    return finish;
-  }
+    public Timestamp getFinish() {
+        return finish;
+    }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public void setBorrowerId(String borrowerId) {
-    this.borrowerId = borrowerId;
-  }
+    public void setBorrowerId(String borrowerId) {
+        this.borrowerId = borrowerId;
+    }
 
-  public void setRoomID(int roomID) {
-    this.roomID = roomID;
-  }
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
 
-  public void setRoomName(String roomName) {
-    this.roomName = roomName;
-  }
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 
-  public void setBorrowerName(String borrowerName) {
-    this.borrowerName = borrowerName;
-  }
+    public void setBorrowerName(String borrowerName) {
+        this.borrowerName = borrowerName;
+    }
 
-  public void setBorrowerStatus(String borrowerStatus) {
-    this.borrowerStatus = borrowerStatus;
-  }
+    public void setBorrowerStatus(String borrowerStatus) {
+        this.borrowerStatus = borrowerStatus;
+    }
 
-  public void setBorrowerAddress(String borrowerAddress) {
-    this.borrowerAddress = borrowerAddress;
-  }
+    public void setBorrowerAddress(String borrowerAddress) {
+        this.borrowerAddress = borrowerAddress;
+    }
 
-  public void setBorrowerPhone(String borrowerPhone) {
-    this.borrowerPhone = borrowerPhone;
-  }
+    public void setBorrowerPhone(String borrowerPhone) {
+        this.borrowerPhone = borrowerPhone;
+    }
 
-  public void setOrganizationName(String organizationName) {
-    this.organizationName = organizationName;
-  }
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
 
-  public void setActivityName(String activityName) {
-    this.activityName = activityName;
-  }
+    public void setActivityName(String activityName) {
+        this.activityName = activityName;
+    }
 
-  public void setTotalParticipant(int totalParticipant) {
-    this.totalParticipant = totalParticipant;
-  }
+    public void setTotalParticipant(int totalParticipant) {
+        this.totalParticipant = totalParticipant;
+    }
 
-  public void setStart(Timestamp start) {
-    this.start = start;
-  }
+    public void setStart(Timestamp start) {
+        this.start = start;
+    }
 
-  public void setFinish(Timestamp finish) {
-    this.finish = finish;
-  }
+    public void setFinish(Timestamp finish) {
+        this.finish = finish;
+    }
 }

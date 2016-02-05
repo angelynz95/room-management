@@ -11,75 +11,75 @@ package database;
 import java.sql.*;
 
 public class Maintenance {
-  private int id;
-  private int roomId;
-  private String roomName;
-  private String description;
-  private Timestamp start;
-  private Timestamp finish;
-  
-  public Maintenance() {
+    private int id;
+    private int roomId;
+    private String roomName;
+    private String description;
+    private Timestamp start;
+    private Timestamp finish;
     
-  }
+    public Maintenance() {
+        
+    }
 
-  public Maintenance(int id, int roomId, String roomName, String description, Timestamp start, Timestamp finish) {
-    this.id = id;
-    this.roomId = roomId;
-    this.roomName = roomName;
-    this.description = description;
-    this.start = start;
-    this.finish = finish;
-  }
-  
-  public String getRoomName() {
-    return roomName;
-  }
+    public Maintenance(int id, int roomId, String roomName, String description, Timestamp start, Timestamp finish) {
+        this.id = id;
+        this.roomId = roomId;
+        this.roomName = roomName;
+        this.description = description;
+        this.start = start;
+        this.finish = finish;
+    }
+    
+    public String getRoomName() {
+        return roomName;
+    }
 
-  public int getId() {
-    return id;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public int getRoomId() {
-    return roomId;
-  }
+    public int getRoomId() {
+        return roomId;
+    }
 
-  public String getDescription() {
-    return description;
-  }
+    public String getDescription() {
+        return description;
+    }
 
-  public Timestamp getStart() {
-    return start;
-  }
+    public Timestamp getStart() {
+        return start;
+    }
 
-  public Timestamp getFinish() {
-    return finish;
-  }
+    public Timestamp getFinish() {
+        return finish;
+    }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public void setRoomId(int roomId) {
-    this.roomId = roomId;
-  }
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
 
-  public void setRoomName(String roomName) {
-    this.roomName = roomName;
-  }
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
 
-  public void setRoomId(String roomName) {
-    this.roomName = roomName;
-  }
+    public void setRoomId(String roomName) {
+        this.roomName = roomName;
+    }
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-  public void setStart(Timestamp start) {
-    this.start = start;
-  }
+    public void setStart(Timestamp start) {
+        this.start = start;
+    }
 
-  public void setFinish(Timestamp finish) {
-    this.finish = finish;
-  }
+    public void setFinish(Timestamp finish) {
+        this.finish = finish;
+    }
 }
