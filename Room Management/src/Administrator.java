@@ -31,9 +31,9 @@ public class Administrator {
                 message = "Sorry, your password is not matched";
             }
             return message;
-        } catch(SQLException ex) {
+        } catch(SQLException e) {
             database.closeDatabase();
-            Logger.getLogger(Administrator.class.getName()).log(Level.SEVERE, null, ex);
+            e.printStackTrace();
             return null;
         }
     }
