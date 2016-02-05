@@ -11,6 +11,8 @@ package database;
 import java.sql.*;
 
 public class Maintenance {
+  private int id;
+  private int roomId;
   private String roomName;
   private String description;
   private Timestamp start;
@@ -19,8 +21,10 @@ public class Maintenance {
   public Maintenance() {
     
   }
-  
-  public Maintenance(String roomName, String description, Timestamp start, Timestamp finish) {
+
+  public Maintenance(int id, int roomId, String roomName, String description, Timestamp start, Timestamp finish) {
+    this.id = id;
+    this.roomId = roomId;
     this.roomName = roomName;
     this.description = description;
     this.start = start;
@@ -29,6 +33,14 @@ public class Maintenance {
   
   public String getRoomName() {
     return roomName;
+  }
+
+  public int getId() {
+    return id;
+  }
+
+  public int getRoomId() {
+    return roomId;
   }
 
   public String getDescription() {
@@ -41,6 +53,18 @@ public class Maintenance {
 
   public Timestamp getFinish() {
     return finish;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  public void setRoomId(int roomId) {
+    this.roomId = roomId;
+  }
+
+  public void setRoomName(String roomName) {
+    this.roomName = roomName;
   }
 
   public void setRoomId(String roomName) {

@@ -17,10 +17,8 @@ import java.util.logging.Logger;
 
 public class Booking {
   
-  ArrayList<Borrowing> borrowings;
-  
   public Booking() {
-    borrowings = new ArrayList<>();
+    
   }
   
   public String addBooking(Borrowing borrowing) {
@@ -56,7 +54,7 @@ public class Booking {
   }
   
   public ArrayList<Borrowing> showClashBooking(Borrowing borrowing) {
-    ArrayList<Borrowing> borrowings = new ArrayList<>();
+    ArrayList<Borrowing> clashBooking = new ArrayList<>();
     Database database = new Database();
     database.connect("room-management");
     
@@ -67,7 +65,7 @@ public class Booking {
     
     try {
       while (rs.next()) {
-        borrowings.add(new Borrowing(rs.getInt("id_peminjaman"), rs.getString("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_ruangan"), rs.getString("nama_peminjam"),
+        clashBooking.add(new Borrowing(rs.getInt("id_peminjaman"), rs.getString("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_ruangan"), rs.getString("nama_peminjam"),
                 rs.getString("status_peminjam"), rs.getString("alamat_peminjam"), rs.getString("nomor_telepon_peminjam"), rs.getString("nama_lembaga"), rs.getString("nama_kegiatan"), 
                 rs.getInt("jumlah_peserta"), rs.getTimestamp("waktu_mulai"), rs.getTimestamp("waktu_selesai")));
       }
@@ -75,6 +73,6 @@ public class Booking {
     } catch (SQLException ex) {
       Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
     }
-    return borrowings;
+    return clashBooking;
   }
 }
