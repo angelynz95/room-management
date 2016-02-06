@@ -13,7 +13,7 @@ import java.sql.*;
 public class Borrowing {
     int id;
     String borrowerId;
-    int roomID;
+    int roomId;
     String roomName;
     String borrowerName;
     String borrowerStatus;
@@ -32,7 +32,7 @@ public class Borrowing {
     public Borrowing(int id, String borrowerId, int roomID, String roomName, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp start, Timestamp finish) {
         this.id = id;
         this.borrowerId = borrowerId;
-        this.roomID = roomID;
+        this.roomId = roomID;
         this.roomName = roomName;
         this.borrowerName = borrowerName;
         this.borrowerStatus = borrowerStatus;
@@ -53,8 +53,8 @@ public class Borrowing {
         return borrowerId;
     }
 
-    public int getRoomID() {
-        return roomID;
+    public int getRoomId() {
+        return roomId;
     }
     
     public String getRoomName() {
@@ -105,8 +105,8 @@ public class Borrowing {
         this.borrowerId = borrowerId;
     }
 
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
+    public void setRoomId(int roomID) {
+        this.roomId = roomID;
     }
 
     public void setRoomName(String roomName) {
