@@ -9,10 +9,10 @@ package database;
  */
 
 public class Room {
-    int id;
-    String name;
-    int capacity;
-    String status;
+    private int id;
+    private String name;
+    private int capacity;
+    private String status;
         
     public Room() {
         

@@ -13,26 +13,20 @@ import java.sql.*;
 public class Maintenance {
     private int id;
     private int roomId;
-    private String roomName;
     private String description;
-    private Timestamp start;
-    private Timestamp finish;
+    private Timestamp startTime;
+    private Timestamp finishTime;
     
     public Maintenance() {
         
     }
 
-    public Maintenance(int id, int roomId, String roomName, String description, Timestamp start, Timestamp finish) {
+    public Maintenance(int id, int roomId, String description, Timestamp startTime, Timestamp finishTime) {
         this.id = id;
         this.roomId = roomId;
-        this.roomName = roomName;
         this.description = description;
-        this.start = start;
-        this.finish = finish;
-    }
-    
-    public String getRoomName() {
-        return roomName;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
     }
 
     public int getId() {
@@ -47,12 +41,12 @@ public class Maintenance {
         return description;
     }
 
-    public Timestamp getStart() {
-        return start;
+    public Timestamp getStartTime() {
+        return startTime;
     }
 
-    public Timestamp getFinish() {
-        return finish;
+    public Timestamp getFinishTime() {
+        return finishTime;
     }
 
     public void setId(int id) {
@@ -63,23 +57,15 @@ public class Maintenance {
         this.roomId = roomId;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
-    }
-
-    public void setRoomId(String roomName) {
-        this.roomName = roomName;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setStart(Timestamp start) {
-        this.start = start;
+    public void setStartTime(Timestamp startTime) {
+        this.startTime = startTime;
     }
 
-    public void setFinish(Timestamp finish) {
-        this.finish = finish;
+    public void setFinishTime(Timestamp finishTime) {
+        this.finishTime = finishTime;
     }
 }

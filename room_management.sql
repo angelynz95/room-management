@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2016 at 07:29 AM
+-- Generation Time: Feb 06, 2016 at 09:33 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `peminjaman` (
   `nama_peminjam` varchar(256) NOT NULL,
   `status_peminjam` varchar(9) NOT NULL,
   `alamat_peminjam` text NOT NULL,
-  `nomor_telepon_peminjam` int(15) NOT NULL,
+  `nomor_telepon_peminjam` varchar(15) NOT NULL,
   `nama_lembaga` varchar(256) NOT NULL DEFAULT 'Informatika ITB',
   `nama_kegiatan` varchar(256) NOT NULL DEFAULT 'Kuliah',
   `jumlah_peserta` int(3) NOT NULL DEFAULT '0',

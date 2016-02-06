@@ -11,29 +11,28 @@ package database;
 import java.sql.*;
 
 public class Borrowing {
-    int id;
-    String borrowerId;
-    int roomId;
-    String roomName;
-    String borrowerName;
-    String borrowerStatus;
-    String borrowerAddress;
-    String borrowerPhone;
-    String organizationName;
-    String activityName;
-    int totalParticipant;
-    Timestamp start;
-    Timestamp finish;
+    private int id;
+    private int roomId;
+    private int borrowerId;
+    private String borrowerName;
+    private String borrowerStatus;
+    private String borrowerAddress;
+    private String borrowerPhone;
+    private String organizationName;
+    private String activityName;
+    private int totalParticipant;
+    private Timestamp permissionTime;
+    private Timestamp startTime;
+    private Timestamp finishTime;
     
     public Borrowing() {
         
     }
 
-    public Borrowing(int id, String borrowerId, int roomID, String roomName, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp start, Timestamp finish) {
+    public Borrowing(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp permissionTime, Timestamp startTime, Timestamp finishTime) {
         this.id = id;
         this.borrowerId = borrowerId;
         this.roomId = roomID;
-        this.roomName = roomName;
         this.borrowerName = borrowerName;
         this.borrowerStatus = borrowerStatus;
         this.borrowerAddress = borrowerAddress;
@@ -41,24 +40,21 @@ public class Borrowing {
         this.organizationName = organizationName;
         this.activityName = activityName;
         this.totalParticipant = totalParticipant;
-        this.start = start;
-        this.finish = finish;
+        this.permissionTime = permissionTime;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getBorrowerId() {
+    public int getBorrowerId() {
         return borrowerId;
     }
 
     public int getRoomId() {
         return roomId;
-    }
-    
-    public String getRoomName() {
-        return roomName;
     }
 
     public String getBorrowerName() {
@@ -89,28 +85,28 @@ public class Borrowing {
         return totalParticipant;
     }
 
-    public Timestamp getStart() {
-        return start;
+    public Timestamp getPermissionTime() {
+        return permissionTime;
     }
 
-    public Timestamp getFinish() {
-        return finish;
+    public Timestamp getStartTime() {
+        return startTime;
+    }
+
+    public Timestamp getFinishTime() {
+        return finishTime;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setBorrowerId(String borrowerId) {
+    public void setBorrowerId(int borrowerId) {
         this.borrowerId = borrowerId;
     }
 
     public void setRoomId(int roomID) {
         this.roomId = roomID;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
     }
 
     public void setBorrowerName(String borrowerName) {
@@ -141,11 +137,15 @@ public class Borrowing {
         this.totalParticipant = totalParticipant;
     }
 
-    public void setStart(Timestamp start) {
-        this.start = start;
+    public void setPermissionTime(Timestamp permissionTime) {
+        this.permissionTime = permissionTime;
     }
 
-    public void setFinish(Timestamp finish) {
-        this.finish = finish;
+    public void setStart(Timestamp startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setFinish(Timestamp finishTime) {
+        this.finishTime = finishTime;
     }
 }
