@@ -20,10 +20,12 @@ import java.util.logging.Logger;
 public class Statistic {
     private ArrayList<Integer> numbers;
     private ArrayList<String> labels;
+    private Database database;
     
     public Statistic() {
         numbers = new ArrayList<>();
         labels = new ArrayList<>();
+        database = new Database();
     }
     
     public ArrayList<Integer> getNumbers() {
@@ -35,7 +37,6 @@ public class Statistic {
     }
     
     public void generateRoomUsageStatistics() {
-        Database database = new Database();
         database.connect("room-management");
         String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT count(id_ruangan) AS frequency from peminjaman group by id_ruangan ) AS tabel;";
         ResultSet rs = database.fetchData(sql);
@@ -47,10 +48,10 @@ public class Statistic {
         } catch (SQLException ex) {
             Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
         }
+        database.closeDatabase();
     }
     
     public void generateRoomMaintananceStatistics() {
-        Database database = new Database();
         database.connect("room-management");
         String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT count(id_ruangan) AS frequency from pemeliharaan group by id_ruangan ) AS tabel;";
         ResultSet rs = database.fetchData(sql);
@@ -62,10 +63,10 @@ public class Statistic {
         } catch (SQLException ex) {
             Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
         }
+        database.closeDatabase();
     }
     
     public void generateGroupBookingStatistics() {
-        Database database = new Database();
         database.connect("room-management");
         String sql = "SELECT nama_lembaga, count(id_ruangan) AS frequency from peminjaman group by id_ruangan;";
         ResultSet rs = database.fetchData(sql);
@@ -77,6 +78,7 @@ public class Statistic {
         } catch (SQLException ex) {
             Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
         }
+        database.closeDatabase();
     }
     
 }
