@@ -27,8 +27,8 @@ public class RoomMaintenance {
     database.connect("room-management");
     
     String sql = "INSERT INTO pemeliharaan (id_ruangan, deskripsi, waktu_mulai, waktu_selesai) VALUES (" +
-            maintenance.getRoomId() + " , " + maintenance.getDescription() + " , " + maintenance.getStart() +
-            " , " + maintenance.getFinish() + ")";
+            maintenance.getRoomId() + " , " + maintenance.getDescription() + " , " + maintenance.getStartTime() +
+            " , " + maintenance.getFinishTime() + ")";
     
     return database.changeData(sql);
   }
@@ -40,15 +40,14 @@ public class RoomMaintenance {
     database.connect("room-management");
     
     String sql = "SELECT * FROM pemeliharaan WHERE id_ruangan = " + maintenance.getRoomId() + " AND ((waktu_mulai >= " + 
-            maintenance.getStart() + " AND waktu_mulai <= " + maintenance.getFinish() + ") OR (waktu_selesai >= " +
-            maintenance.getStart() + " AND waktu_selesai <= " + maintenance.getFinish();
+            maintenance.getStartTime() + " AND waktu_mulai <= " + maintenance.getFinishTime() + ") OR (waktu_selesai >= " +
+            maintenance.getStartTime() + " AND waktu_selesai <= " + maintenance.getFinishTime();
     
     ResultSet rs = database.fetchData(sql);
     
     try {
       while(rs.next()) {
-        clashMaintenance.add(new Maintenance(rs.getInt("id_pemeliharaan"), rs.getInt("id_ruangan"), rs.getString("nama_ruangan"),
-        rs.getString("deskripsi"), rs.getTimestamp("waktu_mulai"), rs.getTimestamp("waktu_selesai")));
+        clashMaintenance.add(new Maintenance(rs.getInt("id_pemeliharaan"), rs.getInt("id_ruangan"), rs.getString("deskripsi"), rs.getTimestamp("waktu_mulai"), rs.getTimestamp("waktu_selesai")));
       }
     } catch (SQLException ex) {
       Logger.getLogger(RoomMaintenance.class.getName()).log(Level.SEVERE, null, ex);
