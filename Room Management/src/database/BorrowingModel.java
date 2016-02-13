@@ -24,15 +24,15 @@ public class BorrowingModel {
     private String organizationName;
     private String activityName;
     private int totalParticipant;
-    private Timestamp permissionTime;
-    private Timestamp startTime;
-    private Timestamp finishTime;
+    private Calendar permissionTime;
+    private Calendar startTime;
+    private Calendar finishTime;
     
     public BorrowingModel() {
         
     }
 
-    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp permissionTime, Timestamp startTime, Timestamp finishTime) {
+    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar permissionTime, Calendar startTime, Calendar finishTime) {
         this.id = id;
         this.borrowerId = borrowerId;
         this.roomId = roomID;
@@ -88,15 +88,15 @@ public class BorrowingModel {
         return totalParticipant;
     }
 
-    public Timestamp getPermissionTime() {
+    public Calendar getPermissionTime() {
         return permissionTime;
     }
 
-    public Timestamp getStartTime() {
+    public Calendar getStartTime() {
         return startTime;
     }
 
-    public Timestamp getFinishTime() {
+    public Calendar getFinishTime() {
         return finishTime;
     }
 
@@ -140,20 +140,20 @@ public class BorrowingModel {
         this.totalParticipant = totalParticipant;
     }
 
-    public void setPermissionTime(Timestamp permissionTime) {
+    public void setPermissionTime(Calendar permissionTime) {
         this.permissionTime = permissionTime;
     }
 
-    public void setStart(Timestamp startTime) {
+    public void setStart(Calendar startTime) {
         this.startTime = startTime;
     }
 
-    public void setFinish(Timestamp finishTime) {
+    public void setFinish(Calendar finishTime) {
         this.finishTime = finishTime;
     }
 
     // Mengkonversi tipe data timestamp ke calendar
-    public Calendar setTimestampToCalendar(Timestamp timestamp) {
+    public final Calendar setTimestampToCalendar(Timestamp timestamp) {
         long timeMillis =  timestamp.getTime();
         Calendar result = new GregorianCalendar();
         result.setTimeInMillis(timeMillis);

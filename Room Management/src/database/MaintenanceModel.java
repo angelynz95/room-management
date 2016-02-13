@@ -8,7 +8,7 @@ package database;
  * @author Devina Ekawati - 13513088
  */
 
-import java.sql.*;
+import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -17,14 +17,14 @@ public class MaintenanceModel {
     private int id;
     private int roomId;
     private String description;
-    private Timestamp startTime;
-    private Timestamp finishTime;
+    private Calendar startTime;
+    private Calendar finishTime;
 
     public MaintenanceModel() {
         
     }
 
-    public MaintenanceModel(int id, int roomId, String description, Timestamp startTime, Timestamp finishTime) {
+    public MaintenanceModel(int id, int roomId, String description, Calendar startTime, Calendar finishTime) {
         this.id = id;
         this.roomId = roomId;
         this.description = description;
@@ -44,11 +44,11 @@ public class MaintenanceModel {
         return description;
     }
 
-    public Timestamp getStartTime() {
+    public Calendar getStartTime() {
         return startTime;
     }
 
-    public Timestamp getFinishTime() {
+    public Calendar getFinishTime() {
         return finishTime;
     }
 
@@ -64,16 +64,16 @@ public class MaintenanceModel {
         this.description = description;
     }
 
-    public void setStartTime(Timestamp startTime) {
+    public void setStartTime(Calendar startTime) {
         this.startTime = startTime;
     }
 
-    public void setFinishTime(Timestamp finishTime) {
+    public void setFinishTime(Calendar finishTime) {
         this.finishTime = finishTime;
     }
 
-    // Mengkonversi tipe data timestamp ke calendar
-    public Calendar setTimestampToCalendar(Timestamp timestamp) {
+    // Mengkonversi tipe data Calendar ke calendar
+    public final Calendar setCalendarToCalendar(Timestamp timestamp) {
         long timeMillis =  timestamp.getTime();
         Calendar result = new GregorianCalendar();
         result.setTimeInMillis(timeMillis);
