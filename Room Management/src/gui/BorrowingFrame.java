@@ -34,18 +34,18 @@ public class BorrowingFrame extends javax.swing.JFrame {
         borrowerStatusLabel = new javax.swing.JLabel();
         activityNameLabel = new javax.swing.JLabel();
         organizationNameLabel = new javax.swing.JLabel();
-        borrowingTimeLabel = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
         totalParticipantLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
+        borrowerIdField = new javax.swing.JTextField();
+        borrowerNameField = new javax.swing.JTextField();
+        borrowerAddressField = new javax.swing.JTextField();
+        borrowerPhoneField = new javax.swing.JTextField();
+        borrowerStatusField = new javax.swing.JTextField();
+        activityNameField = new javax.swing.JTextField();
+        organizationNameField = new javax.swing.JTextField();
+        startTimeField = new javax.swing.JTextField();
+        endTimeField = new javax.swing.JTextField();
+        totalParticipantField = new javax.swing.JTextField();
         addBorrowingButton = new javax.swing.JButton();
         stripLabel = new javax.swing.JLabel();
 
@@ -74,31 +74,31 @@ public class BorrowingFrame extends javax.swing.JFrame {
         organizationNameLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         organizationNameLabel.setText("Nama Lembaga");
 
-        borrowingTimeLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        borrowingTimeLabel.setText("Waktu Peminjaman");
+        timeLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        timeLabel.setText("Waktu Peminjaman");
 
         totalParticipantLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         totalParticipantLabel.setText("Jumlah Peserta");
 
-        jTextField1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        borrowerIdField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField2.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        borrowerNameField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        borrowerAddressField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField4.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        borrowerPhoneField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField5.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        borrowerStatusField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField6.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        activityNameField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField7.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        organizationNameField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField8.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        startTimeField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField9.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        endTimeField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        jTextField10.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        totalParticipantField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
         addBorrowingButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         addBorrowingButton.setText("Simpan");
@@ -120,29 +120,29 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(borrowerStatusLabel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(activityNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(organizationNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(borrowingTimeLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(timeLabel, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(totalParticipantLabel, javax.swing.GroupLayout.Alignment.LEADING))
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(borrowerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(borrowerNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(borrowerIdField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(borrowerPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(borrowerStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(addBorrowingButton)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(stripLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(activityNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(totalParticipantField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
@@ -150,42 +150,42 @@ public class BorrowingFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(borrowerIdLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(borrowerNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(borrowerAddressLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowerPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(borrowerPhoneLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(borrowerStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(borrowerStatusLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(activityNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(activityNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(organizationNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(organizationNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(borrowingTimeLabel)
+                    .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeLabel)
                     .addComponent(stripLabel)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(totalParticipantLabel)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalParticipantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(addBorrowingButton)
                 .addGap(40, 40, 40))
@@ -230,26 +230,26 @@ public class BorrowingFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField activityNameField;
     private javax.swing.JLabel activityNameLabel;
     private javax.swing.JButton addBorrowingButton;
+    private javax.swing.JTextField borrowerAddressField;
     private javax.swing.JLabel borrowerAddressLabel;
+    private javax.swing.JTextField borrowerIdField;
     private javax.swing.JLabel borrowerIdLabel;
+    private javax.swing.JTextField borrowerNameField;
     private javax.swing.JLabel borrowerNameLabel;
+    private javax.swing.JTextField borrowerPhoneField;
     private javax.swing.JLabel borrowerPhoneLabel;
+    private javax.swing.JTextField borrowerStatusField;
     private javax.swing.JLabel borrowerStatusLabel;
-    private javax.swing.JLabel borrowingTimeLabel;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField endTimeField;
+    private javax.swing.JTextField organizationNameField;
     private javax.swing.JLabel organizationNameLabel;
+    private javax.swing.JTextField startTimeField;
     private javax.swing.JLabel stripLabel;
+    private javax.swing.JLabel timeLabel;
+    private javax.swing.JTextField totalParticipantField;
     private javax.swing.JLabel totalParticipantLabel;
     // End of variables declaration//GEN-END:variables
 }
