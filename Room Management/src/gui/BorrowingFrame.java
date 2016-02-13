@@ -48,6 +48,8 @@ public class BorrowingFrame extends javax.swing.JFrame {
         totalParticipantField = new javax.swing.JTextField();
         addBorrowingButton = new javax.swing.JButton();
         stripLabel = new javax.swing.JLabel();
+        roomNameLabel = new javax.swing.JLabel();
+        roomNameField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Borrowing Form");
@@ -106,43 +108,52 @@ public class BorrowingFrame extends javax.swing.JFrame {
         stripLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         stripLabel.setText("-");
 
+        roomNameLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        roomNameLabel.setText("Nama Ruangan");
+
+        roomNameField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(borrowerPhoneLabel)
-                    .addComponent(borrowerAddressLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(borrowerNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(borrowerIdLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(borrowerStatusLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(activityNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(organizationNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(timeLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(totalParticipantLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(borrowerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(borrowerNameField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(borrowerIdField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(borrowerPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(borrowerStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(addBorrowingButton)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(stripLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(activityNameField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(totalParticipantField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(roomNameLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(borrowerPhoneLabel)
+                            .addComponent(borrowerAddressLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(borrowerNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(borrowerIdLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(borrowerStatusLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(activityNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(organizationNameLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timeLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(totalParticipantLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(borrowerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(borrowerNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(borrowerIdField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(borrowerPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(borrowerStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(addBorrowingButton)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(stripLabel)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(endTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(activityNameField, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(totalParticipantField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(roomNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
@@ -176,6 +187,10 @@ public class BorrowingFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(organizationNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(organizationNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(roomNameLabel)
+                    .addComponent(roomNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -246,6 +261,8 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JTextField endTimeField;
     private javax.swing.JTextField organizationNameField;
     private javax.swing.JLabel organizationNameLabel;
+    private javax.swing.JTextField roomNameField;
+    private javax.swing.JLabel roomNameLabel;
     private javax.swing.JTextField startTimeField;
     private javax.swing.JLabel stripLabel;
     private javax.swing.JLabel timeLabel;
