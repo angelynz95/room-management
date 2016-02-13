@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class BorrowingModel {
-    public final int MAX_BORROW_HOUR = 23;
+    public static final int MAX_BORROW_HOUR = 23;
     private int id;
     private int roomId;
     private int borrowerId;

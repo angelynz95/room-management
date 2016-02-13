@@ -1,17 +1,16 @@
 package bookinginformation;
 
-import borrowing.Borrowing;
 import database.BorrowingModel;
 import database.Database;
 import database.MaintenanceModel;
 import database.RoomModel;
-import maintenance.Maintenance;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by User on 2/4/2016.
@@ -19,7 +18,6 @@ import java.util.*;
 public class BookingInformation {
     // Atribut
     private LinkedHashMap<RoomModel, Map<Integer, Object>> tableSchedule;
-    private Map<Integer, Object> roomSchedule;
     private Database database;
     private String path = "jdbc:mysql://localhost:3306/room_management";
 
@@ -40,27 +38,37 @@ public class BookingInformation {
                 String roomName = rs.getString("nama");
                 int roomCapacity = rs.getInt("kapasitas");
                 String roomStatus = rs.getString("status");
+                
                 RoomModel room = new RoomModel(roomId, roomName, roomCapacity, roomStatus);
-                roomSchedule = new TreeMap<>();
+                Map<Integer, Object> roomSchedule = new TreeMap<>();
                 tableSchedule.put(room, roomSchedule);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(BookingInformation.class.getName()).log(Level.SEVERE, null, e);
         }
         database.closeDatabase();
     }
+    
+    // Getter
+    public LinkedHashMap<RoomModel, Map<Integer, Object>> getRoomsSchedule() {
+        return tableSchedule;
+    }
 
     // Menampilkan jadwal peminjaman pada suatu waktu tertentu
-    private void showBookingSchedule(Date today) {
+    public void showBookingSchedule(Calendar date) {
         database.connect(path);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String query = "SELECT * FROM peminjaman" +
-                " WHERE waktu_mulai = " + today +
-                " ORDER BY id_ruangan, waktu_mulai;";
+                " WHERE CAST(waktu_mulai AS DATE) = '" + sdf.format(date.getTime()) +
+                "' ORDER BY id_ruangan, waktu_mulai;";
         ResultSet rs = database.fetchData(query);
         try {
             while (rs.next()) {
                 int roomIdNow = rs.getInt("id_ruangan");
                 int roomId = roomIdNow;
+                RoomModel room = searchRoomById(roomId);
+                        
+                // Looping untuk setiap ruangan
                 do {
                     String borrowerName = rs.getString("nama_peminjam");
                     int borrowingId = rs.getInt("id_peminjaman");
@@ -76,40 +84,43 @@ public class BookingInformation {
                     Calendar finishTime = BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"));
 
                     BorrowingModel borrowing = new BorrowingModel(borrowingId, borrowerId, roomId, borrowerName, borrowerStatus, borrowerAddress, borrowerPhone, organizationName, activityName, totalParticipant, permissionTime, startTime, finishTime);
+                    Map<Integer, Object> roomSchedule = tableSchedule.get(room);
 
                     if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
                         for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
                             roomSchedule.put(i, borrowing);
                         }
-                        tableSchedule.put(searchRoomById(roomId), roomSchedule);
                     } else {
                         // Tanggal dimulai berbeda dengan tanggal selesai
                         for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<BorrowingModel.MAX_BORROW_HOUR; i++) {
                             roomSchedule.put(i, borrowing);
                         }
-                        tableSchedule.put(searchRoomById(roomId), roomSchedule);
                     }
 
-                    roomId= rs.getInt("id_ruangan");
-                } while(roomIdNow == roomId);
+                    roomId = rs.getInt("id_ruangan");
+                } while((roomIdNow==roomId) && rs.next());
             }
         } catch(SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(BookingInformation.class.getName()).log(Level.SEVERE, null, e);
         }
         database.closeDatabase();
     }
 
     // Menampilkan jadwal pemeliharaan pada suatu waktu tertentu
-    private void showMaintenanceSchedule(Date today) {
+    public void showMaintenanceSchedule(Calendar date) {
         database.connect(path);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String query = "SELECT * FROM pemeliharaan" +
-                " WHERE waktu_mulai = " + today +
-                " ORDER BY id_ruangan, waktu_mulai;";
+                " WHERE CAST(waktu_mulai AS DATE) = '" + sdf.format(date.getTime()) +
+                "' ORDER BY id_ruangan, waktu_mulai;";
         ResultSet rs = database.fetchData(query);
         try {
             while (rs.next()) {
                 int roomIdNow = rs.getInt("id_ruangan");
                 int roomId = roomIdNow;
+                RoomModel room = searchRoomById(roomId);
+                
+                // Looping untuk setiap ruangan
                 do {
                     int maintenanceId = rs.getInt("id_pemeliharaan");
                     String description = rs.getString("deskripsi");
@@ -117,31 +128,30 @@ public class BookingInformation {
                     Calendar finishTime = MaintenanceModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"));
 
                     MaintenanceModel maintenance = new MaintenanceModel(maintenanceId, roomId, description, startTime, finishTime);
+                    Map<Integer, Object> roomSchedule = tableSchedule.get(room);
 
                     if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
                         for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
                             roomSchedule.put(i, maintenance);
                         }
-                        tableSchedule.put(searchRoomById(roomId), roomSchedule);
                     } else {
                         // Tanggal dimulai berbeda dengan tanggal selesai
-                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<BorrowingModel.MAX_BORROW_HOUR; i++) {
+                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<MaintenanceModel.MAX_MAINTAIN_HOUR; i++) {
                             roomSchedule.put(i, maintenance);
                         }
-                        tableSchedule.put(searchRoomById(roomId), roomSchedule);
                     }
 
                     roomId= rs.getInt("id_ruangan");
-                } while(roomIdNow == roomId);
+                } while((roomIdNow==roomId) && rs.next());
             }
         } catch(SQLException e) {
-            e.printStackTrace();
+            Logger.getLogger(BookingInformation.class.getName()).log(Level.SEVERE, null, e);
         }
         database.closeDatabase();
     }
 
     // Mencari ruangan pada tabel jadwal dengan menggunakan ID ruangan
-    RoomModel searchRoomById(int roomId) {
+    private RoomModel searchRoomById(int roomId) {
         Iterator schedules = tableSchedule.entrySet().iterator();
         Map.Entry<RoomModel, Map<Integer, Object>> schedule = null;
         boolean isFound = false;
@@ -156,6 +166,32 @@ public class BookingInformation {
             return schedule.getKey();
         } else {
             return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        BookingInformation roomsSchedule = new BookingInformation();
+        Calendar date = new GregorianCalendar(2016, 1, 22); // 22 Februari 2016
+        roomsSchedule.showBookingSchedule(date);
+        roomsSchedule.showMaintenanceSchedule(date);
+        
+        for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: roomsSchedule.getRoomsSchedule().entrySet()) {
+            RoomModel room = roomSchedule.getKey();
+            System.out.println("Ruangan: " + room.getId() + " - " + room.getName());
+            for(Map.Entry<Integer, Object> roomHourSchedule: roomSchedule.getValue().entrySet()) {
+                int hour = roomHourSchedule.getKey();
+                Object booking = roomHourSchedule.getValue();
+                
+                System.out.print("Pukul: " + hour);
+                if (booking.getClass().equals(BorrowingModel.class)) {
+                    BorrowingModel borrowing = (BorrowingModel) booking;
+                    System.out.println(" | Peminjaman: " + borrowing.getId() + " - " + borrowing.getActivityName());
+                } else {
+                    MaintenanceModel maintenance = (MaintenanceModel) booking;
+                    System.out.println(" | Pemeliharaan: " + maintenance.getId() + " - " + maintenance.getDescription());
+                }
+            }
+            System.out.println();
         }
     }
 }
