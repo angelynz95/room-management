@@ -153,7 +153,7 @@ public class BorrowingModel {
     }
 
     // Mengkonversi tipe data timestamp ke calendar
-    public final Calendar setTimestampToCalendar(Timestamp timestamp) {
+    public static Calendar convertTimestampToCalendar(Timestamp timestamp) {
         long timeMillis =  timestamp.getTime();
         Calendar result = new GregorianCalendar();
         result.setTimeInMillis(timeMillis);

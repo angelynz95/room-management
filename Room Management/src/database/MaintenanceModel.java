@@ -73,7 +73,7 @@ public class MaintenanceModel {
     }
 
     // Mengkonversi tipe data Calendar ke calendar
-    public final Calendar setCalendarToCalendar(Timestamp timestamp) {
+    public static Calendar convertTimestampToCalendar(Timestamp timestamp) {
         long timeMillis =  timestamp.getTime();
         Calendar result = new GregorianCalendar();
         result.setTimeInMillis(timeMillis);
