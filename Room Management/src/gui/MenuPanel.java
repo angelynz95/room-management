@@ -5,7 +5,9 @@
  */
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 /**
@@ -19,6 +21,18 @@ public class MenuPanel extends javax.swing.JPanel {
      */
     public MenuPanel() {
         initComponents();
+        // Tampilan Organisasi Jadwal
+        bookingInformationPanel.setLayout(new FlowLayout());
+        bookingInformationPanel.add(new BookingInformation());
+        // Tampilan Info Ruangan
+        roomInformationPanel.setLayout(new FlowLayout());
+        roomInformationPanel.add(new RoomInformation());
+        // Tampilan Statistik
+        statisticPanel.setLayout(new FlowLayout());
+        statisticPanel.add(new StatisticPanel());
+        // Tampilan Ubah Kata Sandi
+        changePasswordPanel.setLayout(new FlowLayout());
+        changePasswordPanel.add(new ChangePasswordPanel());
     }
 
     /**
@@ -32,7 +46,7 @@ public class MenuPanel extends javax.swing.JPanel {
 
         menuPane = new javax.swing.JTabbedPane();
         bookingInformationPanel = new javax.swing.JPanel();
-        roomInformationLabel = new javax.swing.JPanel();
+        roomInformationPanel = new javax.swing.JPanel();
         statisticPanel = new javax.swing.JPanel();
         changePasswordPanel = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
@@ -56,18 +70,18 @@ public class MenuPanel extends javax.swing.JPanel {
 
         menuPane.addTab("Organisasi Jadwal", bookingInformationPanel);
 
-        javax.swing.GroupLayout roomInformationLabelLayout = new javax.swing.GroupLayout(roomInformationLabel);
-        roomInformationLabel.setLayout(roomInformationLabelLayout);
-        roomInformationLabelLayout.setHorizontalGroup(
-            roomInformationLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout roomInformationPanelLayout = new javax.swing.GroupLayout(roomInformationPanel);
+        roomInformationPanel.setLayout(roomInformationPanelLayout);
+        roomInformationPanelLayout.setHorizontalGroup(
+            roomInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1195, Short.MAX_VALUE)
         );
-        roomInformationLabelLayout.setVerticalGroup(
-            roomInformationLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        roomInformationPanelLayout.setVerticalGroup(
+            roomInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Info Ruangan", roomInformationLabel);
+        menuPane.addTab("Info Ruangan", roomInformationPanel);
 
         javax.swing.GroupLayout statisticPanelLayout = new javax.swing.GroupLayout(statisticPanel);
         statisticPanel.setLayout(statisticPanelLayout);
@@ -131,7 +145,7 @@ public class MenuPanel extends javax.swing.JPanel {
     private javax.swing.JPanel changePasswordPanel;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JTabbedPane menuPane;
-    private javax.swing.JPanel roomInformationLabel;
+    private javax.swing.JPanel roomInformationPanel;
     private javax.swing.JPanel statisticPanel;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables

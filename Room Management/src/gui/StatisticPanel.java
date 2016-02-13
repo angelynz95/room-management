@@ -9,12 +9,12 @@ package gui;
  *
  * @author angelynz95
  */
-public class RoomInformationPanel extends javax.swing.JPanel {
+public class StatisticPanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form RoomInformationPanel
+     * Creates new form StatisticPanel
      */
-    public RoomInformationPanel() {
+    public StatisticPanel() {
         initComponents();
     }
 
