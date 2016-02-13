@@ -10,18 +10,19 @@ package database;
 
 import java.sql.*;
 
-public class Maintenance {
+public class MaintenanceModel {
+    public final int MAX_MAINTAIN_HOUR = 23;
     private int id;
     private int roomId;
     private String description;
     private Timestamp startTime;
     private Timestamp finishTime;
-    
-    public Maintenance() {
+
+    public MaintenanceModel() {
         
     }
 
-    public Maintenance(int id, int roomId, String description, Timestamp startTime, Timestamp finishTime) {
+    public MaintenanceModel(int id, int roomId, String description, Timestamp startTime, Timestamp finishTime) {
         this.id = id;
         this.roomId = roomId;
         this.description = description;

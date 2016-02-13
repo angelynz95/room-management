@@ -6,25 +6,26 @@
  * @author Angela Lynn - 13513032
  * @author Devina Ekawati - 13513088
  */
-package booking;
+package borrowing;
 
-import database.Borrowing;
+import database.BorrowingModel;
+import database.BorrowingModel;
 import database.Database;
 import java.util.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Booking {
+public class Borrowing {
   
     private Database database;
     private final String path = "jdbc:mysql://localhost:3306/room_management";
     
-    public Booking() {
+    public Borrowing() {
         database = new Database();
     }
 
-    public String addBooking(Borrowing borrowing) {
+    public String addBooking(BorrowingModel borrowing) {
         database.connect(path);
 
         String sql = "INSERT INTO borrowing (id_ruangan, id_peminjam, nama_peminjam, nomor_telepon_peminjam, "
@@ -35,7 +36,7 @@ public class Booking {
         return database.changeData(sql);
     }
 
-    public String changeBooking(Borrowing borrowing) {
+    public String changeBooking(BorrowingModel borrowing) {
         database.connect(path);
 
         String sql = "UPDATE borrowing SET id_ruangan = " + borrowing.getId() + ", id_peminjam = " + borrowing.getBorrowerId()
@@ -46,15 +47,15 @@ public class Booking {
         return database.changeData(sql);
     }
 
-    public String deleteBooking(Borrowing borrowing) {
+    public String deleteBooking(BorrowingModel borrowing) {
         database.connect(path);
 
         String sql = "DELETE FROM peminjaman WHERE id_peminjaman = " + borrowing.getId();
         return database.changeData(sql);
     }
 
-    public ArrayList<Borrowing> showClashBooking(Borrowing borrowing) {
-        ArrayList<Borrowing> clashBooking = new ArrayList<>();
+    public ArrayList<BorrowingModel> showClashBooking(BorrowingModel borrowing) {
+        ArrayList<BorrowingModel> clashBooking = new ArrayList<>();
         database.connect(path);
 
         String sql = "SELECT * FROM peminjaman WHERE id_ruangan = " + borrowing.getId() + " AND ((waktu_mulai >= " + borrowing.getStartTime() + "AND waktu_mulai <= "
@@ -64,13 +65,13 @@ public class Booking {
 
         try {
             while (rs.next()) {
-              clashBooking.add(new Borrowing(rs.getInt("id_peminjaman"), rs.getInt("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_peminjam"),
+              clashBooking.add(new BorrowingModel(rs.getInt("id_peminjaman"), rs.getInt("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_peminjam"),
                       rs.getString("status_peminjam"), rs.getString("alamat_peminjam"), rs.getString("nomor_telepon_peminjam"), rs.getString("nama_lembaga"), rs.getString("nama_kegiatan"), 
                       rs.getInt("jumlah_peserta"), rs.getTimestamp(""), rs.getTimestamp("waktu_mulai"), rs.getTimestamp("waktu_selesai")));
             }
             rs.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Booking.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
         return clashBooking;
       }

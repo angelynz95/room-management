@@ -8,17 +8,17 @@ package database;
  * @author Devina Ekawati - 13513088
  */
 
-public class Room {
+public class RoomModel {
     private int id;
     private String name;
     private int capacity;
     private String status;
         
-    public Room() {
+    public RoomModel() {
         
     }
 
-    public Room(int id, String name, int capacity, String status) {
+    public RoomModel(int id, String name, int capacity, String status) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;

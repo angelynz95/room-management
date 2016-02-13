@@ -1,8 +1,8 @@
-package roomsInformation;
+package roominformation;
 
-import database.Borrowing;
+import database.BorrowingModel;
 import database.Database;
-import database.Room;
+import database.RoomModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -10,18 +10,19 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
+import database.RoomModel;
 import statistic.Statistic;
 
 /**
  *
  * @author William Sentosa
  */
-public class RoomsInformation {
+public class RoomInformation {
     /* Atribute */
     private Database database;
     private final String path = "jdbc:mysql://localhost:3306/room_management";
     
-    public RoomsInformation() {
+    public RoomInformation() {
         database = new Database();
     }
     
@@ -29,14 +30,14 @@ public class RoomsInformation {
      * Fetch all room data in database
      * @return list of room which exist in database
      */
-    public ArrayList<Room> fetchRoomData() {
-        ArrayList<Room> result = new ArrayList<>();
+    public ArrayList<RoomModel> fetchRoomData() {
+        ArrayList<RoomModel> result = new ArrayList<>();
         database.connect(path);
         String sql = "SELECT * from ruangan;";
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
-                Room room = new Room();
+                RoomModel room = new RoomModel();
                 room.setId(rs.getInt("id_ruangan"));
                 room.setName(rs.getString("nama"));
                 room.setCapacity(rs.getInt("kapasitas"));
@@ -55,14 +56,19 @@ public class RoomsInformation {
      * @param namaRuangan the name of the room which meant to be searched
      * @return room with the name
      */
-    public Room searchRoomData(String namaRuangan) {
-        Room result = new Room();
+    public RoomModel searchRoomData(String namaRuangan) {
+        RoomModel result = new RoomModel();
         database.connect(path);
         String sql = "SELECT * FROM ruangan WHERE nama = '" + namaRuangan + "';";
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
-                Room room = new Room();
+                result.setId(rs.getInt("id_ruangan"));
+                result.setName(rs.getString("nama"));
+                result.setCapacity(rs.getInt("kapasitas"));
+                result.setStatus(rs.getString("status"));
+
+                RoomModel room = new RoomModel();
                 room.setId(rs.getInt("id_ruangan"));
                 room.setName(rs.getString("nama"));
                 room.setCapacity(rs.getInt("kapasitas"));
@@ -75,13 +81,13 @@ public class RoomsInformation {
         return result;
     }
     
-    private ArrayList<Borrowing> fetchBorrowingByIdRoomAndTime(int id, Timestamp time) {
-        ArrayList<Borrowing> result = new ArrayList<>();
+    private ArrayList<BorrowingModel> fetchBorrowingByIdRoomAndTime(int id, Timestamp time) {
+        ArrayList<BorrowingModel> result = new ArrayList<>();
         String sql = "SELECT * FROM peminjaman WHERE id_ruangan = " + id + " AND waktu_mulai > " + time + ";";
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
-                Borrowing b = new Borrowing();
+                BorrowingModel b = new BorrowingModel();
                 b.setId(rs.getInt("id_peminjaman"));
                 b.setRoomId(rs.getInt("id_ruangan"));
                 b.setBorrowerId(rs.getInt("id_peminjam"));
@@ -106,18 +112,17 @@ public class RoomsInformation {
     /**
      * Change the status of a room with certain id into new status  
      * @param id room id
-     * @param newStatus new status that will replace current status
      * @return list of borrowing data which was held in this room
      */
-    public ArrayList<Borrowing> changeRoomStatus(int id) {
-        ArrayList<Borrowing> result = new ArrayList<>();
+    public ArrayList<BorrowingModel> changeRoomStatus(int id) {
+        ArrayList<BorrowingModel> result = new ArrayList<>();
         database.connect(path);
         String status = "", newStatus = "";
         String sql = "SELECT status FROM ruangan WHERE id_ruangan = " + id + ";";
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
-                Room room = new Room();
+                RoomModel room = new RoomModel();
                 status = rs.getString("status");
             }
         } catch (SQLException ex) {
@@ -139,13 +144,15 @@ public class RoomsInformation {
     }
     
     public static final void main(String args[]) {
-        RoomsInformation roomInformation = new RoomsInformation();
-        ArrayList<Room> rooms = roomInformation.fetchRoomData();
-        for(Room r : rooms) {
+        RoomInformation roomInformation = new RoomInformation();
+        ArrayList<RoomModel> rooms = roomInformation.fetchRoomData();
+        for(RoomModel r : rooms) {
             System.out.println(r.getId() + " " + r.getName() + " " + r.getCapacity() + " " + r.getStatus());
         }
-        String name = "7606";
-        Room searchedRoom = roomInformation.searchRoomData(name);
+
+        String name = "R 7606";
+        RoomModel searchedRoom = roomInformation.searchRoomData(name);
+
         System.out.println("*** Ruangan dengan nama " + name + " ***");
         System.out.println(searchedRoom.getId() + " " + searchedRoom.getName() + " " + searchedRoom.getCapacity() + " " + searchedRoom.getStatus());
     }
