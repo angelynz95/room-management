@@ -11,41 +11,39 @@ import java.util.logging.Logger;
  * Created by User on 2/4/2016.
  */
 public class Administrator {
+    private final String path = "jdbc:mysql://localhost:3306/room_management";
+    private Database database;
+    
     // Konstruktor
     public Administrator() {
+        database = new Database();
     }
 
     // Method
     // Melakukan validasi login
-    private String validateLogin(String password) {
-        Database database = new Database();
-        database.connect("room-management");
+    public boolean validateLogin(String password) {
+        database.connect(path);
         String query = "SELECT password FROM pengguna;";
         ResultSet rs = database.fetchData(query);
         try {
+            rs.next();
             String dbPassword = rs.getString("password");
             database.closeDatabase();
-
-            String message;
-            if (password.equals(dbPassword)) {
-                message = "You have successfully login";
-            } else {
-                message = "Sorry, your password is not matched";
-            }
-            return message;
+            return (password.compareTo(dbPassword) == 0);
         } catch(SQLException e) {
             database.closeDatabase();
             e.printStackTrace();
-            return null;
+            return false;
         }
     }
 
     // Menangani pengubahan password
-    private void changePassword(String newPassword) {
+    public void changePassword(String newPassword) {
         Database database = new Database();
-        database.connect("room-management");
+        database.connect(path);
         String query = "UPDATE pengguna SET password = " + newPassword + ";";
         database.changeData(query);
         database.closeDatabase();
     }
+    
 }
