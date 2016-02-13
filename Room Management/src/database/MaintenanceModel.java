@@ -9,6 +9,8 @@ package database;
  */
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class MaintenanceModel {
     public final int MAX_MAINTAIN_HOUR = 23;
@@ -68,5 +70,13 @@ public class MaintenanceModel {
 
     public void setFinishTime(Timestamp finishTime) {
         this.finishTime = finishTime;
+    }
+
+    // Mengkonversi tipe data timestamp ke calendar
+    public Calendar setTimestampToCalendar(Timestamp timestamp) {
+        long timeMillis =  timestamp.getTime();
+        Calendar result = new GregorianCalendar();
+        result.setTimeInMillis(timeMillis);
+        return result;
     }
 }

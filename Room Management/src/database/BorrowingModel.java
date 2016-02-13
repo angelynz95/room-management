@@ -9,6 +9,8 @@ package database;
  */
 
 import java.sql.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class BorrowingModel {
     public final int MAX_BORROW_HOUR = 23;
@@ -148,5 +150,13 @@ public class BorrowingModel {
 
     public void setFinish(Timestamp finishTime) {
         this.finishTime = finishTime;
+    }
+
+    // Mengkonversi tipe data timestamp ke calendar
+    public Calendar setTimestampToCalendar(Timestamp timestamp) {
+        long timeMillis =  timestamp.getTime();
+        Calendar result = new GregorianCalendar();
+        result.setTimeInMillis(timeMillis);
+        return result;
     }
 }
