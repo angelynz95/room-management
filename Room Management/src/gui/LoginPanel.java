@@ -9,12 +9,12 @@ package gui;
  *
  * @author angelynz95
  */
-public class LoginPagePanel extends javax.swing.JPanel {
+public class LoginPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form LoginPagePanel
      */
-    public LoginPagePanel() {
+    public LoginPanel() {
         initComponents();
     }
 
@@ -37,7 +37,7 @@ public class LoginPagePanel extends javax.swing.JPanel {
         titleLabel.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         titleLabel.setText("Aplikasi Room Management");
 
-        passwordField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        passwordField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
         passwordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         passwordLabel.setText("Kata Sandi");
@@ -50,18 +50,16 @@ public class LoginPagePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(156, Short.MAX_VALUE)
+                .addContainerGap(182, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(loginButton)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(passwordLabel)
-                        .addGap(26, 26, 26)
-                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(157, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(titleLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(passwordLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(titleLabel)))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,9 +70,9 @@ public class LoginPagePanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(passwordLabel))
-                .addGap(40, 40, 40)
+                .addGap(35, 35, 35)
                 .addComponent(loginButton)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
