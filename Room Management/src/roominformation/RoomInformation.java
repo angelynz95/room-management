@@ -63,6 +63,11 @@ public class RoomInformation {
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
+                result.setId(rs.getInt("id_ruangan"));
+                result.setName(rs.getString("nama"));
+                result.setCapacity(rs.getInt("kapasitas"));
+                result.setStatus(rs.getString("status"));
+
                 RoomModel room = new RoomModel();
                 room.setId(rs.getInt("id_ruangan"));
                 room.setName(rs.getString("nama"));
@@ -144,8 +149,10 @@ public class RoomInformation {
         for(RoomModel r : rooms) {
             System.out.println(r.getId() + " " + r.getName() + " " + r.getCapacity() + " " + r.getStatus());
         }
-        String name = "7606";
+
+        String name = "R 7606";
         RoomModel searchedRoom = roomInformation.searchRoomData(name);
+
         System.out.println("*** Ruangan dengan nama " + name + " ***");
         System.out.println(searchedRoom.getId() + " " + searchedRoom.getName() + " " + searchedRoom.getCapacity() + " " + searchedRoom.getStatus());
     }
