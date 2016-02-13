@@ -6,9 +6,11 @@
 package gui;
 
 import administrator.Administrator;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -16,6 +18,7 @@ import javax.swing.JFrame;
  */
 public class LoginPanel extends javax.swing.JPanel {
     private Administrator administrator;
+    private JFrame mainFrame;
     
     /**
      * Creates new form LoginPagePanel
@@ -40,7 +43,8 @@ public class LoginPanel extends javax.swing.JPanel {
         loginButton = new javax.swing.JButton();
         messageLabel = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(745, 450));
+        setPreferredSize(new java.awt.Dimension(1200, 700));
+        setRequestFocusEnabled(false);
 
         titleLabel.setFont(new java.awt.Font("Roboto", 0, 30)); // NOI18N
         titleLabel.setText("Aplikasi Room Management");
@@ -58,22 +62,26 @@ public class LoginPanel extends javax.swing.JPanel {
             }
         });
 
+        messageLabel.setForeground(new java.awt.Color(255, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(413, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(passwordLabel)
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(loginButton))
-                .addContainerGap(416, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(passwordLabel)
+                                .addGap(30, 30, 30)
+                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(loginButton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(195, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,14 +89,14 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addGap(81, 81, 81)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(205, 205, 205)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(passwordLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(passwordLabel))
+                    .addComponent(messageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
                 .addComponent(loginButton)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -101,10 +109,13 @@ public class LoginPanel extends javax.swing.JPanel {
     }
     
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
-            messageLabel.setText("Kata sandi benar !");
+        if(/*administrator.validateLogin(convertToString(passwordField.getPassword()))*/ true) {
+            // Pindah ke halaman tampilan menu
+            mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            mainFrame.getContentPane().removeAll();
+            mainFrame.setContentPane(new MenuPanel());
         } else {
-            messageLabel.setText("Kata sandi salah !");
+            messageLabel.setText("Kata sandi salah!");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
@@ -117,13 +128,13 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
-    public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
-        LoginPanel loginPanel = new LoginPanel();
-        frame.setContentPane(loginPanel);
-        frame.pack();
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        MainFrame frame = new MainFrame();
+//        LoginPanel loginPanel = new LoginPanel();
+//        frame.setContentPane(loginPanel);
+//        frame.pack();
+//        frame.setVisible(true);
+//    }
 
 }
 

@@ -6,7 +6,6 @@
 package gui;
 
 import java.awt.Dimension;
-import javax.swing.JMenuBar;
 
 /**
  *
@@ -19,7 +18,6 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-        this.setPreferredSize(new Dimension(1200,700));
     }
 
     /**
@@ -80,12 +78,7 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 MainFrame frame = new MainFrame();
-//                LoginPanel loginPanel = new LoginPanel();
-//                frame.add(loginPanel);
-//                loginPanel.setEnabled(true);
-//                loginPanel.setVisible(true);
-//                frame.pack();
-                frame.setContentPane(new MenuPanel());
+                frame.setContentPane(new LoginPanel());
                 frame.setVisible(true);
             }
         });
