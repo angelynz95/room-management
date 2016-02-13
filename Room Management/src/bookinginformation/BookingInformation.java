@@ -1,12 +1,15 @@
 package bookinginformation;
 
+import borrowing.Borrowing;
 import database.BorrowingModel;
 import database.Database;
 import database.MaintenanceModel;
 import database.RoomModel;
+import maintenance.Maintenance;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -59,29 +62,29 @@ public class BookingInformation {
                 int roomIdNow = rs.getInt("id_ruangan");
                 int roomId = roomIdNow;
                 do {
+                    String borrowerName = rs.getString("nama_peminjam");
                     int borrowingId = rs.getInt("id_peminjaman");
                     int borrowerId = rs.getInt("id_peminjam");
-                    String borrowerName = rs.getString("nama_peminjam");
                     String borrowerStatus = rs.getString("status_peminjam");
                     String borrowerAddress = rs.getString("alamat_peminjam");
                     String borrowerPhone = rs.getString("nomor_telepon_peminjam");
                     String organizationName = rs.getString("nama_lembaga");
                     String activityName = rs.getString("nama_kegiatan");
                     int totalParticipant = rs.getInt("jumlah_peserta");
-                    Timestamp permissionTime = rs.getTimestamp("waktu_izin");
-                    Timestamp startTime = rs.getTimestamp("waktu_mulai");
-                    Timestamp finishTime = rs.getTimestamp("waktu_selesai");
+                    Calendar permissionTime = BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_izin"));
+                    Calendar startTime = BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai"));
+                    Calendar finishTime = BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"));
 
                     BorrowingModel borrowing = new BorrowingModel(borrowingId, borrowerId, roomId, borrowerName, borrowerStatus, borrowerAddress, borrowerPhone, organizationName, activityName, totalParticipant, permissionTime, startTime, finishTime);
 
-                    if (startTime.getDate()== finishTime.getDate()) {
-                        for (int i=startTime.getHours(); i<finishTime.getHours(); i++) {
+                    if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
+                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
                             roomSchedule.put(i, borrowing);
                         }
                         tableSchedule.put(searchRoomById(roomId), roomSchedule);
                     } else {
                         // Tanggal dimulai berbeda dengan tanggal selesai
-                        for (int i=startTime.getHours(); i<BorrowingModel.MAX_BORROW_HOUR; i++) {
+                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<BorrowingModel.MAX_BORROW_HOUR; i++) {
                             roomSchedule.put(i, borrowing);
                         }
                         tableSchedule.put(searchRoomById(roomId), roomSchedule);
@@ -110,19 +113,19 @@ public class BookingInformation {
                 do {
                     int maintenanceId = rs.getInt("id_pemeliharaan");
                     String description = rs.getString("deskripsi");
-                    Timestamp startTime = rs.getTimestamp("waktu_mulai");
-                    Timestamp finishTime = rs.getTimestamp("waktu_selesai");
+                    Calendar startTime = MaintenanceModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai"));
+                    Calendar finishTime = MaintenanceModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"));
 
                     MaintenanceModel maintenance = new MaintenanceModel(maintenanceId, roomId, description, startTime, finishTime);
 
-                    if (startTime.getDate() == finishTime.getDate()) {
-                        for (int i=startTime.getHours(); i<finishTime.getHours(); i++) {
+                    if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
+                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
                             roomSchedule.put(i, maintenance);
                         }
                         tableSchedule.put(searchRoomById(roomId), roomSchedule);
                     } else {
                         // Tanggal dimulai berbeda dengan tanggal selesai
-                        for (int i=startTime.getHours(); i<MaintenanceModel.MAX_MAINTAIN_HOUR; i++) {
+                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<BorrowingModel.MAX_BORROW_HOUR; i++) {
                             roomSchedule.put(i, maintenance);
                         }
                         tableSchedule.put(searchRoomById(roomId), roomSchedule);
