@@ -6,9 +6,6 @@
 package gui;
 
 import administrator.Administrator;
-import java.awt.Color;
-import java.awt.Dimension;
-import javax.swing.GroupLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -112,8 +109,8 @@ public class LoginPanel extends javax.swing.JPanel {
         if(/*administrator.validateLogin(convertToString(passwordField.getPassword()))*/ true) {
             // Pindah ke halaman tampilan menu
             mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
-            mainFrame.getContentPane().removeAll();
             mainFrame.setContentPane(new MenuPanel());
+            mainFrame.pack();
         } else {
             messageLabel.setText("Kata sandi salah!");
         }

@@ -5,16 +5,16 @@
  */
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.FlowLayout;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author angelynz95
  */
 public class MenuPanel extends javax.swing.JPanel {
+    private JFrame mainFrame;
 
     /**
      * Creates new form MainPanel
@@ -26,7 +26,7 @@ public class MenuPanel extends javax.swing.JPanel {
         bookingInformationPanel.add(new BookingInformation());
         // Tampilan Info Ruangan
         roomInformationPanel.setLayout(new FlowLayout());
-        roomInformationPanel.add(new RoomInformation());
+        roomInformationPanel.add(new RoomInformationPanel());
         // Tampilan Statistik
         statisticPanel.setLayout(new FlowLayout());
         statisticPanel.add(new StatisticPanel());
@@ -111,6 +111,11 @@ public class MenuPanel extends javax.swing.JPanel {
 
         logoutLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         logoutLabel.setText("Keluar");
+        logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutLabelMouseClicked(evt);
+            }
+        });
 
         titleLabel.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         titleLabel.setText("Room Management");
@@ -138,6 +143,13 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addComponent(menuPane, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
+        // TODO add your handling code here:
+        mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.setContentPane(new LoginPanel());
+        mainFrame.pack();
+    }//GEN-LAST:event_logoutLabelMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

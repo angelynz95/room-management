@@ -5,7 +5,7 @@
  */
 package gui;
 
-import java.awt.Dimension;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,6 +18,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        setContentPane(new LoginPanel());
+        pack();
     }
 
     /**
@@ -77,9 +79,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainFrame frame = new MainFrame();
-                frame.setContentPane(new LoginPanel());
-                frame.setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }
