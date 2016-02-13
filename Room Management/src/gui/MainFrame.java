@@ -5,6 +5,7 @@
  */
 package gui;
 
+import java.awt.Dimension;
 import javax.swing.JMenuBar;
 
 /**
@@ -18,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        this.setPreferredSize(new Dimension(1200,700));
     }
 
     /**
@@ -36,11 +38,11 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGap(0, 1200, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         pack();
@@ -76,7 +78,13 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame frame = new MainFrame();
+                LoginPanel loginPanel = new LoginPanel();
+                frame.add(loginPanel);
+                loginPanel.setEnabled(true);
+                loginPanel.setVisible(true);
+                frame.pack();
+                frame.setVisible(true);
             }
         });
     }
