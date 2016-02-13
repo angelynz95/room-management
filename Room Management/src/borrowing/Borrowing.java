@@ -25,37 +25,37 @@ public class Borrowing {
         database = new Database();
     }
 
-    public String addBooking(BorrowingModel borrowing) {
+    public String addBorrowing(BorrowingModel borrowing) {
         database.connect(path);
 
-        String sql = "INSERT INTO borrowing (id_ruangan, id_peminjam, nama_peminjam, nomor_telepon_peminjam, "
+        String sql = "INSERT INTO peminjaman (id_ruangan, id_peminjam, nama_peminjam, nomor_telepon_peminjam, "
                 + "status_peminjam, alamat_peminjam, nama_kegiatan, nama_lembaga, waktu_mulai, waktu_selesai, jumlah_peserta)"
-                + "VALUES (" + borrowing.getBorrowerId() + "," + borrowing.getBorrowerName() + "," + borrowing.getBorrowerPhone() + "," 
-                + borrowing.getBorrowerStatus() + "," + borrowing.getBorrowerAddress() + "," + borrowing.getActivityName() + "," + borrowing.getOrganizationName()
-                + borrowing.getStartTime() + "," + borrowing.getFinishTime() + "," + borrowing.getTotalParticipant() + ")";
+                + "VALUES ('" + borrowing.getBorrowerId() + "','" + borrowing.getBorrowerName() + "','" + borrowing.getBorrowerPhone() + "','" 
+                + borrowing.getBorrowerStatus() + "','" + borrowing.getBorrowerAddress() + "','" + borrowing.getActivityName() + "','" + borrowing.getOrganizationName()
+                + borrowing.getStartTime() + "','" + borrowing.getFinishTime() + "','" + borrowing.getTotalParticipant() + "')";
         return database.changeData(sql);
     }
 
-    public String changeBooking(BorrowingModel borrowing) {
+    public String editBorrowing(BorrowingModel borrowing) {
         database.connect(path);
 
-        String sql = "UPDATE borrowing SET id_ruangan = " + borrowing.getId() + ", id_peminjam = " + borrowing.getBorrowerId()
-                + ", nama_peminjam = " + borrowing.getBorrowerName() + ", nomor_telepon_peminjam = " + borrowing.getBorrowerPhone() + "status_peminjam = "
-                + borrowing.getBorrowerStatus() + ", alamat_peminjam = " + borrowing.getBorrowerAddress() + ", nama_kegiatan = " + borrowing.getActivityName()
-                + ", nama_lembaga = " + borrowing.getOrganizationName() + ", waktu_mulai = " + borrowing.getStartTime() + ", waktu_selesai = " + borrowing.getFinishTime()
-                + ", jumlah_peserta = " + borrowing.getTotalParticipant() + " WHERE id_peminjaman = " + borrowing.getId();
+        String sql = "UPDATE peminjaman SET id_ruangan = '" + borrowing.getId() + "', id_peminjam = '" + borrowing.getBorrowerId()
+                + "', nama_peminjam = '" + borrowing.getBorrowerName() + "', nomor_telepon_peminjam = '" + borrowing.getBorrowerPhone() + "', status_peminjam = "
+                + borrowing.getBorrowerStatus() + "', alamat_peminjam = '" + borrowing.getBorrowerAddress() + "', nama_kegiatan = '" + borrowing.getActivityName()
+                + "', nama_lembaga = '" + borrowing.getOrganizationName() + "', waktu_mulai = '" + borrowing.getStartTime() + "', waktu_selesai = '" + borrowing.getFinishTime()
+                + "', jumlah_peserta = '" + borrowing.getTotalParticipant() + " WHERE id_peminjaman = '" + borrowing.getId() + "'";
         return database.changeData(sql);
     }
 
-    public String deleteBooking(BorrowingModel borrowing) {
+    public String deleteBorrowing(BorrowingModel borrowing) {
         database.connect(path);
 
-        String sql = "DELETE FROM peminjaman WHERE id_peminjaman = " + borrowing.getId();
+        String sql = "DELETE FROM peminjaman WHERE id_peminjaman = '" + borrowing.getId() + "'";
         return database.changeData(sql);
     }
 
-    public ArrayList<BorrowingModel> showClashBooking(BorrowingModel borrowing) {
-        ArrayList<BorrowingModel> clashBooking = new ArrayList<>();
+    public ArrayList<BorrowingModel> showClashBorrowing(BorrowingModel borrowing) {
+        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         database.connect(path);
 
         String sql = "SELECT * FROM peminjaman WHERE id_ruangan = " + borrowing.getId() + " AND ((waktu_mulai >= " + borrowing.getStartTime() + "AND waktu_mulai <= "
@@ -65,14 +65,19 @@ public class Borrowing {
 
         try {
             while (rs.next()) {
-              clashBooking.add(new BorrowingModel(rs.getInt("id_peminjaman"), rs.getInt("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_peminjam"),
+                clashBorrowing.add(new BorrowingModel(rs.getInt("id_peminjaman"), rs.getInt("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_peminjam"),
                       rs.getString("status_peminjam"), rs.getString("alamat_peminjam"), rs.getString("nomor_telepon_peminjam"), rs.getString("nama_lembaga"), rs.getString("nama_kegiatan"), 
-                      rs.getInt("jumlah_peserta"), rs.getTimestamp(""), rs.getTimestamp("waktu_mulai"), rs.getTimestamp("waktu_selesai")));
+                      rs.getInt("jumlah_peserta"), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_izin")), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")), 
+                      BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"))));
             }
             rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return clashBooking;
+        return clashBorrowing;
       }
+    
+    public static final void main(String args[]) {
+        
+    }
 }
