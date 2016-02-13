@@ -62,11 +62,10 @@ public class RoomsInformation {
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
-                Room room = new Room();
-                room.setId(rs.getInt("id_ruangan"));
-                room.setName(rs.getString("nama"));
-                room.setCapacity(rs.getInt("kapasitas"));
-                room.setStatus(rs.getString("status"));
+                result.setId(rs.getInt("id_ruangan"));
+                result.setName(rs.getString("nama"));
+                result.setCapacity(rs.getInt("kapasitas"));
+                result.setStatus(rs.getString("status"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
@@ -144,7 +143,7 @@ public class RoomsInformation {
         for(Room r : rooms) {
             System.out.println(r.getId() + " " + r.getName() + " " + r.getCapacity() + " " + r.getStatus());
         }
-        String name = "7606";
+        String name = "R 7606";
         Room searchedRoom = roomInformation.searchRoomData(name);
         System.out.println("*** Ruangan dengan nama " + name + " ***");
         System.out.println(searchedRoom.getId() + " " + searchedRoom.getName() + " " + searchedRoom.getCapacity() + " " + searchedRoom.getStatus());
