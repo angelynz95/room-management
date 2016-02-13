@@ -10,7 +10,8 @@ package database;
 
 import java.sql.*;
 
-public class Borrowing {
+public class BorrowingModel {
+    public final int MAX_BORROW_HOUR = 23;
     private int id;
     private int roomId;
     private int borrowerId;
@@ -25,11 +26,11 @@ public class Borrowing {
     private Timestamp startTime;
     private Timestamp finishTime;
     
-    public Borrowing() {
+    public BorrowingModel() {
         
     }
 
-    public Borrowing(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp permissionTime, Timestamp startTime, Timestamp finishTime) {
+    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Timestamp permissionTime, Timestamp startTime, Timestamp finishTime) {
         this.id = id;
         this.borrowerId = borrowerId;
         this.roomId = roomID;
