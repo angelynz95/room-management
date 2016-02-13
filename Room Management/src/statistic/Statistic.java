@@ -46,8 +46,9 @@ public class Statistic {
      */
     public void generateRoomUsageStatistics() {
         database.connect(path);
-        String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT count(id_ruangan) AS frequency from peminjaman group by id_ruangan ) AS tabel;";
+        String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT id_ruangan, count(id_ruangan) AS frequency from peminjaman group by id_ruangan ) AS tabel;";
         ResultSet rs = database.fetchData(sql);
+        resetList();
         try {
             while (rs.next()) {
                 labels.add(rs.getString("nama"));
@@ -59,13 +60,19 @@ public class Statistic {
         database.closeDatabase();
     }
     
+    void resetList() {
+        numbers = new ArrayList<>();
+        labels = new ArrayList<>();
+    }
+    
     /**
      * Generate room maintenance statistics which consist of the name of the room as labels and the count of its maintenance as numbers 
      */
     public void generateRoomMaintenanceStatistics() {
         database.connect(path);
-        String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT count(id_ruangan) AS frequency from pemeliharaan group by id_ruangan ) AS tabel;";
+        String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT id_ruangan, count(id_ruangan) AS frequency from pemeliharaan group by id_ruangan ) AS tabel;";
         ResultSet rs = database.fetchData(sql);
+        resetList();
         try {
             while (rs.next()) {
                 labels.add(rs.getString("nama"));
@@ -82,8 +89,9 @@ public class Statistic {
      */
     public void generateGroupBookingStatistics() {
         database.connect(path);
-        String sql = "SELECT nama_lembaga, count(id_ruangan) AS frequency from peminjaman group by id_ruangan;";
+        String sql = "SELECT nama_lembaga, count(nama_lembaga) AS frequency from peminjaman group by nama_lembaga;";
         ResultSet rs = database.fetchData(sql);
+        resetList();
         try {
             while (rs.next()) {
                 labels.add(rs.getString("nama_lembaga"));
@@ -104,21 +112,21 @@ public class Statistic {
         numbers1 = stat.getNumbers();
         System.out.println("*** Statistik pengunaan ruangan ***");
         for(int i=0; i<labels1.size(); i++) {
-            System.out.println(labels1.get(i) + numbers1.get(i));
+            System.out.println(labels1.get(i) + " : " + numbers1.get(i));
         }
         stat.generateRoomMaintenanceStatistics();
         labels2 = stat.getLabels();
         numbers2 = stat.getNumbers();
         System.out.println("*** Statistik pemeliharaan ruangan ***");
         for(int i=0; i<labels2.size(); i++) {
-            System.out.println(labels2.get(i) + numbers2.get(i));
+            System.out.println(labels2.get(i) + " : " + numbers2.get(i));
         }
         stat.generateGroupBookingStatistics();
         labels3 = stat.getLabels();
         numbers3 = stat.getNumbers();
         System.out.println("*** Statistik peminjaman ruangan oleh suatu kelompok ***");
         for(int i=0; i<labels3.size(); i++) {
-            System.out.println(labels3.get(i) + numbers3.get(i));
+            System.out.println(labels3.get(i) + " : " + numbers3.get(i));
         }
     }
     
