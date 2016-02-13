@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
 import database.RoomModel;
+import java.util.Calendar;
 import statistic.Statistic;
 
 /**
@@ -83,8 +84,10 @@ public class RoomInformation {
     
     private ArrayList<BorrowingModel> fetchBorrowingByIdRoomAndTime(int id, Timestamp time) {
         ArrayList<BorrowingModel> result = new ArrayList<>();
-        String sql = "SELECT * FROM peminjaman WHERE id_ruangan = " + id + " AND waktu_mulai > " + time + ";";
+        String sql = "SELECT * FROM peminjaman WHERE id_ruangan = " + id + " AND waktu_mulai > '" + time.toString() + "';";
+        System.out.println(sql);
         ResultSet rs = database.fetchData(sql);
+        Calendar cal = Calendar.getInstance();
         try {
             while (rs.next()) {
                 BorrowingModel b = new BorrowingModel();
@@ -98,9 +101,9 @@ public class RoomInformation {
                 b.setOrganizationName(rs.getString("nama_lembaga"));
                 b.setActivityName(rs.getString("nama_kegiatan"));
                 b.setTotalParticipant(rs.getInt("jumlah_peserta"));
-                b.setPermissionTime(rs.getTimestamp("waktu_izin"));
-                b.setStart(rs.getTimestamp("waktu_mulai"));
-                b.setFinish(rs.getTimestamp("waktu_selesai"));
+                b.setPermissionTime( BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_izin")));
+                b.setStart(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")));
+                b.setFinish(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai")));
                 result.add(b);
             }
         } catch (SQLException ex) {
@@ -131,12 +134,15 @@ public class RoomInformation {
         if (status.compareTo("rusak") == 0) {
             newStatus = "OK";
             String query = "UPDATE ruangan SET status = '"+ newStatus +"' WHERE id_ruangan = " + id;
-            database.changeData(query);
+            String temp = database.changeData(query);
+            System.out.println(temp);
         } else if (status.compareTo("OK") == 0) {
             newStatus = "rusak";
             String query = "UPDATE ruangan SET status = '"+ newStatus +"' WHERE id_ruangan = " + id;
             database.changeData(query);
             Date date = new Date();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(date.getTime());
             result = fetchBorrowingByIdRoomAndTime(id, new Timestamp(date.getTime()));
         }
         database.closeDatabase();
@@ -155,6 +161,13 @@ public class RoomInformation {
 
         System.out.println("*** Ruangan dengan nama " + name + " ***");
         System.out.println(searchedRoom.getId() + " " + searchedRoom.getName() + " " + searchedRoom.getCapacity() + " " + searchedRoom.getStatus());
+        System.out.println("Change status of the room with id=1");
+        ArrayList<BorrowingModel> borrowings = roomInformation.changeRoomStatus(1);
+        System.out.println("Yang bentrok :");
+        for(BorrowingModel m : borrowings) {
+            System.out.println(m.getId());
+        }
     }
+    
     
 }
