@@ -1,3 +1,5 @@
+package administrator;
+
 import database.Database;
 
 import java.sql.ResultSet;
@@ -9,11 +11,11 @@ import java.util.logging.Logger;
  * Created by User on 2/4/2016.
  */
 public class Administrator {
-    // Method
     // Konstruktor
     public Administrator() {
     }
 
+    // Method
     // Melakukan validasi login
     private String validateLogin(String password) {
         Database database = new Database();
