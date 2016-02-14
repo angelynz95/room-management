@@ -13,15 +13,21 @@ import javax.swing.JMenuBar;
  * @author angelynz95
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    // Atribut
+    private static MainFrame frame = new MainFrame();
+    
     /**
      * Creates new form MainFrame
      */
-    public MainFrame() {
+    private MainFrame() {
         initComponents();
         this.setPreferredSize(new Dimension(1200,700));
     }
-
+    
+    public static MainFrame getInstance() {
+        return frame;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

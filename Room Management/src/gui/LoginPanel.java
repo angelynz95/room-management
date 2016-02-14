@@ -7,8 +7,12 @@ package gui;
 
 import administrator.Administrator;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
+import javax.swing.*;
 
 /**
  *
@@ -23,6 +27,19 @@ public class LoginPanel extends javax.swing.JPanel {
     public LoginPanel() {
         initComponents();
         administrator = new Administrator();
+        passwordField.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
+                        messageLabel.setText("Kata sandi benar !");
+                        MainFrame frame = MainFrame.getInstance();
+                        frame.setContentPane(new ChangePasswordPanel());
+                    } else {
+                        messageLabel.setText("Kata sandi salah !");
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -46,6 +63,11 @@ public class LoginPanel extends javax.swing.JPanel {
         titleLabel.setText("Aplikasi Room Management");
 
         passwordField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
 
         passwordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         passwordLabel.setText("Kata Sandi");
@@ -88,7 +110,7 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addComponent(messageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginButton)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -103,10 +125,16 @@ public class LoginPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
             messageLabel.setText("Kata sandi benar !");
+            MainFrame frame = MainFrame.getInstance();
+            frame.setContentPane(new ChangePasswordPanel());
         } else {
             messageLabel.setText("Kata sandi salah !");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // Do nothing
+    }//GEN-LAST:event_passwordFieldActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -118,7 +146,7 @@ public class LoginPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public static void main(String[] args) {
-        MainFrame frame = new MainFrame();
+        MainFrame frame = MainFrame.getInstance();
         LoginPanel loginPanel = new LoginPanel();
         frame.setContentPane(loginPanel);
         frame.pack();
