@@ -21,7 +21,6 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author angelynz95
  */
 public class RoomInformationPanel extends javax.swing.JPanel {
-    private JFrame mainFrame;
     private JTable table;
     private List<List<Object>> data;
     private List<Object> columns;
@@ -34,16 +33,11 @@ public class RoomInformationPanel extends javax.swing.JPanel {
         initComponents();
         // Inisialisasi columns
         columns = new ArrayList<Object>();
-        columns.add("Nama Ruangan");
-        columns.add("Kapasitas Ruangan");
-        columns.add("Status Ruangan");
         // Inisialisasi data
         data = new ArrayList<List<Object>>();
-        data.add(new ArrayList<Object>());
-        data.get(0).add("7606");
-        data.get(0).add(50);
-        data.get(0).add("OK");
         // Menampilkan tabel
+        setColumns();
+        setData();
         showTable();
     }
 
@@ -92,6 +86,19 @@ public class RoomInformationPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setColumns() {
+        columns.add("Nama Ruangan");
+        columns.add("Kapasitas Ruangan");
+        columns.add("Status Ruangan");
+    }
+    
+    private void setData() {
+        data.add(new ArrayList<Object>());
+        data.get(0).add("7606");
+        data.get(0).add(50);
+        data.get(0).add("OK");
+    }
+    
     private void showTable() {
         Object[] temp = new Object[columns.size()];
         Object[][] temp2 = new Object[data.size()][columns.size()];

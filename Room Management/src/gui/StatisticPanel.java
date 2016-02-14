@@ -7,17 +7,57 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author angelynz95
  */
 public class StatisticPanel extends javax.swing.JPanel {
+    private DefaultTableCellRenderer headerRenderer;
+    private DefaultTableCellRenderer cellRenderer;
+    private JTable roomBorrowedFrequencyStatistic;
+    private JTable roomBrokenFrequencyStatistic;
+    private JTable roomUsedStatistic;
+    private List<List<Object>> roomBorrowedFrequencyData;
+    private List<List<Object>> roomBrokenFrequencyData;
+    private List<List<Object>> roomUsedData;
+    private List<Object> roomBorrowedFrequencyColumns;
+    private List<Object> roomBrokenFrequencyColumns;
+    private List<Object> roomUsedColumns;
 
     /**
      * Creates new form StatisticPanel
      */
     public StatisticPanel() {
         initComponents();
+        // Inisialisasi kolom frekuensi peminjaman ruangan
+        roomBorrowedFrequencyColumns = new ArrayList<Object>();
+        // Inisialisasi kolom frekuensi kerusakan ruangan
+        roomBrokenFrequencyColumns = new ArrayList<Object>();
+        // Inisialisasi penggunaan ruangan oleh kelompok user tertentu
+        roomUsedColumns = new ArrayList<Object>();
+        // Inisialisasi data statistik
+        roomBorrowedFrequencyData = new ArrayList<List<Object>>();
+        roomBrokenFrequencyData = new ArrayList<List<Object>>();
+        roomUsedData = new ArrayList<List<Object>>();
+        // Menampilkan statistik
+        setRoomBorrowedFrequencyColumns();
+        setRoomBrokenFrequencyColumns();
+        setRoomUsedColumns();
+        setRoomBorrowedFrequencyData();
+        setRoomBrokenFrequencyData();
+        setRoomUsedData();
+        customizeTable();
+        showRoomBorrowedFrequencyStatistic();
+        showRoomBrokenFrequencyStatistic();
+        showRoomUsedStatistic();
     }
 
     /**
@@ -29,19 +69,211 @@ public class StatisticPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        statisticPane = new javax.swing.JTabbedPane();
+        roomBorrowedFrequencyPanel = new javax.swing.JPanel();
+        roomBorrowedFrequencyPane = new javax.swing.JScrollPane();
+        roomBrokenFrequencyPanel = new javax.swing.JPanel();
+        roomBrokenFrequencyPane = new javax.swing.JScrollPane();
+        roomUsedPanel = new javax.swing.JPanel();
+        roomUsedPane = new javax.swing.JScrollPane();
+
+        statisticPane.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+
+        javax.swing.GroupLayout roomBorrowedFrequencyPanelLayout = new javax.swing.GroupLayout(roomBorrowedFrequencyPanel);
+        roomBorrowedFrequencyPanel.setLayout(roomBorrowedFrequencyPanelLayout);
+        roomBorrowedFrequencyPanelLayout.setHorizontalGroup(
+            roomBorrowedFrequencyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomBorrowedFrequencyPanelLayout.createSequentialGroup()
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(roomBorrowedFrequencyPane, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
+        );
+        roomBorrowedFrequencyPanelLayout.setVerticalGroup(
+            roomBorrowedFrequencyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomBorrowedFrequencyPanelLayout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(roomBorrowedFrequencyPane, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        statisticPane.addTab("Frekuensi Penggunaan Ruang", roomBorrowedFrequencyPanel);
+
+        javax.swing.GroupLayout roomBrokenFrequencyPanelLayout = new javax.swing.GroupLayout(roomBrokenFrequencyPanel);
+        roomBrokenFrequencyPanel.setLayout(roomBrokenFrequencyPanelLayout);
+        roomBrokenFrequencyPanelLayout.setHorizontalGroup(
+            roomBrokenFrequencyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomBrokenFrequencyPanelLayout.createSequentialGroup()
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(roomBrokenFrequencyPane, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
+        );
+        roomBrokenFrequencyPanelLayout.setVerticalGroup(
+            roomBrokenFrequencyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomBrokenFrequencyPanelLayout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(roomBrokenFrequencyPane, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        statisticPane.addTab("Frekuensi Kerusakan Ruang", roomBrokenFrequencyPanel);
+
+        javax.swing.GroupLayout roomUsedPanelLayout = new javax.swing.GroupLayout(roomUsedPanel);
+        roomUsedPanel.setLayout(roomUsedPanelLayout);
+        roomUsedPanelLayout.setHorizontalGroup(
+            roomUsedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomUsedPanelLayout.createSequentialGroup()
+                .addContainerGap(219, Short.MAX_VALUE)
+                .addComponent(roomUsedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(219, Short.MAX_VALUE))
+        );
+        roomUsedPanelLayout.setVerticalGroup(
+            roomUsedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomUsedPanelLayout.createSequentialGroup()
+                .addContainerGap(71, Short.MAX_VALUE)
+                .addComponent(roomUsedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        statisticPane.addTab("Penggunaan Ruang oleh (Kelompok) User", roomUsedPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1195, Short.MAX_VALUE)
+            .addComponent(statisticPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 626, Short.MAX_VALUE)
+            .addComponent(statisticPane)
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setRoomBorrowedFrequencyColumns() {
+        roomBorrowedFrequencyColumns.add("Nama Ruangan");
+        roomBorrowedFrequencyColumns.add("Frekuensi Peminjaman");
+    }
+    
+    private void setRoomBrokenFrequencyColumns() {
+        roomBrokenFrequencyColumns.add("Nama Ruangan");
+        roomBrokenFrequencyColumns.add("Frekuensi Kerusakan");
+    }
+    
+    private void setRoomUsedColumns() {
+        roomUsedColumns.add("");
+        roomUsedColumns.add("Dosen");
+        roomUsedColumns.add("HMIF");
+        roomUsedColumns.add("TU IF");
+    }
+    
+    private void setRoomBorrowedFrequencyData() {
+        
+    }
+    
+    private void setRoomBrokenFrequencyData() {
+        
+    }
+    
+    private void setRoomUsedData() {
+        
+    }
+    
+    private void showRoomBorrowedFrequencyStatistic() {
+        Object[] temp = new Object[roomBorrowedFrequencyColumns.size()];
+        Object[][] temp2 = new Object[roomBorrowedFrequencyData.size()][roomBorrowedFrequencyColumns.size()];
+        ArrayList<Object[]> rows = new ArrayList<Object[]>();
+        for (List<Object> datum : roomBorrowedFrequencyData) {
+            rows.add((Object[]) datum.toArray());
+        }
+        
+        roomBorrowedFrequencyStatistic = new JTable(rows.toArray(temp2), roomBorrowedFrequencyColumns.toArray(temp));
+        roomBorrowedFrequencyStatistic.setFillsViewportHeight(true);
+        roomBorrowedFrequencyStatistic.setEnabled(false);
+        roomBorrowedFrequencyStatistic.getTableHeader().setReorderingAllowed(false);
+        // Menerapkan customization tabel
+        roomBorrowedFrequencyStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
+        for (int i = 0; i < roomBorrowedFrequencyStatistic.getColumnCount(); i++) {
+            roomBorrowedFrequencyStatistic.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        }
+        // Mengatur font
+        roomBorrowedFrequencyStatistic.setFont(new Font("Roboto", Font.PLAIN, 16));
+        
+        roomBorrowedFrequencyPane.getViewport().add(roomBorrowedFrequencyStatistic);
+    }
+    
+    private void showRoomBrokenFrequencyStatistic() {
+        Object[] temp = new Object[roomBrokenFrequencyColumns.size()];
+        Object[][] temp2 = new Object[roomBrokenFrequencyData.size()][roomBrokenFrequencyColumns.size()];
+        ArrayList<Object[]> rows = new ArrayList<Object[]>();
+        for (List<Object> datum : roomBrokenFrequencyData) {
+            rows.add((Object[]) datum.toArray());
+        }
+        
+        roomBrokenFrequencyStatistic = new JTable(rows.toArray(temp2), roomBrokenFrequencyColumns.toArray(temp));
+        roomBrokenFrequencyStatistic.setFillsViewportHeight(true);
+        roomBrokenFrequencyStatistic.setEnabled(false);
+        roomBrokenFrequencyStatistic.getTableHeader().setReorderingAllowed(false);
+        // Menerapkan customization
+        roomBrokenFrequencyStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
+        for (int i = 0; i < roomBrokenFrequencyStatistic.getColumnCount(); i++) {
+            roomBrokenFrequencyStatistic.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        }
+        // Mengatur font
+        roomBrokenFrequencyStatistic.setFont(new Font("Roboto", Font.PLAIN, 16));
+        
+        roomBrokenFrequencyPane.getViewport().add(roomBrokenFrequencyStatistic);
+    }
+    
+    private void showRoomUsedStatistic() {
+        Object[] temp = new Object[roomUsedColumns.size()];
+//        Object[][] temp2 = new Object[roomUsedData.size()][roomUsedColumns.size()];
+        Object[][] temp2 = {{"7606", 5, 3, 2}};
+        ArrayList<Object[]> rows = new ArrayList<Object[]>();
+        for (List<Object> datum : roomUsedData) {
+            rows.add((Object[]) datum.toArray());
+        }
+        
+        roomUsedStatistic = new JTable(temp2, roomUsedColumns.toArray(temp));
+        roomUsedStatistic.setFillsViewportHeight(true);
+        roomUsedStatistic.setEnabled(false);
+        roomUsedStatistic.getTableHeader().setReorderingAllowed(false);
+        // Meng-customize roomUsedStatistic
+        DefaultTableCellRenderer firstColumnRenderer = new DefaultTableCellRenderer();
+        // Membuat alignment center
+        firstColumnRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        firstColumnRenderer.setVerticalAlignment(SwingConstants.CENTER);
+        // Membuat warna berbeda pada kolom pertama
+        firstColumnRenderer.setBackground(Color.lightGray);
+        // Menerapkan customization
+        roomUsedStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
+        for (int i = 1; i < roomUsedStatistic.getColumnCount(); i++) {
+            roomUsedStatistic.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        }
+        roomUsedStatistic.getColumnModel().getColumn(0).setCellRenderer(firstColumnRenderer);
+        // Mengatur font
+        roomUsedStatistic.setFont(new Font("Roboto", Font.PLAIN, 16));
+        
+        roomUsedPane.getViewport().add(roomUsedStatistic);
+    }
+    
+    private void customizeTable() {
+        headerRenderer = new DefaultTableCellRenderer();
+        cellRenderer = new DefaultTableCellRenderer();
+        // Membuat alignment center
+        cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        cellRenderer.setVerticalAlignment(SwingConstants.CENTER);
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
+        // Membuat warna berbeda pada header
+        headerRenderer.setBackground(Color.lightGray);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane roomBorrowedFrequencyPane;
+    private javax.swing.JPanel roomBorrowedFrequencyPanel;
+    private javax.swing.JScrollPane roomBrokenFrequencyPane;
+    private javax.swing.JPanel roomBrokenFrequencyPanel;
+    private javax.swing.JScrollPane roomUsedPane;
+    private javax.swing.JPanel roomUsedPanel;
+    private javax.swing.JTabbedPane statisticPane;
     // End of variables declaration//GEN-END:variables
 }
