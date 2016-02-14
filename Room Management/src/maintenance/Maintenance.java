@@ -11,7 +11,7 @@ package maintenance;
 import database.BorrowingModel;
 import database.Database;
 import database.MaintenanceModel;
-import java.sql.Date;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;

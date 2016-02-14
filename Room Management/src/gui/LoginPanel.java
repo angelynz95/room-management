@@ -1,19 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Aplikasi Room Management
+ * @author Irene Wiliudarsan - 13513002
+ * @author William Sentosa - 13513026
+ * @author Angela Lynn - 13513032
+ * @author Devina Ekawati - 13513088
  */
 package gui;
 
 import administrator.Administrator;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.GroupLayout;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.*;
 
 /**
  *

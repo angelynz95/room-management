@@ -1,8 +1,17 @@
+/**
+ * Aplikasi Room Management
+ * @author Irene Wiliudarsan - 13513002
+ * @author William Sentosa - 13513026
+ * @author Angela Lynn - 13513032
+ * @author Devina Ekawati - 13513088
+ */
 package roominformation;
 
 import database.BorrowingModel;
 import database.Database;
 import database.RoomModel;
+import statistic.Statistic;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -10,9 +19,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Date;
-import database.RoomModel;
 import java.util.Calendar;
-import statistic.Statistic;
 
 /**
  *
