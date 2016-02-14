@@ -5,17 +5,44 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+
 /**
  *
  * @author angelynz95
  */
 public class RoomInformationPanel extends javax.swing.JPanel {
+    private JFrame mainFrame;
+    private JTable table;
+    private List<List<Object>> data;
+    private List<Object> columns;
 
     /**
      * Creates new form RoomInformation
      */
     public RoomInformationPanel() {
+        
         initComponents();
+        // Inisialisasi columns
+        columns = new ArrayList<Object>();
+        columns.add("Nama Ruangan");
+        columns.add("Kapasitas Ruangan");
+        columns.add("Status Ruangan");
+        // Inisialisasi data
+        data = new ArrayList<List<Object>>();
+        data.add(new ArrayList<Object>());
+        data.get(0).add("7606");
+        data.get(0).add(50);
+        data.get(0).add("OK");
+        // Menampilkan tabel
+        showTable();
     }
 
     /**
@@ -29,7 +56,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
 
         searchField = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        roomInformationPane = new javax.swing.JScrollPane();
 
         searchField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
@@ -43,7 +70,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(272, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(roomInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(searchField)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -58,14 +85,60 @@ public class RoomInformationPanel extends javax.swing.JPanel {
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(roomInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void showTable() {
+        Object[] temp = new Object[columns.size()];
+        Object[][] temp2 = new Object[data.size()][columns.size()];
+        ArrayList<Object[]> rows = new ArrayList<Object[]>();
+        for (List<Object> datum : data) {
+            rows.add((Object[]) datum.toArray());
+        }
+        
+        table = new JTable(rows.toArray(temp2), columns.toArray(temp));
+        table.setFillsViewportHeight(true);
+        table.setEnabled(false);
+        table.getTableHeader().setReorderingAllowed(false);
+        // Meng-customize table
+        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        // Membuat alignment center
+        cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        cellRenderer.setVerticalAlignment(SwingConstants.CENTER);
+        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
+        // Membuat warna berbeda pada header
+        headerRenderer.setBackground(Color.lightGray);
+        // Menerapkan customization
+        table.getTableHeader().setDefaultRenderer(headerRenderer);
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
+        }
+        // Mengatur font
+        table.setFont(new Font("Roboto", Font.PLAIN, 16));
+        
+        // Menambahkan mouse listener
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = table.rowAtPoint(evt.getPoint());
+                int column = table.columnAtPoint(evt.getPoint());
+                if (table.getValueAt(row, column).equals("OK")) {
+                    table.setValueAt("Rusak", row, column);
+                } else {
+                    table.setValueAt("OK", row, column);
+                }
+            }
+        });
+        
+        roomInformationPane.getViewport().add(table);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane roomInformationPane;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchField;
     // End of variables declaration//GEN-END:variables
