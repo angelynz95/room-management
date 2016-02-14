@@ -20,8 +20,6 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private MainFrame() {
         initComponents();
-        setContentPane(new LoginPanel());
-        pack();
     }
     
     public static MainFrame getInstance() {
@@ -85,7 +83,10 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame frame = MainFrame.getInstance();
+                frame.setContentPane(new LoginPanel());
+                frame.pack();
+                frame.setVisible(true);
             }
         });
     }

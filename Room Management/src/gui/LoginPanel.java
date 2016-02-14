@@ -21,7 +21,7 @@ import javax.swing.*;
  */
 public class LoginPanel extends javax.swing.JPanel {
     private Administrator administrator;
-    private JFrame mainFrame;
+    private MainFrame frame;
     
     /**
      * Creates new form LoginPagePanel
@@ -29,6 +29,7 @@ public class LoginPanel extends javax.swing.JPanel {
     public LoginPanel() {
         initComponents();
         administrator = new Administrator();
+        frame = MainFrame.getInstance();
         passwordField.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -132,7 +133,6 @@ public class LoginPanel extends javax.swing.JPanel {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
             messageLabel.setText("Kata sandi benar !");
-            MainFrame frame = MainFrame.getInstance();
             frame.setContentPane(new MenuPanel());
         } else {
             messageLabel.setText("Kata sandi salah!");
@@ -152,13 +152,13 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
-//    public static void main(String[] args) {
-//        MainFrame frame = new MainFrame();
-//        LoginPanel loginPanel = new LoginPanel();
-//        frame.setContentPane(loginPanel);
-//        frame.pack();
-//        frame.setVisible(true);
-//    }
+    public static void main(String[] args) {
+        MainFrame frame = MainFrame.getInstance();
+        LoginPanel loginPanel = new LoginPanel();
+        frame.setContentPane(loginPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
 
 }
 
