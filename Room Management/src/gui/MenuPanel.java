@@ -5,17 +5,34 @@
  */
 package gui;
 
+import java.awt.FlowLayout;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author angelynz95
  */
 public class MenuPanel extends javax.swing.JPanel {
+    private JFrame mainFrame;
 
     /**
-     * Creates new form MenuPanel
+     * Creates new form MainPanel
      */
     public MenuPanel() {
         initComponents();
+        // Tampilan Organisasi Jadwal
+        bookingInformationPanel.setLayout(new FlowLayout());
+        bookingInformationPanel.add(new BookingInformation());
+        // Tampilan Info Ruangan
+        roomInformationPanel.setLayout(new FlowLayout());
+        roomInformationPanel.add(new RoomInformationPanel());
+        // Tampilan Statistik
+        statisticPanel.setLayout(new FlowLayout());
+        statisticPanel.add(new StatisticPanel());
+        // Tampilan Ubah Kata Sandi
+        changePasswordPanel.setLayout(new FlowLayout());
+        changePasswordPanel.add(new ChangePasswordPanel());
     }
 
     /**
@@ -27,96 +44,121 @@ public class MenuPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bookingInformationLabel = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        roomInformationLabel = new javax.swing.JLabel();
-        statisticLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
+        menuPane = new javax.swing.JTabbedPane();
+        bookingInformationPanel = new javax.swing.JPanel();
+        roomInformationPanel = new javax.swing.JPanel();
+        statisticPanel = new javax.swing.JPanel();
+        changePasswordPanel = new javax.swing.JPanel();
+        logoutLabel = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
 
-        bookingInformationLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        bookingInformationLabel.setText("Organisasi Jadwal");
+        setPreferredSize(new java.awt.Dimension(1200, 700));
 
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        menuPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        menuPane.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
-        roomInformationLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        roomInformationLabel.setText("Info Ruangan");
+        javax.swing.GroupLayout bookingInformationPanelLayout = new javax.swing.GroupLayout(bookingInformationPanel);
+        bookingInformationPanel.setLayout(bookingInformationPanelLayout);
+        bookingInformationPanelLayout.setHorizontalGroup(
+            bookingInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1195, Short.MAX_VALUE)
+        );
+        bookingInformationPanelLayout.setVerticalGroup(
+            bookingInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
+        );
 
-        statisticLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        statisticLabel.setText("Statistic");
+        menuPane.addTab("Organisasi Jadwal", bookingInformationPanel);
 
-        jLabel4.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jLabel4.setText("Ubah Kata Sandi");
+        javax.swing.GroupLayout roomInformationPanelLayout = new javax.swing.GroupLayout(roomInformationPanel);
+        roomInformationPanel.setLayout(roomInformationPanelLayout);
+        roomInformationPanelLayout.setHorizontalGroup(
+            roomInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1195, Short.MAX_VALUE)
+        );
+        roomInformationPanelLayout.setVerticalGroup(
+            roomInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
+        );
 
-        jLabel5.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        jLabel5.setText("Keluar");
+        menuPane.addTab("Info Ruangan", roomInformationPanel);
 
-        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        javax.swing.GroupLayout statisticPanelLayout = new javax.swing.GroupLayout(statisticPanel);
+        statisticPanel.setLayout(statisticPanelLayout);
+        statisticPanelLayout.setHorizontalGroup(
+            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1195, Short.MAX_VALUE)
+        );
+        statisticPanelLayout.setVerticalGroup(
+            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
+        );
 
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        menuPane.addTab("Statistik", statisticPanel);
 
-        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        javax.swing.GroupLayout changePasswordPanelLayout = new javax.swing.GroupLayout(changePasswordPanel);
+        changePasswordPanel.setLayout(changePasswordPanelLayout);
+        changePasswordPanelLayout.setHorizontalGroup(
+            changePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1195, Short.MAX_VALUE)
+        );
+        changePasswordPanelLayout.setVerticalGroup(
+            changePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
+        );
+
+        menuPane.addTab("Ubah Kata Sandi", changePasswordPanel);
+
+        logoutLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        logoutLabel.setText("Keluar");
+        logoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutLabelMouseClicked(evt);
+            }
+        });
+
+        titleLabel.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        titleLabel.setText("Room Management");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(menuPane)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(bookingInformationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(roomInformationLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(statisticLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 652, Short.MAX_VALUE)
-                .addComponent(jLabel5)
+                .addComponent(titleLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(logoutLabel)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jSeparator3)
-            .addComponent(jSeparator4)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(roomInformationLabel)
-                        .addComponent(statisticLabel)
-                        .addComponent(jLabel4))
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bookingInformationLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logoutLabel)
+                    .addComponent(titleLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(menuPane, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
+        // TODO add your handling code here:
+        mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        mainFrame.setContentPane(new LoginPanel());
+        mainFrame.pack();
+    }//GEN-LAST:event_logoutLabelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel bookingInformationLabel;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JLabel roomInformationLabel;
-    private javax.swing.JLabel statisticLabel;
+    private javax.swing.JPanel bookingInformationPanel;
+    private javax.swing.JPanel changePasswordPanel;
+    private javax.swing.JLabel logoutLabel;
+    private javax.swing.JTabbedPane menuPane;
+    private javax.swing.JPanel roomInformationPanel;
+    private javax.swing.JPanel statisticPanel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }

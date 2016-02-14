@@ -6,14 +6,18 @@
 package gui;
 
 import administrator.Administrator;
+<<<<<<< HEAD
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import javax.swing.GroupLayout;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import javax.swing.*;
+=======
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+>>>>>>> 111df4fed8361057b3f9ca23977a2f00f8db44fc
 
 /**
  *
@@ -35,7 +39,7 @@ public class LoginPanel extends javax.swing.JPanel {
                     if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
                         messageLabel.setText("Kata sandi benar !");
                         MainFrame frame = MainFrame.getInstance();
-                        frame.setContentPane(new MenuPanel());
+                        frame.setContentPane(new ChangePasswordPanel());
                     } else {
                         messageLabel.setText("Kata sandi salah !");
                     }
@@ -117,7 +121,11 @@ public class LoginPanel extends javax.swing.JPanel {
                     .addComponent(messageLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addComponent(loginButton)
+<<<<<<< HEAD
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+=======
                 .addContainerGap(255, Short.MAX_VALUE))
+>>>>>>> 111df4fed8361057b3f9ca23977a2f00f8db44fc
         );
     }// </editor-fold>//GEN-END:initComponents
     
@@ -130,10 +138,18 @@ public class LoginPanel extends javax.swing.JPanel {
     }
     
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+<<<<<<< HEAD
         if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
             messageLabel.setText("Kata sandi benar !");
             MainFrame frame = MainFrame.getInstance();
-            frame.setContentPane(new MenuPanel());
+            frame.setContentPane(new ChangePasswordPanel());
+=======
+        if(/*administrator.validateLogin(convertToString(passwordField.getPassword()))*/ true) {
+            // Pindah ke halaman tampilan menu
+            mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
+            mainFrame.setContentPane(new MenuPanel());
+            mainFrame.pack();
+>>>>>>> 111df4fed8361057b3f9ca23977a2f00f8db44fc
         } else {
             messageLabel.setText("Kata sandi salah!");
         }
@@ -152,6 +168,15 @@ public class LoginPanel extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 
+<<<<<<< HEAD
+    public static void main(String[] args) {
+        MainFrame frame = MainFrame.getInstance();
+        LoginPanel loginPanel = new LoginPanel();
+        frame.setContentPane(loginPanel);
+        frame.pack();
+        frame.setVisible(true);
+    }
+=======
 //    public static void main(String[] args) {
 //        MainFrame frame = new MainFrame();
 //        LoginPanel loginPanel = new LoginPanel();
@@ -159,6 +184,7 @@ public class LoginPanel extends javax.swing.JPanel {
 //        frame.pack();
 //        frame.setVisible(true);
 //    }
+>>>>>>> 111df4fed8361057b3f9ca23977a2f00f8db44fc
 
 }
 

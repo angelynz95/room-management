@@ -58,7 +58,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(377, Short.MAX_VALUE)
+                .addContainerGap(375, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newPasswordLabel)
                     .addGroup(layout.createSequentialGroup()
@@ -72,12 +72,12 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                                 .addComponent(newPasswordField)
                                 .addComponent(newPasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(changePasswordButton))))
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
+                .addContainerGap(226, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(oldPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(oldPasswordLabel))
@@ -91,7 +91,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                     .addComponent(newPasswordConfirmationLabel))
                 .addGap(46, 46, 46)
                 .addComponent(changePasswordButton)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(213, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

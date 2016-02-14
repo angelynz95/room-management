@@ -5,8 +5,7 @@
  */
 package gui;
 
-import java.awt.Dimension;
-import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 
 /**
  *
@@ -21,7 +20,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     private MainFrame() {
         initComponents();
-        this.setPreferredSize(new Dimension(1200,700));
+        setContentPane(new LoginPanel());
+        pack();
     }
     
     public static MainFrame getInstance() {
@@ -39,6 +39,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Room Management");
+        setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,13 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                MainFrame frame = new MainFrame();
-                LoginPanel loginPanel = new LoginPanel();
-                frame.add(loginPanel);
-                loginPanel.setEnabled(true);
-                loginPanel.setVisible(true);
-                frame.pack();
-                frame.setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }

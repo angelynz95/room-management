@@ -64,7 +64,9 @@ public class Maintenance {
         } catch (SQLException ex) {
           Logger.getLogger(Maintenance.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        database.closeDatabase();
+        
         return clashMaintenance;
     }
     
@@ -138,9 +140,6 @@ public class Maintenance {
 //            System.out.println(clashMaintenance.get(i).getId());
 //        }
         
-        
-        
-//        BorrowingModel borrowingModel = new BorrowingModel(14, 22222222, 1, "Nina", "Dosen", "JL Ganesha", "0823133224333", "Informatika ITB", "kuliah", 50, permissionTime, startTime, finishTime);
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         clashBorrowing = maintenance.getClashBorrowing(maintenanceModel);
         for (int i = 0; i < clashBorrowing.size(); i++) {

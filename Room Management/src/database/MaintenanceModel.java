@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class MaintenanceModel {
-    public final int MAX_MAINTAIN_HOUR = 23;
+    public static final int MAX_MAINTAIN_HOUR = 23;
     private int id;
     private int roomId;
     private String description;
