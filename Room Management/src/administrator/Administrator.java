@@ -46,9 +46,8 @@ public class Administrator {
 
     // Menangani pengubahan password
     public void changePassword(String newPassword) {
-        Database database = new Database();
         database.connect(path);
-        String query = "UPDATE pengguna SET password = " + newPassword + ";";
+        String query = "UPDATE pengguna SET password = '" + newPassword + "';";
         database.changeData(query);
         database.closeDatabase();
     }

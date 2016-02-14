@@ -129,10 +129,10 @@ public class LoginPanel extends javax.swing.JPanel {
     
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         if(administrator.validateLogin(convertToString(passwordField.getPassword()))) {
-            messageLabel.setText("Kata sandi benar !");
+            messageLabel.setText("Kata sandi benar");
             frame.setContentPane(new MenuPanel());
         } else {
-            messageLabel.setText("Kata sandi salah!");
+            messageLabel.setText("Kata sandi salah");
         }
     }//GEN-LAST:event_loginButtonActionPerformed
 
