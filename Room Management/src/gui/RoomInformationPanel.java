@@ -14,8 +14,10 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableCellRenderer;
 import roominformation.RoomInformation;
 
@@ -44,7 +46,21 @@ public class RoomInformationPanel extends javax.swing.JPanel {
         setData();
         showTable();
     }
-
+    
+    public RoomInformationPanel(String searchedText) {
+        
+        initComponents();
+        roomInformation = new RoomInformation();
+        // Inisialisasi columns
+        columns = new ArrayList<Object>();
+        // Inisialisasi data
+        data = new ArrayList<List<Object>>();
+        // Menampilkan tabel
+        setColumns();
+        this.setSearchedData(searchedText);
+        showTable();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,6 +78,11 @@ public class RoomInformationPanel extends javax.swing.JPanel {
 
         searchButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         searchButton.setText("Cari");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -90,6 +111,15 @@ public class RoomInformationPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        MenuPanel panel = (MenuPanel)frame.getContentPane();
+        panel.getRoomInformationContainer().removeAll();
+        panel.getRoomInformationContainer().add(new RoomInformationPanel(searchField.getText()));
+        panel.getRoomInformationContainer().revalidate();
+        panel.getRoomInformationContainer().repaint();
+    }//GEN-LAST:event_searchButtonActionPerformed
+
     private void setColumns() {
         columns.add("Nama Ruangan");
         columns.add("Kapasitas Ruangan");
@@ -98,6 +128,16 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     
     private void setData() {
         List<RoomModel> rooms = roomInformation.fetchRoomData();
+        for(int i=0; i<rooms.size(); i++) {
+            data.add(new ArrayList<Object>());
+            data.get(i).add(rooms.get(i).getName());
+            data.get(i).add(rooms.get(i).getCapacity());
+            data.get(i).add(rooms.get(i).getStatus());
+        }
+    }
+    
+    private void setSearchedData(String text) {
+        ArrayList<RoomModel> rooms = roomInformation.searchRoomData(text);
         for(int i=0; i<rooms.size(); i++) {
             data.add(new ArrayList<Object>());
             data.get(i).add(rooms.get(i).getName());

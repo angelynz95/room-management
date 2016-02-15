@@ -64,23 +64,19 @@ public class RoomInformation {
      * @param namaRuangan the name of the room which meant to be searched
      * @return room with the name
      */
-    public RoomModel searchRoomData(String namaRuangan) {
-        RoomModel result = new RoomModel();
+    public ArrayList<RoomModel> searchRoomData(String namaRuangan) {
+        ArrayList<RoomModel> result = new ArrayList<>();
         database.connect(path);
-        String sql = "SELECT * FROM ruangan WHERE nama = '" + namaRuangan + "';";
+        String sql = "SELECT * FROM ruangan WHERE nama LIKE '%" + namaRuangan + "%';";
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
-                result.setId(rs.getInt("id_ruangan"));
-                result.setName(rs.getString("nama"));
-                result.setCapacity(rs.getInt("kapasitas"));
-                result.setStatus(rs.getString("status"));
-
-                RoomModel room = new RoomModel();
-                room.setId(rs.getInt("id_ruangan"));
-                room.setName(rs.getString("nama"));
-                room.setCapacity(rs.getInt("kapasitas"));
-                room.setStatus(rs.getString("status"));
+                RoomModel model = new RoomModel();
+                model.setId(rs.getInt("id_ruangan"));
+                model.setName(rs.getString("nama"));
+                model.setCapacity(rs.getInt("kapasitas"));
+                model.setStatus(rs.getString("status"));
+                result.add(model);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,17 +162,6 @@ public class RoomInformation {
         }
 
         String name = "R 7606";
-        RoomModel searchedRoom = roomInformation.searchRoomData(name);
-
-        System.out.println("*** Ruangan dengan nama " + name + " ***");
-        System.out.println(searchedRoom.getId() + " " + searchedRoom.getName() + " " + searchedRoom.getCapacity() + " " + searchedRoom.getStatus());
-        System.out.println("Change status of the room with id=1");
-        /*
-        ArrayList<BorrowingModel> borrowings = roomInformation.changeRoomStatus(1);
-        System.out.println("Yang bentrok :");
-        for(BorrowingModel m : borrowings) {
-            System.out.println(m.getId());
-        } */
     }
     
     

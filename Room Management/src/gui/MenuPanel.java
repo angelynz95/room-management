@@ -51,10 +51,12 @@ public class MenuPanel extends javax.swing.JPanel {
         changePasswordContainer.setLayout(new FlowLayout());
         changePasswordPanel = new ChangePasswordPanel();
         changePasswordContainer.add(changePasswordPanel);
-        
-        
     }
-
+    
+    public JPanel getRoomInformationContainer() {
+        return this.roomInformationContainer;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
