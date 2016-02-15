@@ -17,6 +17,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
 import maintenance.Maintenance;
 import roominformation.RoomInformation;
@@ -26,16 +28,19 @@ import roominformation.RoomInformation;
  * @author angelynz95
  */
 public class MaintenanceFrame extends javax.swing.JFrame {
+    MainFrame mainFrame;
     
     /**
      * Creates new form MaintenanceFrame
      */
     public MaintenanceFrame() {
         initComponents();
+        mainFrame = MainFrame.getInstance();
     }
     
     public MaintenanceFrame(String roomName, Calendar startTime, Calendar finishTime, String description) {
         initComponents();
+        mainFrame = MainFrame.getInstance();
         this.roomNameDropdown.setSelectedItem(roomName);
         this.startDateField.setDate(startTime.getTime());
         this.startTimeField.setValue(startTime.getTime());
@@ -240,8 +245,13 @@ public class MaintenanceFrame extends javax.swing.JFrame {
             } else {
                 maintenance.addMaintenance(maintenanceModel);
                 dispose();
-                
-                // Refresh panel organisasi jadwal
+                // Refresh tampilan organisasi jadwal
+                JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+                JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+                bookingInformationPanel.removeAll();
+                bookingInformationPanel.add(new BookingInformationPanel((GregorianCalendar) maintenanceModel.getStartTime()));
+                bookingInformationPanel.repaint();
+                bookingInformationPanel.revalidate();
             }
         }
     }//GEN-LAST:event_addMaintenanceButtonMouseClicked

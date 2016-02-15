@@ -32,6 +32,7 @@ public class MenuPanel extends javax.swing.JPanel {
      */
     public MenuPanel() {
         initComponents();
+        mainFrame = MainFrame.getInstance();
         // Tampilan Organisasi Jadwal
         bookingInformationContainer.setLayout(new FlowLayout());
         bookingInformationPanel = new BookingInformationPanel(new GregorianCalendar());
@@ -173,7 +174,6 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         // TODO add your handling code here:
-        mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         mainFrame.setContentPane(new LoginPanel());
         mainFrame.pack();
     }//GEN-LAST:event_logoutLabelMouseClicked

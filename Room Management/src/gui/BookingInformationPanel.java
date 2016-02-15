@@ -239,7 +239,6 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                 customizeLabel(scheduleLabel);
                 if (roomSchedule.getValue().size() > 0) {
                     if (roomSchedule.getValue().containsKey(i + 7)) {
-                System.out.println(roomSchedule.getKey().getName());
                         if (roomSchedule.getValue().get(i + 7).getClass().equals(BorrowingModel.class)) {
                             BorrowingModel borrowing = (BorrowingModel) roomSchedule.getValue().get(i + 7);
                             scheduleLabel.setBackground(new Color(138, 199, 222));

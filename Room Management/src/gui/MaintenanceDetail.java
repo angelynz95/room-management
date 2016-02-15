@@ -53,8 +53,8 @@ public class MaintenanceDetail extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         namaRuanganLabel = new javax.swing.JLabel();
-        waktuMulaiLabel = new javax.swing.JLabel();
         waktuSelesaiLabel = new javax.swing.JLabel();
+        waktuMulaiLabel = new javax.swing.JLabel();
         deskripsiLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -90,9 +90,9 @@ public class MaintenanceDetail extends javax.swing.JFrame {
 
         namaRuanganLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
-        waktuMulaiLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-
         waktuSelesaiLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+
+        waktuMulaiLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
         deskripsiLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
 
@@ -115,8 +115,8 @@ public class MaintenanceDetail extends javax.swing.JFrame {
                                 .addGap(72, 72, 72)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(namaRuanganLabel)
-                                    .addComponent(waktuSelesaiLabel)
-                                    .addComponent(waktuMulaiLabel)))
+                                    .addComponent(waktuMulaiLabel)
+                                    .addComponent(waktuSelesaiLabel)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,11 +140,11 @@ public class MaintenanceDetail extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(waktuSelesaiLabel))
+                    .addComponent(waktuMulaiLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(waktuMulaiLabel))
+                    .addComponent(waktuSelesaiLabel))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
