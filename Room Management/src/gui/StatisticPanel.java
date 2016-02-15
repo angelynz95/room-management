@@ -127,9 +127,9 @@ public class StatisticPanel extends javax.swing.JPanel {
         roomUsedPanelLayout.setHorizontalGroup(
             roomUsedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roomUsedPanelLayout.createSequentialGroup()
-                .addContainerGap(219, Short.MAX_VALUE)
-                .addComponent(roomUsedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 752, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
+                .addContainerGap(342, Short.MAX_VALUE)
+                .addComponent(roomUsedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(341, Short.MAX_VALUE))
         );
         roomUsedPanelLayout.setVerticalGroup(
             roomUsedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,30 +257,21 @@ public class StatisticPanel extends javax.swing.JPanel {
     
     private void showRoomUsedStatistic() {
         Object[] temp = new Object[roomUsedColumns.size()];
-//        Object[][] temp2 = new Object[roomUsedData.size()][roomUsedColumns.size()];
-        Object[][] temp2 = {{"7606", 5, 3, 2}};
+        Object[][] temp2 = new Object[roomUsedData.size()][roomUsedColumns.size()];
         ArrayList<Object[]> rows = new ArrayList<Object[]>();
         for (List<Object> datum : roomUsedData) {
             rows.add((Object[]) datum.toArray());
         }
         
-        roomUsedStatistic = new JTable(temp2, roomUsedColumns.toArray(temp));
+        roomUsedStatistic = new JTable(rows.toArray(temp2), roomUsedColumns.toArray(temp));
         roomUsedStatistic.setFillsViewportHeight(true);
         roomUsedStatistic.setEnabled(false);
         roomUsedStatistic.getTableHeader().setReorderingAllowed(false);
-        // Meng-customize roomUsedStatistic
-        DefaultTableCellRenderer firstColumnRenderer = new DefaultTableCellRenderer();
-        // Membuat alignment center
-        firstColumnRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        firstColumnRenderer.setVerticalAlignment(SwingConstants.CENTER);
-        // Membuat warna berbeda pada kolom pertama
-        firstColumnRenderer.setBackground(Color.lightGray);
         // Menerapkan customization
         roomUsedStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
-        for (int i = 1; i < roomUsedStatistic.getColumnCount(); i++) {
+        for (int i = 0; i < roomUsedStatistic.getColumnCount(); i++) {
             roomUsedStatistic.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
         }
-        roomUsedStatistic.getColumnModel().getColumn(0).setCellRenderer(firstColumnRenderer);
         // Mengatur font
         roomUsedStatistic.setFont(new Font("Roboto", Font.PLAIN, 16));
         
