@@ -40,6 +40,7 @@ public class PasswordChangedFrame extends javax.swing.JFrame {
         passwordChangedConfirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         passwordChangedLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         passwordChangedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

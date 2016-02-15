@@ -9,7 +9,10 @@ package gui;
 
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
+import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -17,24 +20,37 @@ import javax.swing.SwingUtilities;
  */
 public class MenuPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
-
+    private BookingInformation bookingInformationPanel;
+    private RoomInformationPanel roomInformationPanel;
+    private StatisticPanel statisticPanel;
+    private ChangePasswordPanel changePasswordPanel;
+    
     /**
      * Creates new form MainPanel
      */
     public MenuPanel() {
         initComponents();
         // Tampilan Organisasi Jadwal
-        bookingInformationPanel.setLayout(new FlowLayout());
-        bookingInformationPanel.add(new BookingInformation());
+        bookingInformationContainer.setLayout(new FlowLayout());
+        bookingInformationPanel = new BookingInformation();
+        bookingInformationContainer.add(bookingInformationPanel);
+        
         // Tampilan Info Ruangan
-        roomInformationPanel.setLayout(new FlowLayout());
-        roomInformationPanel.add(new RoomInformationPanel());
+        roomInformationContainer.setLayout(new FlowLayout());
+        roomInformationPanel = new RoomInformationPanel();
+        roomInformationContainer.add(roomInformationPanel);
+        
         // Tampilan Statistik
-        statisticPanel.setLayout(new FlowLayout());
-        statisticPanel.add(new StatisticPanel());
+        statisticContainer.setLayout(new FlowLayout());
+        statisticPanel = new StatisticPanel();
+        statisticContainer.add(statisticPanel);
+        
         // Tampilan Ubah Kata Sandi
-        changePasswordPanel.setLayout(new FlowLayout());
-        changePasswordPanel.add(new ChangePasswordPanel());
+        changePasswordContainer.setLayout(new FlowLayout());
+        changePasswordPanel = new ChangePasswordPanel();
+        changePasswordContainer.add(changePasswordPanel);
+        
+        
     }
 
     /**
@@ -47,10 +63,10 @@ public class MenuPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         menuPane = new javax.swing.JTabbedPane();
-        bookingInformationPanel = new javax.swing.JPanel();
-        roomInformationPanel = new javax.swing.JPanel();
-        statisticPanel = new javax.swing.JPanel();
-        changePasswordPanel = new javax.swing.JPanel();
+        bookingInformationContainer = new javax.swing.JPanel();
+        roomInformationContainer = new javax.swing.JPanel();
+        statisticContainer = new javax.swing.JPanel();
+        changePasswordContainer = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
 
@@ -58,58 +74,63 @@ public class MenuPanel extends javax.swing.JPanel {
 
         menuPane.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         menuPane.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        menuPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuPaneMouseClicked(evt);
+            }
+        });
 
-        javax.swing.GroupLayout bookingInformationPanelLayout = new javax.swing.GroupLayout(bookingInformationPanel);
-        bookingInformationPanel.setLayout(bookingInformationPanelLayout);
-        bookingInformationPanelLayout.setHorizontalGroup(
-            bookingInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout bookingInformationContainerLayout = new javax.swing.GroupLayout(bookingInformationContainer);
+        bookingInformationContainer.setLayout(bookingInformationContainerLayout);
+        bookingInformationContainerLayout.setHorizontalGroup(
+            bookingInformationContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1195, Short.MAX_VALUE)
         );
-        bookingInformationPanelLayout.setVerticalGroup(
-            bookingInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        bookingInformationContainerLayout.setVerticalGroup(
+            bookingInformationContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Organisasi Jadwal", bookingInformationPanel);
+        menuPane.addTab("Organisasi Jadwal", bookingInformationContainer);
 
-        javax.swing.GroupLayout roomInformationPanelLayout = new javax.swing.GroupLayout(roomInformationPanel);
-        roomInformationPanel.setLayout(roomInformationPanelLayout);
-        roomInformationPanelLayout.setHorizontalGroup(
-            roomInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout roomInformationContainerLayout = new javax.swing.GroupLayout(roomInformationContainer);
+        roomInformationContainer.setLayout(roomInformationContainerLayout);
+        roomInformationContainerLayout.setHorizontalGroup(
+            roomInformationContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1195, Short.MAX_VALUE)
         );
-        roomInformationPanelLayout.setVerticalGroup(
-            roomInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        roomInformationContainerLayout.setVerticalGroup(
+            roomInformationContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Info Ruangan", roomInformationPanel);
+        menuPane.addTab("Info Ruangan", roomInformationContainer);
 
-        javax.swing.GroupLayout statisticPanelLayout = new javax.swing.GroupLayout(statisticPanel);
-        statisticPanel.setLayout(statisticPanelLayout);
-        statisticPanelLayout.setHorizontalGroup(
-            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout statisticContainerLayout = new javax.swing.GroupLayout(statisticContainer);
+        statisticContainer.setLayout(statisticContainerLayout);
+        statisticContainerLayout.setHorizontalGroup(
+            statisticContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1195, Short.MAX_VALUE)
         );
-        statisticPanelLayout.setVerticalGroup(
-            statisticPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        statisticContainerLayout.setVerticalGroup(
+            statisticContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Statistik", statisticPanel);
+        menuPane.addTab("Statistik", statisticContainer);
 
-        javax.swing.GroupLayout changePasswordPanelLayout = new javax.swing.GroupLayout(changePasswordPanel);
-        changePasswordPanel.setLayout(changePasswordPanelLayout);
-        changePasswordPanelLayout.setHorizontalGroup(
-            changePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout changePasswordContainerLayout = new javax.swing.GroupLayout(changePasswordContainer);
+        changePasswordContainer.setLayout(changePasswordContainerLayout);
+        changePasswordContainerLayout.setHorizontalGroup(
+            changePasswordContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1195, Short.MAX_VALUE)
         );
-        changePasswordPanelLayout.setVerticalGroup(
-            changePasswordPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        changePasswordContainerLayout.setVerticalGroup(
+            changePasswordContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Ubah Kata Sandi", changePasswordPanel);
+        menuPane.addTab("Ubah Kata Sandi", changePasswordContainer);
 
         logoutLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         logoutLabel.setText("Keluar");
@@ -141,7 +162,7 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(logoutLabel)
                     .addComponent(titleLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(menuPane, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -153,14 +174,30 @@ public class MenuPanel extends javax.swing.JPanel {
         mainFrame.pack();
     }//GEN-LAST:event_logoutLabelMouseClicked
 
+    private void menuPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPaneMouseClicked
+        // TODO add your handling code here:
+        ChangeListener changeListener = new ChangeListener() {
+            public void stateChanged(ChangeEvent changeEvent) {
+              JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+              int index = sourceTabbedPane.getSelectedIndex();
+              System.out.println("Tab changed to: " + index);
+              if (index == 3) {
+                  changePasswordPanel.resetTextField();
+              }
+              
+            }
+        };
+        menuPane.addChangeListener(changeListener);
+    }//GEN-LAST:event_menuPaneMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bookingInformationPanel;
-    private javax.swing.JPanel changePasswordPanel;
+    private javax.swing.JPanel bookingInformationContainer;
+    private javax.swing.JPanel changePasswordContainer;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JTabbedPane menuPane;
-    private javax.swing.JPanel roomInformationPanel;
-    private javax.swing.JPanel statisticPanel;
+    private javax.swing.JPanel roomInformationContainer;
+    private javax.swing.JPanel statisticContainer;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
