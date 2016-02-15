@@ -85,40 +85,40 @@ public class BookingDetailFrame extends javax.swing.JFrame {
         jLabel1.setText("Detail Pemesanan");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel2.setText("Nama Ruangan :");
+        jLabel2.setText("Nama Ruangan ");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel3.setText("Nama Peminjam :");
+        jLabel3.setText("Nama Peminjam ");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel4.setText("Status Peminjam :");
+        jLabel4.setText("Status Peminjam ");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel5.setText("NIM / NIP :");
+        jLabel5.setText("NIM / NIP ");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel6.setText("Alamat Peminjam :");
+        jLabel6.setText("Alamat Peminjam ");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel7.setText("Nomor Telepon Peminjam :");
+        jLabel7.setText("Nomor Telepon Peminjam ");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel8.setText("Nama Lembaga :");
+        jLabel8.setText("Nama Lembaga");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel9.setText("Nama Kegiatan :");
+        jLabel9.setText("Nama Kegiatan");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel10.setText("Jumlah Peserta :");
+        jLabel10.setText("Jumlah Peserta");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel11.setText("Waktu izin :");
+        jLabel11.setText("Waktu izin");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel12.setText("Waktu mulai :");
+        jLabel12.setText("Waktu mulai");
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel13.setText("Waktu selesai :");
+        jLabel13.setText("Waktu selesai");
 
         deleteButton.setText("Hapus");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -169,10 +169,11 @@ public class BookingDetailFrame extends javax.swing.JFrame {
                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76))
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jLabel6)
                             .addComponent(jLabel4)
@@ -198,18 +199,15 @@ public class BookingDetailFrame extends javax.swing.JFrame {
                             .addComponent(jumlahPesertaLabel)
                             .addComponent(waktuMulaiLabel)
                             .addComponent(waktuSelesaiLabel)
-                            .addComponent(waktuIzinLabel)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel1)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                            .addComponent(waktuIzinLabel))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(namaRuanganLabel))
@@ -308,7 +306,7 @@ public class BookingDetailFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Borrowing b = new Borrowing();
-                new BookingDetailFrame(b.searchBorrowingById(6), "R 7606").setVisible(true);
+                new BookingDetailFrame(b.searchBorrowingById(8), "R 7606").setVisible(true);
             }
         });
     }
