@@ -72,11 +72,11 @@ public class Borrowing {
         return message;
     }
 
-    public ArrayList<BorrowingModel> showClashBorrowing(BorrowingModel borrowing) {
+    public ArrayList<BorrowingModel> getClashBorrowing(BorrowingModel borrowing) {
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         database.connect(path);
 
-        String sql = "SELECT * FROM peminjaman WHERE id_ruangan = '" + borrowing.getId() + "' AND ((waktu_mulai >= '" + sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_mulai <= '"
+        String sql = "SELECT * FROM peminjaman WHERE id_ruangan = '" + borrowing.getRoomId()+ "' AND ((waktu_mulai >= '" + sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_mulai <= '"
                 + sdf.format(borrowing.getFinishTime().getTime()) + "') OR (waktu_selesai >= '" + sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_selesai <= '" + sdf.format(borrowing.getFinishTime().getTime()) + "'))";
         
         ResultSet rs = database.fetchData(sql);
@@ -129,13 +129,13 @@ public class Borrowing {
         Calendar startTime = new GregorianCalendar(2016, 1, 23, 13, 30);
         Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
         Calendar permissionTime = new GregorianCalendar();
-        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 2, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, permissionTime, startTime, finishTime);
+        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, permissionTime, startTime, finishTime);
         
 //        String msg = borrowing.deleteBorrowing(borrowingModel);
 //        System.out.println(msg);
         
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
-        clashBorrowing = borrowing.showClashBorrowing(borrowingModel);
+        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
         for (int i = 0; i < clashBorrowing.size(); i++) {
             System.out.println(clashBorrowing.get(i).getId());
         }
@@ -143,7 +143,7 @@ public class Borrowing {
         ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
         clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
         
-        for (int i = 0; i < clashBorrowing.size(); i++) {
+        for (int i = 0; i < clashMaintenance.size(); i++) {
             System.out.println(clashMaintenance.get(i).getId());
         }
     }
