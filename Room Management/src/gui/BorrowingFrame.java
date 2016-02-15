@@ -7,11 +7,10 @@
  */
 package gui;
 
-import java.awt.FlowLayout;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
+import java.util.GregorianCalendar;
 import javax.swing.SpinnerDateModel;
 
 /**
@@ -25,13 +24,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
      */
     public BorrowingFrame() {
         initComponents();
-        JSpinner timeSpinner = new JSpinner( new SpinnerDateModel() );
-        JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(timeSpinner, "HH:mm:ss");
-        timeSpinner.setEditor(timeEditor);
-        timeSpinner.setValue(new Date()); // will only show the current time
-        JLabel test = new JLabel("lala");
-//        datePicker.setLayout(new FlowLayout());
-//        datePicker.add(timeSpinner);
     }
 
     /**
@@ -43,11 +35,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jDialog2 = new javax.swing.JDialog();
-        jDialog3 = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
         borrowerIdLabel = new javax.swing.JLabel();
         borrowerNameLabel = new javax.swing.JLabel();
         borrowerAddressLabel = new javax.swing.JLabel();
@@ -67,7 +54,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         roomNameLabel = new javax.swing.JLabel();
         startTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
-        jLabel2 = new javax.swing.JLabel();
+        timeSeperatorLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         roomNameDropdown = new javax.swing.JComboBox();
@@ -76,52 +63,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         othersStatusButton = new javax.swing.JRadioButton();
         jSpinner1 = new javax.swing.JSpinner();
         totalParticipantLabel1 = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-        jDialog2.getContentPane().setLayout(jDialog2Layout);
-        jDialog2Layout.setHorizontalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog2Layout.setVerticalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jDialog3Layout = new javax.swing.GroupLayout(jDialog3.getContentPane());
-        jDialog3.getContentPane().setLayout(jDialog3Layout);
-        jDialog3Layout.setHorizontalGroup(
-            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog3Layout.setVerticalGroup(
-            jDialog3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jLabel1.setText("jLabel1");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Penambahan Peminjaman Ruangan");
@@ -176,10 +117,10 @@ public class BorrowingFrame extends javax.swing.JFrame {
 
         finishTimeField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("-");
-        jLabel2.setAlignmentX(0.5F);
+        timeSeperatorLabel.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        timeSeperatorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeSeperatorLabel.setText("-");
+        timeSeperatorLabel.setAlignmentX(0.5F);
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
         jLabel3.setText("Data Peminjam");
@@ -209,7 +150,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
@@ -251,10 +192,17 @@ public class BorrowingFrame extends javax.swing.JFrame {
                                     .addGap(109, 109, 109)
                                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+<<<<<<< HEAD
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(115, 115, 115)
+=======
+                                    .addComponent(timeSeperatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+>>>>>>> 5c9848aa9c52473147be303e23861df40573dfc8
                                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addBorrowingButton)
@@ -269,7 +217,12 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(roomNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+<<<<<<< HEAD
                     .addComponent(jLabel2)
+=======
+                    .addComponent(timeSeperatorLabel)
+                    .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+>>>>>>> 5c9848aa9c52473147be303e23861df40573dfc8
                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeLabel))
@@ -314,15 +267,18 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(totalParticipantLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(addBorrowingButton)
-                .addGap(38, 38, 38))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.JSpinner.DateEditor startTimeEditor = new javax.swing.JSpinner.DateEditor(startTimeField, "HH.mm");
         startTimeField.setEditor(startTimeEditor);
-        startTimeField.setValue(new Date()); // will only show the current time
+
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(new Date());
+        startTimeField.setValue(new Date(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY), 0)); // Will only show the current time
         javax.swing.JSpinner.DateEditor finishTimeEditor = new javax.swing.JSpinner.DateEditor(finishTimeField, "HH.mm");
         finishTimeField.setEditor(finishTimeEditor);
-        finishTimeField.setValue(new Date()); // will only show the current time
+        finishTimeField.setValue(new Date(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY), 0)); // Will only show the current time
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -343,17 +299,11 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BorrowingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BorrowingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BorrowingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(BorrowingFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -376,14 +326,8 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel borrowerPhoneLabel;
     private javax.swing.JLabel borrowerStatusLabel;
     private javax.swing.JSpinner finishTimeField;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JDialog jDialog2;
-    private javax.swing.JDialog jDialog3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JRadioButton lecturerStatusButton;
     private javax.swing.JTextField organizationNameField;
@@ -394,6 +338,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JSpinner startTimeField;
     private javax.swing.JRadioButton studentStatusButton;
     private javax.swing.JLabel timeLabel;
+    private javax.swing.JLabel timeSeperatorLabel;
     private javax.swing.JLabel totalParticipantLabel;
     private javax.swing.JLabel totalParticipantLabel1;
     // End of variables declaration//GEN-END:variables
