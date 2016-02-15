@@ -31,7 +31,24 @@ public class Maintenance {
         database = new Database();
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
-
+    
+    public MaintenanceModel searchMaintenanceById(int id) {
+        MaintenanceModel model = new MaintenanceModel();
+        database.connect(path);
+        String sql = "SELECT * FROM pemeliharaan WHERE id_pemeliharaan = " + id + ";";
+        ResultSet rs = database.fetchData(sql);
+        try {
+            rs.next();
+            model.setId(rs.getInt("id_pemeliharaan"));
+            model.setRoomId(rs.getInt("id_ruangan"));
+            model.setStartTime(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")));
+            model.setFinishTime(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai")));
+        } catch (SQLException ex) {
+            Logger.getLogger(Maintenance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+    
     public String addMaintenance(MaintenanceModel maintenance) {
         database.connect(path);
         
