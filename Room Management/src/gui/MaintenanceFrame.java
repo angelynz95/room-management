@@ -61,7 +61,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         addMaintenanceButton.setText("Simpan");
         addMaintenanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                validateForm(evt);
+                addMaintenanceButtonMouseClicked(evt);
             }
         });
 
@@ -166,7 +166,13 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void validateForm(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_validateForm
+    /**
+     * Validate maintenance form. 
+     * Form is valid if there are no empty field and input date is valid.
+     * 
+     * @param evt mouse event
+     */
+    private void addMaintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMaintenanceButtonMouseClicked
         boolean isDescriptionValid = isDescriptionValid();
         boolean isDateValid = isDateValid();
         
@@ -182,8 +188,13 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         if(isDateValid && isDescriptionValid) {
             // Form valid, check for clash booking schedule in database
         }
-    }//GEN-LAST:event_validateForm
+    }//GEN-LAST:event_addMaintenanceButtonMouseClicked
     
+    /**
+     * Check whether maintenance description field is valid or not valid (empty).
+     * 
+     * @return true if description field is not empty
+     */
     private boolean isDescriptionValid() {
         String description = descriptionField.getText();
         return !description.isEmpty();
@@ -218,7 +229,8 @@ public class MaintenanceFrame extends javax.swing.JFrame {
     }
     
     /**
-     * Convert date and time to become one Calendar data type
+     * Convert date and time to become one Calendar data type.
+     * 
      * @param date date
      * @param time time
      * @return date and time in Calendar data type
@@ -231,21 +243,6 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         int minute = time.get(Calendar.MINUTE);
         Calendar calendar = new GregorianCalendar(year, month, day, hour, minute);
         return calendar;
-    }
-    
-    /**
-     * Return true if calendar1 is earlier than calendar2
-     * 
-     * @param calendar1 earlierTime
-     * @param calendar2 laterTime
-     * @return true if calendar1 is earlier than calendar2
-     */
-    private boolean getEarlierTime(Calendar calendar1, Calendar calendar2) {
-        if (calendar1.getTimeInMillis() < calendar2.getTimeInMillis()) {
-            return true;
-        } else {
-            return false;
-        }
     }
     
     /**
