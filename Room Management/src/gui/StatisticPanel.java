@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import statistic.Statistic;
 
 /**
  *
@@ -31,12 +32,16 @@ public class StatisticPanel extends javax.swing.JPanel {
     private List<Object> roomBorrowedFrequencyColumns;
     private List<Object> roomBrokenFrequencyColumns;
     private List<Object> roomUsedColumns;
+    private MainFrame frame;
+    private Statistic statistic;
 
     /**
      * Creates new form StatisticPanel
      */
     public StatisticPanel() {
         initComponents();
+        statistic = new Statistic();
+        frame = MainFrame.getInstance();
         // Inisialisasi kolom frekuensi peminjaman ruangan
         roomBorrowedFrequencyColumns = new ArrayList<Object>();
         // Inisialisasi kolom frekuensi kerusakan ruangan
@@ -149,6 +154,8 @@ public class StatisticPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setRoomBorrowedFrequencyColumns() {
+        ArrayList<String> roomNames = statistic.getLabels();
+        ArrayList<Integer> count = statistic.getNumbers();
         roomBorrowedFrequencyColumns.add("Nama Ruangan");
         roomBorrowedFrequencyColumns.add("Frekuensi Peminjaman");
     }
@@ -159,22 +166,47 @@ public class StatisticPanel extends javax.swing.JPanel {
     }
     
     private void setRoomUsedColumns() {
-        roomUsedColumns.add("");
-        roomUsedColumns.add("Dosen");
-        roomUsedColumns.add("HMIF");
-        roomUsedColumns.add("TU IF");
+        roomUsedColumns.add("Nama Lembaga");
+        roomUsedColumns.add("Frekuensi Peminjaman");
     }
     
     private void setRoomBorrowedFrequencyData() {
-        
+        roomBorrowedFrequencyData = new ArrayList<List<Object>>();
+        statistic.generateRoomUsageStatistics();
+        List<String> roomNames = statistic.getLabels();
+        List<Integer> count = statistic.getNumbers();
+        for(int i=0; i<roomNames.size(); i++) {
+            List<Object> temp = new ArrayList<Object>();
+            temp.add(roomNames.get(i));
+            temp.add(count.get(i));
+            roomBorrowedFrequencyData.add(temp);
+        }
     }
     
     private void setRoomBrokenFrequencyData() {
-        
+        roomBrokenFrequencyData = new ArrayList<List<Object>>();
+        statistic.generateRoomMaintenanceStatistics();
+        List<String> roomNames = statistic.getLabels();
+        List<Integer> count = statistic.getNumbers();
+        for(int i=0; i<roomNames.size(); i++) {
+            List<Object> temp = new ArrayList<Object>();
+            temp.add(roomNames.get(i));
+            temp.add(count.get(i));
+            roomBrokenFrequencyData.add(temp);
+        }
     }
     
     private void setRoomUsedData() {
-        
+        roomUsedData = new ArrayList<List<Object>>();
+        statistic.generateGroupBookingStatistics();
+        List<String> groupNames = statistic.getLabels();
+        List<Integer> count = statistic.getNumbers();
+        for(int i=0; i<groupNames.size(); i++) {
+            List<Object> temp = new ArrayList<Object>();
+            temp.add(groupNames.get(i));
+            temp.add(count.get(i));
+            roomUsedData.add(temp);
+        }
     }
     
     private void showRoomBorrowedFrequencyStatistic() {
@@ -276,4 +308,11 @@ public class StatisticPanel extends javax.swing.JPanel {
     private javax.swing.JPanel roomUsedPanel;
     private javax.swing.JTabbedPane statisticPane;
     // End of variables declaration//GEN-END:variables
+
+    public static void main(String[] args) {
+        MainFrame frame = MainFrame.getInstance();
+        frame.setContentPane(new StatisticPanel());
+        frame.setVisible(true);
+    }
+
 }
