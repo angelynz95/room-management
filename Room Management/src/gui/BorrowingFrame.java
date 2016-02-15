@@ -52,7 +52,9 @@ public class BorrowingFrame extends javax.swing.JFrame {
         organizationNameField = new javax.swing.JTextField();
         addBorrowingButton = new javax.swing.JButton();
         roomNameLabel = new javax.swing.JLabel();
+        startDateField = new org.freixas.jcalendar.JCalendarCombo();
         startTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
+        finishDateField = new org.freixas.jcalendar.JCalendarCombo();
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         timeSeperatorLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -113,7 +115,13 @@ public class BorrowingFrame extends javax.swing.JFrame {
         roomNameLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         roomNameLabel.setText("Nama Ruangan");
 
+        startDateField.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
+        startDateField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
         startTimeField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+
+        finishDateField.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
+        finishDateField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         finishTimeField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
@@ -189,18 +197,14 @@ public class BorrowingFrame extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(roomNameDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGap(109, 109, 109)
+                                    .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-<<<<<<< HEAD
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(115, 115, 115)
-=======
                                     .addComponent(timeSeperatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
->>>>>>> 5c9848aa9c52473147be303e23861df40573dfc8
                                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(36, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -217,13 +221,10 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(roomNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-<<<<<<< HEAD
-                    .addComponent(jLabel2)
-=======
                     .addComponent(timeSeperatorLabel)
                     .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
->>>>>>> 5c9848aa9c52473147be303e23861df40573dfc8
                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeLabel))
                 .addGap(18, 18, 18)
@@ -325,6 +326,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JTextField borrowerPhoneField;
     private javax.swing.JLabel borrowerPhoneLabel;
     private javax.swing.JLabel borrowerStatusLabel;
+    private org.freixas.jcalendar.JCalendarCombo finishDateField;
     private javax.swing.JSpinner finishTimeField;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -335,6 +337,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton othersStatusButton;
     private javax.swing.JComboBox roomNameDropdown;
     private javax.swing.JLabel roomNameLabel;
+    private org.freixas.jcalendar.JCalendarCombo startDateField;
     private javax.swing.JSpinner startTimeField;
     private javax.swing.JRadioButton studentStatusButton;
     private javax.swing.JLabel timeLabel;
