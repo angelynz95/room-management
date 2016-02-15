@@ -124,16 +124,18 @@ public class RoomInformation {
      * @param id room id
      * @return list of borrowing data which was held in this room
      */
-    public ArrayList<BorrowingModel> changeRoomStatus(int id) {
+    public ArrayList<BorrowingModel> changeRoomStatus(String name) {
         ArrayList<BorrowingModel> result = new ArrayList<>();
         database.connect(path);
+        int id = -1;
         String status = "", newStatus = "";
-        String sql = "SELECT status FROM ruangan WHERE id_ruangan = " + id + ";";
+        String sql = "SELECT * FROM ruangan WHERE nama = '" + name + "';";
         ResultSet rs = database.fetchData(sql);
         try {
             while (rs.next()) {
                 RoomModel room = new RoomModel();
                 status = rs.getString("status");
+                id = rs.getInt("id_ruangan");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
@@ -169,11 +171,12 @@ public class RoomInformation {
         System.out.println("*** Ruangan dengan nama " + name + " ***");
         System.out.println(searchedRoom.getId() + " " + searchedRoom.getName() + " " + searchedRoom.getCapacity() + " " + searchedRoom.getStatus());
         System.out.println("Change status of the room with id=1");
+        /*
         ArrayList<BorrowingModel> borrowings = roomInformation.changeRoomStatus(1);
         System.out.println("Yang bentrok :");
         for(BorrowingModel m : borrowings) {
             System.out.println(m.getId());
-        }
+        } */
     }
     
     
