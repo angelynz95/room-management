@@ -7,6 +7,8 @@
  */
 package gui;
 
+import database.BorrowingModel;
+import database.RoomModel;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import roominformation.RoomInformation;
 
 /**
  *
@@ -24,13 +27,14 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     private JTable table;
     private List<List<Object>> data;
     private List<Object> columns;
-
+    private RoomInformation roomInformation;
     /**
      * Creates new form RoomInformation
      */
     public RoomInformationPanel() {
         
         initComponents();
+        roomInformation = new RoomInformation();
         // Inisialisasi columns
         columns = new ArrayList<Object>();
         // Inisialisasi data
@@ -93,10 +97,13 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     }
     
     private void setData() {
-        data.add(new ArrayList<Object>());
-        data.get(0).add("7606");
-        data.get(0).add(50);
-        data.get(0).add("OK");
+        List<RoomModel> rooms = roomInformation.fetchRoomData();
+        for(int i=0; i<rooms.size(); i++) {
+            data.add(new ArrayList<Object>());
+            data.get(i).add(rooms.get(i).getName());
+            data.get(i).add(rooms.get(i).getCapacity());
+            data.get(i).add(rooms.get(i).getStatus());
+        }
     }
     
     private void showTable() {
@@ -134,11 +141,17 @@ public class RoomInformationPanel extends javax.swing.JPanel {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = table.rowAtPoint(evt.getPoint());
+                ArrayList<BorrowingModel> clashBooking = new ArrayList<>();
                 int column = table.columnAtPoint(evt.getPoint());
                 if (table.getValueAt(row, column).equals("OK")) {
-                    table.setValueAt("Rusak", row, column);
-                } else {
+                    table.setValueAt("rusak", row, column);
+                    clashBooking = roomInformation.changeRoomStatus(table.getValueAt(row, 0).toString());
+                } else if (table.getValueAt(row, column).equals("rusak")) {
                     table.setValueAt("OK", row, column);
+                    clashBooking = roomInformation.changeRoomStatus(table.getValueAt(row, 0).toString());
+                }
+                if(clashBooking.size() != 0) {
+                    // Tampilkan booking yang bentrok
                 }
             }
         });

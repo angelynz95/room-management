@@ -1,7 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Aplikasi Room Management
+ * @author Irene Wiliudarsan - 13513002
+ * @author William Sentosa - 13513026
+ * @author Angela Lynn - 13513032
+ * @author Devina Ekawati - 13513088
  */
 package database;
 

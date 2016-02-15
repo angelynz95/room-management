@@ -1,5 +1,3 @@
-package database;
-
 /**
  * Aplikasi Room Management
  * @author Irene Wiliudarsan - 13513002
@@ -7,6 +5,7 @@ package database;
  * @author Angela Lynn - 13513032
  * @author Devina Ekawati - 13513088
  */
+package database;
 
 import java.sql.*;
 import java.util.Calendar;
