@@ -7,11 +7,18 @@
  */
 package gui;
 
+import borrowing.Borrowing;
+import database.BorrowingModel;
+import database.MaintenanceModel;
+import database.RoomModel;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.SpinnerDateModel;
+import maintenance.Maintenance;
+import roominformation.RoomInformation;
 
 /**
  *
@@ -59,11 +66,18 @@ public class BorrowingFrame extends javax.swing.JFrame {
         timeSeperatorLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        roomNameDropdown = new javax.swing.JComboBox();
+        RoomInformation roomInformation = new RoomInformation();
+        ArrayList<RoomModel> roomsModel = new ArrayList<RoomModel>();
+        ArrayList<String> roomsName = new ArrayList<String>();
+        roomsModel = roomInformation.fetchRoomData();
+        for (int i = 0; i < roomsModel.size(); i++) {
+            roomsName.add(roomsModel.get(i).getName());
+        }
+        roomNameDropdown = new javax.swing.JComboBox(roomsName.toArray());
         lecturerStatusButton = new javax.swing.JRadioButton();
         studentStatusButton = new javax.swing.JRadioButton();
         othersStatusButton = new javax.swing.JRadioButton();
-        jSpinner1 = new javax.swing.JSpinner();
+        totalParticipantSpinner = new javax.swing.JSpinner();
         totalParticipantLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,6 +125,11 @@ public class BorrowingFrame extends javax.swing.JFrame {
 
         addBorrowingButton.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         addBorrowingButton.setText("Simpan");
+        addBorrowingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBorrowingButtonActionPerformed(evt);
+            }
+        });
 
         roomNameLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         roomNameLabel.setText("Nama Ruangan");
@@ -137,7 +156,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         jLabel4.setText("Tujuan Peminjaman");
 
         roomNameDropdown.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        roomNameDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         lecturerStatusButton.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lecturerStatusButton.setText("Dosen");
@@ -148,7 +166,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         othersStatusButton.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         othersStatusButton.setText("Lainnya");
 
-        jSpinner1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        totalParticipantSpinner.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         totalParticipantLabel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         totalParticipantLabel1.setText("orang");
@@ -180,7 +198,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
                                 .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(activityNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(totalParticipantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(totalParticipantLabel1))
                             .addGroup(layout.createSequentialGroup()
@@ -263,7 +281,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(organizationNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalParticipantSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalParticipantLabel)
                     .addComponent(totalParticipantLabel1))
                 .addGap(18, 18, 18)
@@ -284,6 +302,79 @@ public class BorrowingFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addBorrowingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBorrowingButtonActionPerformed
+        // TODO add your handling code here:
+        
+        // Jika form valid
+        Borrowing borrowing = new Borrowing();
+        
+        int id = 0;
+        int borrowerId = Integer.parseInt(borrowerIdField.getText());
+        
+        RoomInformation roomInformation = new RoomInformation();
+        
+        int roomId = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getId();
+        
+        String borrowerName = borrowerNameField.getText();
+        
+        // Nanti diganti sama pilihan combo box
+        String borrowerStatus = "Mahasiswa";
+        
+        String borrowerAddress = borrowerAddressField.getText();
+        String borrowerPhone = borrowerPhoneField.getText();
+        String organizationName = organizationNameField.getText();
+        String activityName = activityNameField.getText();
+        
+        int totalParticipant = Integer.parseInt(totalParticipantSpinner.getValue().toString());
+        
+        Calendar date = startDateField.getCalendar();
+        Calendar time = Calendar.getInstance();
+        time.setTime((Date) startTimeField.getValue());
+        Calendar startTime = convertTimeToCalendar(date, time);
+
+        date = finishDateField.getCalendar();
+        time = Calendar.getInstance();
+        time.setTime((Date) finishTimeField.getValue());;
+        Calendar finishTime = convertTimeToCalendar(date, time);
+
+        BorrowingModel borrowingModel = new BorrowingModel(id, borrowerId, roomId, borrowerName, borrowerStatus, borrowerAddress,
+                borrowerPhone, organizationName, activityName, totalParticipant, startTime, finishTime);
+
+        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
+        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
+
+        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
+        clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
+
+        if ((clashBorrowing.size() > 0) && (clashMaintenance.size() > 0)) {
+            ClashBookingFrame frame = new ClashBookingFrame();
+            frame.setContentPane(new ClashBorrowingPanel(clashBorrowing, clashMaintenance));
+            frame.setVisible(true);
+        } else {
+            borrowing.addBorrowing(borrowingModel);
+            dispose();
+            
+            // Refresh panel organisasi jadwal
+        }
+    }//GEN-LAST:event_addBorrowingButtonActionPerformed
+    
+    /**
+     * Convert date and time to become one Calendar data type.
+     * 
+     * @param date date
+     * @param time time
+     * @return date and time in Calendar data type
+     */
+    private Calendar convertTimeToCalendar(Calendar date, Calendar time) {
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day = date.get(Calendar.DATE);
+        int hour = time.get(Calendar.HOUR_OF_DAY);
+        int minute = time.get(Calendar.MINUTE);
+        Calendar calendar = new GregorianCalendar(year, month, day, hour, minute);
+        return calendar;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -330,7 +421,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JSpinner finishTimeField;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JRadioButton lecturerStatusButton;
     private javax.swing.JTextField organizationNameField;
     private javax.swing.JLabel organizationNameLabel;
@@ -344,5 +434,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel timeSeperatorLabel;
     private javax.swing.JLabel totalParticipantLabel;
     private javax.swing.JLabel totalParticipantLabel1;
+    private javax.swing.JSpinner totalParticipantSpinner;
     // End of variables declaration//GEN-END:variables
 }

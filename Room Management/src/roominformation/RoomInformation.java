@@ -162,6 +162,8 @@ public class RoomInformation {
         }
 
         String name = "R 7606";
+        rooms = roomInformation.searchRoomData(name);
+        System.out.println(rooms.size());
     }
     
     

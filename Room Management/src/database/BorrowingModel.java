@@ -31,7 +31,7 @@ public class BorrowingModel {
         
     }
 
-    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar permissionTime, Calendar startTime, Calendar finishTime) {
+    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar startTime, Calendar finishTime) {
         this.id = id;
         this.borrowerId = borrowerId;
         this.roomId = roomID;
@@ -42,7 +42,6 @@ public class BorrowingModel {
         this.organizationName = organizationName;
         this.activityName = activityName;
         this.totalParticipant = totalParticipant;
-        this.permissionTime = permissionTime;
         this.startTime = startTime;
         this.finishTime = finishTime;
     }
