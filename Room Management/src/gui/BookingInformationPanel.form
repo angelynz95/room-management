@@ -18,7 +18,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="28" max="32767" attributes="0"/>
-              <Component id="bookingInformationPane" min="-2" pref="1140" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="dateField" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="230" max="-2" attributes="0"/>
+                      <Component id="borrowingButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="maintenanceButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="bookingInformationPane" min="-2" pref="1140" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -26,9 +35,15 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="51" max="32767" attributes="0"/>
-              <Component id="bookingInformationPane" min="-2" pref="554" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="borrowingButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="maintenanceButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="dateField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="13" max="32767" attributes="0"/>
+              <Component id="bookingInformationPane" min="-2" pref="528" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -55,5 +70,35 @@
         </Container>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="borrowingButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Roboto" size="16" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Pemesanan"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="maintenanceButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Roboto" size="16" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Pemeliharaan"/>
+      </Properties>
+    </Component>
+    <Component class="org.freixas.jcalendar.JCalendarCombo" name="dateField">
+      <Properties>
+        <Property name="dateFormat" type="java.text.DateFormat" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;)" type="code"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Roboto" size="16" style="0"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="dateChanged" listener="org.freixas.jcalendar.DateListener" parameters="org.freixas.jcalendar.DateEvent" handler="dateFieldDateChanged"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dateFieldActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

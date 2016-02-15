@@ -12,20 +12,26 @@ import database.BorrowingModel;
 import database.MaintenanceModel;
 import database.RoomModel;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -33,9 +39,11 @@ import javax.swing.SwingConstants;
  */
 public class BookingInformationPanel extends javax.swing.JPanel {
     BookingInformation bookingInformation;
+    Color defaultColor;
     GregorianCalendar date;
     List<String> rooms;
     List<String> schedules;
+    MainFrame mainFrame;
 
     /**
      * Creates new form BookingInformation
@@ -46,6 +54,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         this.date = date;
         rooms = new ArrayList<String>();
         schedules = new ArrayList<String>();
+        mainFrame = MainFrame.getInstance();
         
         setRooms();
         setSchedules();
@@ -64,6 +73,9 @@ public class BookingInformationPanel extends javax.swing.JPanel {
 
         bookingInformationPane = new javax.swing.JScrollPane();
         bookingInformationPanel = new javax.swing.JPanel();
+        borrowingButton = new javax.swing.JButton();
+        maintenanceButton = new javax.swing.JButton();
+        dateField = new org.freixas.jcalendar.JCalendarCombo();
 
         javax.swing.GroupLayout bookingInformationPanelLayout = new javax.swing.GroupLayout(bookingInformationPanel);
         bookingInformationPanel.setLayout(bookingInformationPanelLayout);
@@ -78,23 +90,68 @@ public class BookingInformationPanel extends javax.swing.JPanel {
 
         bookingInformationPane.setViewportView(bookingInformationPanel);
 
+        borrowingButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        borrowingButton.setText("Pemesanan");
+
+        maintenanceButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        maintenanceButton.setText("Pemeliharaan");
+
+        dateField.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
+        dateField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        dateField.addDateListener(new org.freixas.jcalendar.DateListener() {
+            public void dateChanged(org.freixas.jcalendar.DateEvent evt) {
+                dateFieldDateChanged(evt);
+            }
+        });
+        dateField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(230, 230, 230)
+                        .addComponent(borrowingButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(maintenanceButton))
+                    .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
-                .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 554, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(borrowingButton)
+                    .addComponent(maintenanceButton)
+                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dateFieldDateChanged(org.freixas.jcalendar.DateEvent evt) {//GEN-FIRST:event_dateFieldDateChanged
+        // TODO add your handling code here:
+        bookingInformationPanel.removeAll();
+        date = (GregorianCalendar) evt.getSelectedDate();
+        bookingInformation = new BookingInformation();
+        showBookingInformation();
+        bookingInformationPanel.repaint();
+        bookingInformationPanel.revalidate();
+    }//GEN-LAST:event_dateFieldDateChanged
+
+    private void dateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateFieldActionPerformed
 
     private void setRooms() {
         for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
@@ -202,5 +259,8 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane bookingInformationPane;
     private javax.swing.JPanel bookingInformationPanel;
+    private javax.swing.JButton borrowingButton;
+    private org.freixas.jcalendar.JCalendarCombo dateField;
+    private javax.swing.JButton maintenanceButton;
     // End of variables declaration//GEN-END:variables
 }
