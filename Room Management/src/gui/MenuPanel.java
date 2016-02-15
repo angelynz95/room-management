@@ -34,7 +34,7 @@ public class MenuPanel extends javax.swing.JPanel {
         initComponents();
         // Tampilan Organisasi Jadwal
         bookingInformationContainer.setLayout(new FlowLayout());
-        bookingInformationPanel = new BookingInformationPanel(new GregorianCalendar(2016, 2, 8));
+        bookingInformationPanel = new BookingInformationPanel(new GregorianCalendar());
         bookingInformationContainer.add(bookingInformationPanel);
         
         // Tampilan Info Ruangan

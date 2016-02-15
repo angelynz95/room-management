@@ -70,18 +70,14 @@
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="roomNameDropdown" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="startDateField" min="-2" pref="100" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="startTimeField" min="-2" pref="60" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-<<<<<<< HEAD
-                                  <Component id="jLabel2" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-=======
                                   <Component id="timeSeperatorLabel" min="-2" pref="10" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="finishDateField" min="-2" pref="100" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
->>>>>>> 5c9848aa9c52473147be303e23861df40573dfc8
                                   <Component id="finishTimeField" min="-2" pref="60" max="-2" attributes="0"/>
                               </Group>
                           </Group>
@@ -107,13 +103,10 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
-<<<<<<< HEAD
-                  <Component id="jLabel2" alignment="2" min="-2" max="-2" attributes="0"/>
-=======
                   <Component id="timeSeperatorLabel" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="startDateField" alignment="2" min="-2" max="-2" attributes="0"/>
->>>>>>> 5c9848aa9c52473147be303e23861df40573dfc8
                   <Component id="startTimeField" alignment="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="finishDateField" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="finishTimeField" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="timeLabel" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -302,6 +295,16 @@
         <Property name="text" type="java.lang.String" value="Nama Ruangan"/>
       </Properties>
     </Component>
+    <Component class="org.freixas.jcalendar.JCalendarCombo" name="startDateField">
+      <Properties>
+        <Property name="dateFormat" type="java.text.DateFormat" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;)" type="code"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Roboto" size="12" style="0"/>
+        </Property>
+      </Properties>
+    </Component>
     <Component class="javax.swing.JSpinner" name="startTimeField">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -312,6 +315,16 @@
         <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="javax.swing.JSpinner.DateEditor startTimeEditor = new javax.swing.JSpinner.DateEditor(startTimeField, &quot;HH.mm&quot;);&#xa;startTimeField.setEditor(startTimeEditor);&#xa;&#xa;Calendar calendar = GregorianCalendar.getInstance();&#xa;calendar.setTime(new Date());&#xa;startTimeField.setValue(new Date(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE), calendar.get(Calendar.HOUR_OF_DAY), 0)); // Will only show the current time"/>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JSpinner(new SpinnerDateModel())"/>
       </AuxValues>
+    </Component>
+    <Component class="org.freixas.jcalendar.JCalendarCombo" name="finishDateField">
+      <Properties>
+        <Property name="dateFormat" type="java.text.DateFormat" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new SimpleDateFormat(&quot;dd/MM/yyyy&quot;)" type="code"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Roboto" size="12" style="0"/>
+        </Property>
+      </Properties>
     </Component>
     <Component class="javax.swing.JSpinner" name="finishTimeField">
       <Properties>

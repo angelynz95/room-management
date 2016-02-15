@@ -7,10 +7,12 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.BorderFactory;
 import javax.swing.SpinnerDateModel;
 
 /**
@@ -57,6 +59,11 @@ public class MaintenanceFrame extends javax.swing.JFrame {
 
         addMaintenanceButton.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         addMaintenanceButton.setText("Simpan");
+        addMaintenanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addMaintenanceButtonMouseClicked(evt);
+            }
+        });
 
         descriptionField.setColumns(20);
         descriptionField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -160,6 +167,85 @@ public class MaintenanceFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Validate maintenance form. 
+     * Form is valid if there are no empty field and input date is valid.
+     * 
+     * @param evt mouse event
+     */
+    private void addMaintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMaintenanceButtonMouseClicked
+        boolean isDescriptionValid = isDescriptionValid();
+        boolean isDateValid = isDateValid();
+        
+        if(!isDescriptionValid) {
+            descriptionField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        if(!isDateValid) {
+            startDateField.setBorder(BorderFactory.createLineBorder(Color.red));
+            startTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
+            finishDateField.setBorder(BorderFactory.createLineBorder(Color.red));
+            finishTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        if(isDateValid && isDescriptionValid) {
+            // Form valid, check for clash booking schedule in database
+        }
+    }//GEN-LAST:event_addMaintenanceButtonMouseClicked
+    
+    /**
+     * Check whether maintenance description field is valid or not valid (empty).
+     * 
+     * @return true if description field is not empty
+     */
+    private boolean isDescriptionValid() {
+        String description = descriptionField.getText();
+        return !description.isEmpty();
+    }
+    
+    /**
+     * Check whether user date and time input are valid or not.
+     * Datetime will be valid if start date is earlier than now and
+     * finish time is later than now.
+     * 
+     * @return true if date is valid
+     */
+    private boolean isDateValid() {
+        Calendar date = startDateField.getCalendar();
+        Calendar time = Calendar.getInstance();
+        time.setTime((Date) startTimeField.getValue());
+        Calendar startTime = convertTimeToCalendar(date, time);
+        
+        date = finishDateField.getCalendar();
+        time = Calendar.getInstance();
+        time.setTime((Date) finishTimeField.getValue());;
+        Calendar finishTime = convertTimeToCalendar(date, time);
+        
+        Calendar nowTime = GregorianCalendar.getInstance();
+        nowTime.setTime(new Date());
+        
+        if (nowTime.before(startTime) && startTime.before(finishTime)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Convert date and time to become one Calendar data type.
+     * 
+     * @param date date
+     * @param time time
+     * @return date and time in Calendar data type
+     */
+    private Calendar convertTimeToCalendar(Calendar date, Calendar time) {
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day = date.get(Calendar.DATE);
+        int hour = time.get(Calendar.HOUR_OF_DAY);
+        int minute = time.get(Calendar.MINUTE);
+        Calendar calendar = new GregorianCalendar(year, month, day, hour, minute);
+        return calendar;
+    }
+    
+    /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -189,7 +275,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addMaintenanceButton;
     private javax.swing.JTextArea descriptionField;
