@@ -28,18 +28,22 @@ import roominformation.RoomInformation;
  * @author angelynz95
  */
 public class MaintenanceFrame extends javax.swing.JFrame {
-    MainFrame mainFrame;
+    private int maintenanceId;
+    private MainFrame mainFrame;
     
     /**
      * Creates new form MaintenanceFrame
      */
     public MaintenanceFrame() {
         initComponents();
+        maintenanceId = 0;
         mainFrame = MainFrame.getInstance();
+        roomNameDropdown.setEnabled(true);
     }
     
-    public MaintenanceFrame(String roomName, Calendar startTime, Calendar finishTime, String description) {
+    public MaintenanceFrame(int maintenanceId, String roomName, Calendar startTime, Calendar finishTime, String description) {
         initComponents();
+        this.maintenanceId = maintenanceId;
         mainFrame = MainFrame.getInstance();
         this.roomNameDropdown.setSelectedItem(roomName);
         this.startDateField.setDate(startTime.getTime());
@@ -47,6 +51,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         this.finishDateField.setDate(finishTime.getTime());
         this.finishTimeField.setValue(finishTime.getTime());
         this.descriptionField.setText(description);
+        roomNameDropdown.setEnabled(false);
     }
 
     /**
@@ -230,7 +235,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
             RoomInformation roomInformation = new RoomInformation();
             int roomId = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getId();
             
-            MaintenanceModel maintenanceModel = new MaintenanceModel(0, roomId, descriptionField.getText(), startTime, finishTime);
+            MaintenanceModel maintenanceModel = new MaintenanceModel(maintenanceId, roomId, descriptionField.getText(), startTime, finishTime);
             
             ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
             clashBorrowing = maintenance.getClashBorrowing(maintenanceModel);
@@ -243,7 +248,11 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                 frame.setContentPane(new ClashMaintenancePanel(clashBorrowing, clashMaintenance));
                 frame.setVisible(true);
             } else {
-                maintenance.addMaintenance(maintenanceModel);
+                if (maintenanceId == 0) {
+                    maintenance.addMaintenance(maintenanceModel);
+                } else {
+                    maintenance.editMaintenance(maintenanceModel);
+                }
                 dispose();
                 // Refresh tampilan organisasi jadwal
                 JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);

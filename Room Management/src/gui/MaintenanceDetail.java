@@ -9,6 +9,9 @@ import borrowing.Borrowing;
 import database.BorrowingModel;
 import database.MaintenanceModel;
 import java.awt.event.WindowEvent;
+import java.util.GregorianCalendar;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import maintenance.Maintenance;
 
 /**
@@ -16,13 +19,14 @@ import maintenance.Maintenance;
  * @author William Sentosa
  */
 public class MaintenanceDetail extends javax.swing.JFrame {
-    
+    private MainFrame mainFrame;
     private MaintenanceModel model;
     private String roomName;
     private Maintenance maintenance;
      
     public MaintenanceDetail(MaintenanceModel model, String roomName) {
         initComponents();
+        mainFrame = MainFrame.getInstance();
         this.model = model;
         this.roomName = roomName;
         maintenance = new Maintenance();
@@ -163,11 +167,22 @@ public class MaintenanceDetail extends javax.swing.JFrame {
         maintenance.deleteMaintenance(model);
         DeleteSuccessFrame successFrame = new DeleteSuccessFrame();
         successFrame.setVisible(true);
+        // Refresh tampilan organisasi jadwal
+        JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+        JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+        bookingInformationPanel.removeAll();
+        bookingInformationPanel.add(new BookingInformationPanel((GregorianCalendar) model.getStartTime()));
+        bookingInformationPanel.repaint();
+        bookingInformationPanel.revalidate();
+        
+        this.dispose();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(roomName, model.getStartTime(), model.getFinishTime(), model.getDescription());
+        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(model.getId(), roomName, model.getStartTime(), model.getFinishTime(), model.getDescription());
         maintenanceFrame.setVisible(true);
+        
+        this.dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**

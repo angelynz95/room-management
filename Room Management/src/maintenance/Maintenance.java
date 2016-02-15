@@ -115,6 +115,7 @@ public class Maintenance {
     public String editMaintenance(MaintenanceModel maintenance) {
         database.connect(path);
         
+        System.out.println(maintenance.getRoomId() + " " + maintenance.getId());
         String sql = "UPDATE pemeliharaan SET id_ruangan = '" + maintenance.getRoomId() + "', deskripsi = '" + 
                 maintenance.getDescription() + "', waktu_mulai = '"  + sdf.format(maintenance.getStartTime().getTime()) + "', waktu_selesai = '" + sdf.format(maintenance.getFinishTime().getTime()) + 
                 "' WHERE id_pemeliharaan = '" + maintenance.getId() + "'";
