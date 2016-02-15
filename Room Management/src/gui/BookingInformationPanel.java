@@ -12,26 +12,20 @@ import database.BorrowingModel;
 import database.MaintenanceModel;
 import database.RoomModel;
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 /**
  *
@@ -92,9 +86,19 @@ public class BookingInformationPanel extends javax.swing.JPanel {
 
         borrowingButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         borrowingButton.setText("Pemesanan");
+        borrowingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                borrowingButtonMouseClicked(evt);
+            }
+        });
 
         maintenanceButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         maintenanceButton.setText("Pemeliharaan");
+        maintenanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                maintenanceButtonMouseClicked(evt);
+            }
+        });
 
         dateField.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
         dateField.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
@@ -152,6 +156,18 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     private void dateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateFieldActionPerformed
+
+    private void borrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowingButtonMouseClicked
+        // TODO add your handling code here:
+        BorrowingFrame borrowingFrame = new BorrowingFrame();
+        borrowingFrame.setVisible(true);
+    }//GEN-LAST:event_borrowingButtonMouseClicked
+
+    private void maintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceButtonMouseClicked
+        // TODO add your handling code here:
+        MaintenanceFrame maintenanceFrame = new MaintenanceFrame();
+        maintenanceFrame.setVisible(true);
+    }//GEN-LAST:event_maintenanceButtonMouseClicked
 
     private void setRooms() {
         for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
@@ -224,19 +240,23 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                 if (roomSchedule.getValue().size() > 0) {
                     if (roomSchedule.getValue().containsKey(i + 7)) {
                         if (roomSchedule.getValue().get(i + 7).getClass().equals(BorrowingModel.class)) {
+                            BorrowingModel borrowing = (BorrowingModel) roomSchedule.getValue().get(i + 7);
                             scheduleLabel.setBackground(new Color(138, 199, 222));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
-                                    // Membuka frame informasi borrowing
+                                    BookingDetailFrame bookingDetailFrame = new BookingDetailFrame(borrowing, roomSchedule.getKey().getName());
+                                    bookingDetailFrame.setVisible(true);
                                 }
                             });
                         } else if (roomSchedule.getValue().get(i + 7).getClass().equals(MaintenanceModel.class)) {
+                            MaintenanceModel maintenance = (MaintenanceModel) roomSchedule.getValue().get(i + 7);
                             scheduleLabel.setBackground(new Color(250, 127, 119));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
-                                    // Membuka frame informasi maintenance
+                                    MaintenanceDetail maintenanceDetailFrame = new MaintenanceDetail(maintenance, roomSchedule.getKey().getName());
+                                    maintenanceDetailFrame.setVisible(true);
                                 }
                             });
                         }

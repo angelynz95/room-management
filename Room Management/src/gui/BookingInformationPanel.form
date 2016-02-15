@@ -77,6 +77,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Pemesanan"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="borrowingButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="maintenanceButton">
       <Properties>
@@ -85,6 +88,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Pemeliharaan"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="maintenanceButtonMouseClicked"/>
+      </Events>
     </Component>
     <Component class="org.freixas.jcalendar.JCalendarCombo" name="dateField">
       <Properties>
