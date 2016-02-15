@@ -45,6 +45,22 @@ public class BorrowingModel {
         this.startTime = startTime;
         this.finishTime = finishTime;
     }
+    
+    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar permissionTime, Calendar startTime, Calendar finishTime) {
+        this.id = id;
+        this.borrowerId = borrowerId;
+        this.roomId = roomID;
+        this.borrowerName = borrowerName;
+        this.borrowerStatus = borrowerStatus;
+        this.borrowerAddress = borrowerAddress;
+        this.borrowerPhone = borrowerPhone;
+        this.organizationName = organizationName;
+        this.activityName = activityName;
+        this.totalParticipant = totalParticipant;
+        this.permissionTime = permissionTime;
+        this.startTime = startTime;
+        this.finishTime = finishTime;
+    }
 
     public int getId() {
         return id;
