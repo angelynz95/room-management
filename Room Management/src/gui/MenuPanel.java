@@ -21,7 +21,7 @@ import javax.swing.event.ChangeListener;
  */
 public class MenuPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
-    private BookingInformation bookingInformationPanel;
+    private BookingInformationPanel bookingInformationPanel;
     private RoomInformationPanel roomInformationPanel;
     private StatisticPanel statisticPanel;
     private ChangePasswordPanel changePasswordPanel;
@@ -33,7 +33,7 @@ public class MenuPanel extends javax.swing.JPanel {
         initComponents();
         // Tampilan Organisasi Jadwal
         bookingInformationContainer.setLayout(new FlowLayout());
-        bookingInformationPanel = new BookingInformation();
+        bookingInformationPanel = new BookingInformationPanel();
         bookingInformationContainer.add(bookingInformationPanel);
         
         // Tampilan Info Ruangan
