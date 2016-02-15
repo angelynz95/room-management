@@ -7,17 +7,40 @@
  */
 package gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+
 /**
  *
  * @author angelynz95
  */
 public class BookingInformation extends javax.swing.JPanel {
+    List<String> rooms;
+    List<String> schedules;
 
     /**
      * Creates new form BookingInformation
      */
     public BookingInformation() {
         initComponents();
+        rooms = new ArrayList<String>();
+        schedules = new ArrayList<String>();
+        
+        setRooms();
+        setSchedules();
+        customizeBookingInformationPane();
+        showBookingInformation();
     }
 
     /**
@@ -29,19 +52,160 @@ public class BookingInformation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bookingInformationPane = new javax.swing.JScrollPane();
+        bookingInformationPanel = new javax.swing.JPanel();
+
+        javax.swing.GroupLayout bookingInformationPanelLayout = new javax.swing.GroupLayout(bookingInformationPanel);
+        bookingInformationPanel.setLayout(bookingInformationPanelLayout);
+        bookingInformationPanelLayout.setHorizontalGroup(
+            bookingInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1154, Short.MAX_VALUE)
+        );
+        bookingInformationPanelLayout.setVerticalGroup(
+            bookingInformationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 489, Short.MAX_VALUE)
+        );
+
+        bookingInformationPane.setViewportView(bookingInformationPanel);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1195, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 626, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(102, Short.MAX_VALUE)
+                .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 503, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setRooms() {
+        rooms.add("7606");
+        rooms.add("7603");
+        rooms.add("7601");
+        rooms.add("7602");
+        rooms.add("7604");
+        rooms.add("7605");
+        rooms.add("7607");
+        rooms.add("7608");
+        rooms.add("7609");
+        rooms.add("7610");
+        rooms.add("7611");
+    }
+    
+    private void setSchedules() {
+        for (int i = 7; i < 9; i++) {
+            schedules.add("0" + i + ".00 - 0" + (i+1) + ".00");
+        }
+        schedules.add("09.00 - 10.00");
+        for (int i = 0; i < 9; i++) {
+            schedules.add("1" + i + ".00 - 1" + (i+1) + ".00");
+        }
+        schedules.add("19.00 - 20.00");
+        for (int i = 0; i <= 2; i++) {
+            schedules.add("2" + i + ".00 - 2" + (i+1) + ".00");
+        }
+    }
+    
+    private void customizeBookingInformationPane() {
+        bookingInformationPane.setOpaque(false);
+        bookingInformationPane.getViewport().setOpaque(false);
+//        bookingInformationPane.setBorder(null);
+        bookingInformationPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        bookingInformationPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        bookingInformationPanel.setLayout(new GridLayout(0, rooms.size() + 1));
+    }
+    
+    private void showBookingInformation() {
+        customizeRoomCells();
+        customizeScheduleCells();
+    }
+    
+    private void customizeRoomCells() {
+        JLabel roomLabel;
+        
+        roomLabel = new JLabel();
+        roomLabel.setPreferredSize(new Dimension(200, 16));
+        roomLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        roomLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        roomLabel.setVerticalAlignment(SwingConstants.CENTER);
+        roomLabel.setFont(new Font("Roboto", Font.PLAIN, 16));
+        roomLabel.setText("");
+        bookingInformationPanel.add(roomLabel);
+        
+        for (int i = 0; i < rooms.size(); i++) {
+            roomLabel = new JLabel();
+            roomLabel.setPreferredSize(new Dimension(200, 16));
+            roomLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            roomLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            roomLabel.setVerticalAlignment(SwingConstants.CENTER);
+            roomLabel.setFont(new Font("Roboto", Font.PLAIN, 16));
+            roomLabel.setText(rooms.get(i));
+            bookingInformationPanel.add(roomLabel);
+        }
+    }
+    
+    private void customizeScheduleCells() {
+        for (int i = 0; i < schedules.size(); i++) {
+            customizeScheduleLabels(i);
+            for (int j = 0; j < rooms.size(); j++) {
+                JButton editBookingButton = new JButton("Edit");
+                JButton deleteBookingButton = new JButton("Delete");
+                JLabel bookingInformationLabel = new JLabel("Label");
+                JPanel schedulePanel = new JPanel();
+                
+                GroupLayout groupLayout = new GroupLayout(schedulePanel);
+                groupLayout.setAutoCreateGaps(true);
+                groupLayout.setAutoCreateContainerGaps(true);
+                // Mengatur posisi group
+                groupLayout.setHorizontalGroup(
+                    groupLayout.createSequentialGroup()
+                        .addComponent(bookingInformationLabel)
+                        .addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(editBookingButton)
+                            .addComponent(deleteBookingButton))
+                );
+                groupLayout.setVerticalGroup(
+                    groupLayout.createSequentialGroup()
+                        .addGroup(groupLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(bookingInformationLabel)
+                            .addComponent(editBookingButton))
+                        .addComponent(deleteBookingButton)
+                );
+                
+                schedulePanel.setLayout(groupLayout);
+                
+                schedulePanel.setPreferredSize(new Dimension(200, 16));
+                schedulePanel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+                schedulePanel.setLayout(new GroupLayout(schedulePanel));
+                schedulePanel.setFont(new Font("Roboto", Font.PLAIN, 16));
+
+                bookingInformationPanel.add(schedulePanel);
+            }
+        }
+    }
+    
+    private void customizeScheduleLabels(int index) {
+        JLabel scheduleLabel = new JLabel();
+        scheduleLabel.setPreferredSize(new Dimension(200, 16));
+        scheduleLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        scheduleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        scheduleLabel.setVerticalAlignment(SwingConstants.CENTER);
+        scheduleLabel.setFont(new Font("Roboto", Font.PLAIN, 16));
+        scheduleLabel.setText(schedules.get(index));
+        
+        bookingInformationPanel.add(scheduleLabel);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane bookingInformationPane;
+    private javax.swing.JPanel bookingInformationPanel;
     // End of variables declaration//GEN-END:variables
 }
