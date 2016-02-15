@@ -67,6 +67,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
             }
         });
 
+        oldPasswordMessage.setForeground(new java.awt.Color(255, 0, 0));
+
         newPasswordConfirmationMessage.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
