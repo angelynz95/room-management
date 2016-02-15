@@ -15,6 +15,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -165,12 +168,23 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                     if (roomSchedule.getValue().containsKey(i + 7)) {
                         if (roomSchedule.getValue().get(i + 7).getClass().equals(BorrowingModel.class)) {
                             scheduleLabel.setBackground(new Color(138, 199, 222));
+                            scheduleLabel.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent mouseEvent) {
+                                    // Membuka frame informasi borrowing
+                                }
+                            });
                         } else if (roomSchedule.getValue().get(i + 7).getClass().equals(MaintenanceModel.class)) {
                             scheduleLabel.setBackground(new Color(250, 127, 119));
+                            scheduleLabel.addMouseListener(new MouseAdapter() {
+                                @Override
+                                public void mouseClicked(MouseEvent mouseEvent) {
+                                    // Membuka frame informasi maintenance
+                                }
+                            });
                         }
                     }
                 }
-                
                 bookingInformationPanel.add(scheduleLabel);
             }
         }
