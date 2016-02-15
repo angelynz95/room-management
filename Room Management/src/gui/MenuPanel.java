@@ -8,6 +8,7 @@
 package gui;
 
 import java.awt.FlowLayout;
+import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -33,7 +34,7 @@ public class MenuPanel extends javax.swing.JPanel {
         initComponents();
         // Tampilan Organisasi Jadwal
         bookingInformationContainer.setLayout(new FlowLayout());
-        bookingInformationPanel = new BookingInformationPanel();
+        bookingInformationPanel = new BookingInformationPanel(new GregorianCalendar(2016, 2, 8));
         bookingInformationContainer.add(bookingInformationPanel);
         
         // Tampilan Info Ruangan
