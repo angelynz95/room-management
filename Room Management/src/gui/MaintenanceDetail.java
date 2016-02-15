@@ -81,7 +81,7 @@ public class MaintenanceDetail extends javax.swing.JFrame {
             }
         });
 
-        editButton.setText("Edit");
+        editButton.setText("Ubah");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);
@@ -166,7 +166,8 @@ public class MaintenanceDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        
+        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(roomName, model.getStartTime(), model.getFinishTime(), model.getDescription());
+        maintenanceFrame.setVisible(true);
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**
@@ -207,7 +208,7 @@ public class MaintenanceDetail extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Maintenance m = new Maintenance();
-                new MaintenanceDetail(m.searchMaintenanceById(2), "R 7606").setVisible(true);
+                new MaintenanceDetail(m.searchMaintenanceById(1), "R 7606").setVisible(true);
             }
         });
     }

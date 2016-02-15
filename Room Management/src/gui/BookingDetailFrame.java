@@ -127,7 +127,7 @@ public class BookingDetailFrame extends javax.swing.JFrame {
             }
         });
 
-        editButton.setText("Edit");
+        editButton.setText("Ubah");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);

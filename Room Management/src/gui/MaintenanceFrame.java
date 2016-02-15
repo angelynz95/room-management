@@ -33,6 +33,16 @@ public class MaintenanceFrame extends javax.swing.JFrame {
     public MaintenanceFrame() {
         initComponents();
     }
+    
+    public MaintenanceFrame(String roomName, Calendar startTime, Calendar finishTime, String description) {
+        initComponents();
+        this.roomNameDropdown.setSelectedItem(roomName);
+        this.startDateField.setDate(startTime.getTime());
+        this.startTimeField.setValue(startTime.getTime());
+        this.finishDateField.setDate(finishTime.getTime());
+        this.finishTimeField.setValue(finishTime.getTime());
+        this.descriptionField.setText(description);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +73,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         timeLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Pemeliharaan Ruangan");
         setResizable(false);
 
