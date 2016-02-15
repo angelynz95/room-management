@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -40,6 +41,7 @@ public class StatisticPanel extends javax.swing.JPanel {
      */
     public StatisticPanel() {
         initComponents();
+        customizeScrollPane();
         statistic = new Statistic();
         frame = MainFrame.getInstance();
         // Inisialisasi kolom frekuensi peminjaman ruangan
@@ -84,6 +86,8 @@ public class StatisticPanel extends javax.swing.JPanel {
 
         statisticPane.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
 
+        roomBorrowedFrequencyPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
         javax.swing.GroupLayout roomBorrowedFrequencyPanelLayout = new javax.swing.GroupLayout(roomBorrowedFrequencyPanel);
         roomBorrowedFrequencyPanel.setLayout(roomBorrowedFrequencyPanelLayout);
         roomBorrowedFrequencyPanelLayout.setHorizontalGroup(
@@ -103,6 +107,8 @@ public class StatisticPanel extends javax.swing.JPanel {
 
         statisticPane.addTab("Frekuensi Penggunaan Ruang", roomBorrowedFrequencyPanel);
 
+        roomBrokenFrequencyPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
         javax.swing.GroupLayout roomBrokenFrequencyPanelLayout = new javax.swing.GroupLayout(roomBrokenFrequencyPanel);
         roomBrokenFrequencyPanel.setLayout(roomBrokenFrequencyPanelLayout);
         roomBrokenFrequencyPanelLayout.setHorizontalGroup(
@@ -121,6 +127,8 @@ public class StatisticPanel extends javax.swing.JPanel {
         );
 
         statisticPane.addTab("Frekuensi Kerusakan Ruang", roomBrokenFrequencyPanel);
+
+        roomUsedPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         javax.swing.GroupLayout roomUsedPanelLayout = new javax.swing.GroupLayout(roomUsedPanel);
         roomUsedPanel.setLayout(roomUsedPanelLayout);
@@ -218,8 +226,9 @@ public class StatisticPanel extends javax.swing.JPanel {
         }
         
         roomBorrowedFrequencyStatistic = new JTable(rows.toArray(temp2), roomBorrowedFrequencyColumns.toArray(temp));
-        roomBorrowedFrequencyStatistic.setFillsViewportHeight(true);
         roomBorrowedFrequencyStatistic.setEnabled(false);
+        roomBorrowedFrequencyStatistic.setOpaque(false);
+        roomBorrowedFrequencyStatistic.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         roomBorrowedFrequencyStatistic.getTableHeader().setReorderingAllowed(false);
         // Menerapkan customization tabel
         roomBorrowedFrequencyStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
@@ -241,8 +250,9 @@ public class StatisticPanel extends javax.swing.JPanel {
         }
         
         roomBrokenFrequencyStatistic = new JTable(rows.toArray(temp2), roomBrokenFrequencyColumns.toArray(temp));
-        roomBrokenFrequencyStatistic.setFillsViewportHeight(true);
         roomBrokenFrequencyStatistic.setEnabled(false);
+        roomBrokenFrequencyStatistic.setOpaque(false);
+        roomBrokenFrequencyStatistic.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         roomBrokenFrequencyStatistic.getTableHeader().setReorderingAllowed(false);
         // Menerapkan customization
         roomBrokenFrequencyStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
@@ -264,8 +274,9 @@ public class StatisticPanel extends javax.swing.JPanel {
         }
         
         roomUsedStatistic = new JTable(rows.toArray(temp2), roomUsedColumns.toArray(temp));
-        roomUsedStatistic.setFillsViewportHeight(true);
         roomUsedStatistic.setEnabled(false);
+        roomUsedStatistic.setOpaque(false);
+        roomUsedStatistic.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         roomUsedStatistic.getTableHeader().setReorderingAllowed(false);
         // Menerapkan customization
         roomUsedStatistic.getTableHeader().setDefaultRenderer(headerRenderer);
@@ -286,10 +297,20 @@ public class StatisticPanel extends javax.swing.JPanel {
         cellRenderer.setVerticalAlignment(SwingConstants.CENTER);
         headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
-        // Membuat warna berbeda pada header
+        // Membuat warna berbeda antara header dan cell biasa
         headerRenderer.setBackground(Color.lightGray);
+        cellRenderer.setOpaque(false);
     }
-
+    
+    private void customizeScrollPane() {
+        roomBorrowedFrequencyPane.setOpaque(false);
+        roomBorrowedFrequencyPane.getViewport().setOpaque(false);
+        roomBrokenFrequencyPane.setOpaque(false);
+        roomBrokenFrequencyPane.getViewport().setOpaque(false);
+        roomUsedPane.setOpaque(false);
+        roomUsedPane.getViewport().setOpaque(false);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane roomBorrowedFrequencyPane;
     private javax.swing.JPanel roomBorrowedFrequencyPanel;

@@ -9,6 +9,7 @@ package gui;
 
 import java.awt.FlowLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
@@ -183,8 +184,13 @@ public class MenuPanel extends javax.swing.JPanel {
               System.out.println("Tab changed to: " + index);
               if (index == 3) {
                   changePasswordPanel.resetTextField();
+              } else if (index == 2) {
+                  statisticContainer.removeAll();
+                  statisticPanel = new StatisticPanel();
+                  statisticContainer.add(statisticPanel);
+                  statisticContainer.repaint();
+                  statisticContainer.revalidate();
               }
-              
             }
         };
         menuPane.addChangeListener(changeListener);
