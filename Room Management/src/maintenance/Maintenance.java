@@ -131,14 +131,14 @@ public class Maintenance {
         Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
         
         MaintenanceModel maintenanceModel = new MaintenanceModel(idMaintenance, roomId, description, startTime, finishTime);
-        String msg = maintenance.addMaintenance(maintenanceModel);
-        System.out.println(msg);
+//        String msg = maintenance.addMaintenance(maintenanceModel);
+//        System.out.println(msg);
         
-//        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
-//        clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
-//        for (int i = 0; i < clashMaintenance.size(); i++) {
-//            System.out.println(clashMaintenance.get(i).getId());
-//        }
+        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
+        clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
+        for (int i = 0; i < clashMaintenance.size(); i++) {
+            System.out.println(clashMaintenance.get(i).getId());
+        }
         
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         clashBorrowing = maintenance.getClashBorrowing(maintenanceModel);
