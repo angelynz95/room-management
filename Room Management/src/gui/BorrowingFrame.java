@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.GregorianCalendar;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
@@ -66,13 +68,14 @@ public class BorrowingFrame extends javax.swing.JFrame {
 
             if (button.getText().equals(borrowerStatus)) {
                 borrowerStatusButtonGroup.setSelected(button.getModel(), true);
-                System.out.println(button + "true");
             }
         }
         
         this.activityNameField.setText(model.getActivityName());
         this.organizationNameField.setText(model.getOrganizationName());
         this.totalParticipantField.setValue(model.getTotalParticipant());
+        
+        mainFrame = MainFrame.getInstance();
     }
 
     /**
@@ -401,7 +404,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         // Jika form valid
         Borrowing borrowing = new Borrowing();
         
-        int id = 0;
+        int id = borrowingId;
         int borrowerId = Integer.parseInt(borrowerIdField.getText());
         
         RoomInformation roomInformation = new RoomInformation();
@@ -410,7 +413,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         
         String borrowerName = borrowerNameField.getText();
         
-        // Nanti diganti sama pilihan combo box
         String borrowerStatus = "";
         for (Enumeration<AbstractButton> buttons = borrowerStatusButtonGroup.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
@@ -456,7 +458,13 @@ public class BorrowingFrame extends javax.swing.JFrame {
             }
             dispose();
             
-            // Refresh panel organisasi jadwal
+            // Refresh tampilan organisasi jadwal
+            JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+            JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+            bookingInformationPanel.removeAll();
+            bookingInformationPanel.add(new BookingInformationPanel(new GregorianCalendar(borrowingModel.getStartTime().get(Calendar.YEAR), borrowingModel.getStartTime().get(Calendar.MONTH), borrowingModel.getStartTime().get(Calendar.DATE))));
+            bookingInformationPanel.repaint();
+            bookingInformationPanel.revalidate();
         }
     }
 

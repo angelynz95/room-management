@@ -244,7 +244,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
             ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
             clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
             
-            if ((clashBorrowing.size() > 0) && (clashMaintenance.size() > 0)) {
+            if ((clashBorrowing.size() > 0) || (clashMaintenance.size() > 0)) {
                 ClashBookingFrame frame = new ClashBookingFrame();
                 frame.setContentPane(new ClashMaintenancePanel(clashBorrowing, clashMaintenance));
                 frame.setVisible(true);
