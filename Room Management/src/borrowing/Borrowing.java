@@ -92,12 +92,34 @@ public class Borrowing {
 
         String sql = "DELETE FROM peminjaman WHERE id_peminjaman = '" + borrowing.getId() + "'";
         String message = database.changeData(sql);
-        
         database.closeDatabase();
-        
         return message;
     }
-
+    
+    
+    
+    public void addWeekelyBorrowing(BorrowingModel borrowing, Calendar calendarStart, Calendar calendarEnd, int startHour, int endHour) {
+        database.connect(path);
+        Calendar tempStart = new GregorianCalendar();
+        Calendar tempEnd = new GregorianCalendar();
+        int day = borrowing.getStartTime().get(Calendar.DAY_OF_WEEK);
+        while (calendarStart.before(calendarEnd)) {
+            tempStart.set(calendarStart.get(Calendar.YEAR), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.DATE), startHour, 0, 0);
+            tempEnd.set(calendarStart.get(Calendar.YEAR), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.DATE), endHour, 0, 0);
+            if (calendarStart.get(Calendar.DAY_OF_WEEK) == day) {
+                String sql = "INSERT INTO peminjaman (id_ruangan, id_peminjam, nama_peminjam, nomor_telepon_peminjam, "
+                + "status_peminjam, alamat_peminjam, nama_kegiatan, nama_lembaga, waktu_mulai, waktu_selesai, jumlah_peserta)"
+                + " VALUES ('" + borrowing.getRoomId() + "', '" + borrowing.getBorrowerId() + "','" + borrowing.getBorrowerName() + "','" + borrowing.getBorrowerPhone() + "','" 
+                + borrowing.getBorrowerStatus() + "','" + borrowing.getBorrowerAddress() + "','" + borrowing.getActivityName() + "','" + borrowing.getOrganizationName() + "', '"
+                + sdf.format(tempStart.getTime()) + "','" + sdf.format(tempEnd.getTime()) + "','" + borrowing.getTotalParticipant() + "')";
+                String message = database.changeData(sql);
+                System.out.println(sdf.format(tempStart.getTime()) + " - " + sdf.format(tempEnd.getTime()));
+            }
+            calendarStart.add(Calendar.DATE, 1);
+        }
+        database.closeDatabase();
+    }
+    
     public ArrayList<BorrowingModel> getClashBorrowing(BorrowingModel borrowing) {
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         database.connect(path);
@@ -152,24 +174,12 @@ public class Borrowing {
     public static final void main(String args[]) {
         Borrowing borrowing = new Borrowing();
         
-        Calendar startTime = new GregorianCalendar(2016, 1, 23, 13, 30);
-        Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
-        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, startTime, finishTime);
+        Calendar startTime = new GregorianCalendar(2016, 3, 7, 7, 00);
+        Calendar finishTime = new GregorianCalendar(2016, 3, 21, 9, 00);
+        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah PBD", 50, startTime, finishTime);
         
-//        String msg = borrowing.deleteBorrowing(borrowingModel);
-//        System.out.println(msg);
+        borrowing.addWeekelyBorrowing(borrowingModel, startTime, finishTime, 7, 9);
         
-        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
-        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
-        for (int i = 0; i < clashBorrowing.size(); i++) {
-            System.out.println(clashBorrowing.get(i).getId());
-        }
         
-        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
-        clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
-        
-        for (int i = 0; i < clashMaintenance.size(); i++) {
-            System.out.println(clashMaintenance.get(i).getId());
-        }
     }
 }
