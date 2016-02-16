@@ -136,17 +136,20 @@ public class BookingInformation {
 
                     MaintenanceModel maintenance = new MaintenanceModel(maintenanceId, roomId, description, startTime, finishTime);
                     Map<Integer, Object> roomSchedule = tableSchedule.get(room);
-
-                    if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
-                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
-                            roomSchedule.put(i, maintenance);
-                        }
-                    } else {
-                        // Tanggal dimulai berbeda dengan tanggal selesai
-                        for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<MaintenanceModel.MAX_MAINTAIN_HOUR; i++) {
-                            roomSchedule.put(i, maintenance);
-                        }
+                    System.out.println("Hello");
+                    if (roomSchedule != null) {
+                        if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
+                            for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
+                                roomSchedule.put(i, maintenance);
+                            }
+                        } else {
+                            // Tanggal dimulai berbeda dengan tanggal selesai
+                            for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<MaintenanceModel.MAX_MAINTAIN_HOUR; i++) {
+                                roomSchedule.put(i, maintenance);
+                            }
+                        }    
                     }
+                    
 
                     roomId= rs.getInt("id_ruangan");
                 } while((roomIdNow==roomId) && rs.next());
