@@ -80,8 +80,6 @@ public class Borrowing {
                 + "', jumlah_peserta = '" + borrowing.getTotalParticipant() + "' WHERE id_peminjaman = '" + borrowing.getId() + "'";
         String message = database.changeData(sql);
         
-        
-        
         database.closeDatabase();
         
         return message;
@@ -96,9 +94,11 @@ public class Borrowing {
         return message;
     }
     
-    
-    
-    public void addWeekelyBorrowing(BorrowingModel borrowing, Calendar calendarStart, Calendar calendarEnd, int startHour, int endHour) {
+    public void addWeekelyBorrowing(BorrowingModel borrowing) {
+        Calendar calendarStart = borrowing.getStartTime();
+        int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);
+        Calendar calendarEnd = borrowing.getFinishTime();
+        int endHour = calendarEnd.get(Calendar.HOUR_OF_DAY);
         database.connect(path);
         Calendar tempStart = new GregorianCalendar();
         Calendar tempEnd = new GregorianCalendar();
@@ -151,7 +151,7 @@ public class Borrowing {
 
         database.connect(path);
 
-        String sql = "SELECT * FROM pemeliharaan WHERE id_peminjaman <> " + borrowing.getId() + " AND id_ruangan = '" + borrowing.getRoomId() + "' AND ((waktu_mulai >= '" +
+        String sql = "SELECT * FROM pemeliharaan WHERE id_ruangan = '" + borrowing.getRoomId() + "' AND ((waktu_mulai >= '" +
                 sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_mulai <= '" + sdf.format(borrowing.getFinishTime().getTime()) + "') OR (waktu_selesai >= '" +
                 sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_selesai <= '" + sdf.format(borrowing.getFinishTime().getTime()) + "'))";
         
@@ -178,7 +178,7 @@ public class Borrowing {
         Calendar finishTime = new GregorianCalendar(2016, 3, 21, 9, 00);
         BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah PBD", 50, startTime, finishTime);
         
-        borrowing.addWeekelyBorrowing(borrowingModel, startTime, finishTime, 7, 9);
+        borrowing.addWeekelyBorrowing(borrowingModel);
         
         
     }
