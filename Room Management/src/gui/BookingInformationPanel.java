@@ -12,6 +12,7 @@ import database.BorrowingModel;
 import database.MaintenanceModel;
 import database.RoomModel;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -236,11 +237,13 @@ public class BookingInformationPanel extends javax.swing.JPanel {
             for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
                 scheduleLabel = new JLabel();                
                 customizeLabel(scheduleLabel);
+                
                 if (roomSchedule.getValue().size() > 0) {
                     if (roomSchedule.getValue().containsKey(i + 7)) {
                         if (roomSchedule.getValue().get(i + 7).getClass().equals(BorrowingModel.class)) {
                             BorrowingModel borrowing = (BorrowingModel) roomSchedule.getValue().get(i + 7);
                             scheduleLabel.setBackground(new Color(138, 199, 222));
+                            scheduleLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
@@ -251,6 +254,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                         } else if (roomSchedule.getValue().get(i + 7).getClass().equals(MaintenanceModel.class)) {
                             MaintenanceModel maintenance = (MaintenanceModel) roomSchedule.getValue().get(i + 7);
                             scheduleLabel.setBackground(new Color(250, 127, 119));
+                            scheduleLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
