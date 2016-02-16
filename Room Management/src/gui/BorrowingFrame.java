@@ -80,7 +80,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         totalParticipantSpinner = new javax.swing.JSpinner();
         totalParticipantLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Peminjaman Ruangan");
         setResizable(false);
 
