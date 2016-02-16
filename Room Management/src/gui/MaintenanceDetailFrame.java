@@ -8,6 +8,8 @@ package gui;
 import borrowing.Borrowing;
 import database.BorrowingModel;
 import database.MaintenanceModel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.util.GregorianCalendar;
 import javax.swing.JPanel;
@@ -27,6 +29,9 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
     public MaintenanceDetailFrame(MaintenanceModel model, String roomName) {
         initComponents();
         mainFrame = MainFrame.getInstance();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
+        
         this.model = model;
         this.roomName = roomName;
         maintenance = new Maintenance();
@@ -167,6 +172,7 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
         maintenance.deleteMaintenance(model);
         DeleteSuccessFrame successFrame = new DeleteSuccessFrame();
         successFrame.setVisible(true);
+        
         // Refresh tampilan organisasi jadwal
         JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
         JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
@@ -196,7 +202,7 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -231,7 +237,6 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Maintenance m = new Maintenance();
-                new MaintenanceDetailFrame(m.searchMaintenanceById(1), "R 7606").setVisible(true);
             }
         });
     }

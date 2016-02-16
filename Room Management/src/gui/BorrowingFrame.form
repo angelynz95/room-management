@@ -35,68 +35,84 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="borrowerTitleLabel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="borrowerStatusLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="borrowerPhoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="borrowerNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="borrowerIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="borrowerAddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="purposeTitleLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="activityNameLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="organizationNameLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="totalParticipantLabel" min="-2" max="-2" attributes="0"/>
-                          <Component id="timeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="roomNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="organizationNameField" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
-                              <Component id="activityNameField" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="totalParticipantField" min="-2" pref="40" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="peopleLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lecturerStatusButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                              <Component id="studentStatusButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                              <Component id="othersStatusButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Component id="borrowerIdField" min="-2" pref="355" max="-2" attributes="0"/>
-                              <Component id="borrowerNameField" min="-2" pref="355" max="-2" attributes="0"/>
-                              <Component id="borrowerAddressField" min="-2" pref="355" max="-2" attributes="0"/>
-                              <Component id="borrowerPhoneField" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="roomNameDropdown" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="startDateField" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="startTimeField" min="-2" pref="60" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="timeSeperatorLabel" min="-2" pref="10" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="finishDateField" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="finishTimeField" min="-2" pref="60" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="borrowerStatusLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="borrowerPhoneLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="borrowerNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="borrowerIdLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="borrowerAddressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="purposeTitleLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="activityNameLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="organizationNameLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="totalParticipantLabel" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                          <Component id="organizationNameField" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
+                                          <Component id="activityNameField" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="totalParticipantField" min="-2" pref="40" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="peopleLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="lecturerStatusButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                          <Component id="studentStatusButton" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                                          <Component id="othersStatusButton" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" alignment="0" groupAlignment="0" attributes="0">
+                                          <Component id="borrowerIdField" min="-2" pref="355" max="-2" attributes="0"/>
+                                          <Component id="borrowerNameField" min="-2" pref="355" max="-2" attributes="0"/>
+                                          <Component id="borrowerAddressField" min="-2" pref="355" max="-2" attributes="0"/>
+                                          <Component id="borrowerPhoneField" alignment="1" min="-2" pref="355" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace pref="427" max="-2" attributes="0"/>
+                                  <Component id="addBorrowingButton" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="timeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="roomNameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="isWeeklyCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="roomNameDropdown" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="startDateField" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="startTimeField" min="-2" pref="60" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="timeSeperatorLabel" min="-2" pref="10" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="finishDateField" min="-2" pref="100" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="finishTimeField" min="-2" pref="60" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="borrowerTitleLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="36" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="addBorrowingButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -117,9 +133,11 @@
                   <Component id="finishTimeField" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="timeLabel" alignment="2" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="isWeeklyCheckBox" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
               <Component id="borrowerTitleLabel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="2" attributes="0">
                   <Component id="borrowerIdField" alignment="2" min="-2" max="-2" attributes="0"/>
                   <Component id="borrowerIdLabel" alignment="2" min="-2" max="-2" attributes="0"/>
@@ -431,6 +449,14 @@
           <Font name="Roboto" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="orang"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="isWeeklyCheckBox">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Roboto" size="10" style="0"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ulangi tiap minggu"/>
       </Properties>
     </Component>
   </SubComponents>

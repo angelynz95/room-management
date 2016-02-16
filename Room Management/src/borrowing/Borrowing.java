@@ -94,7 +94,7 @@ public class Borrowing {
         return message;
     }
     
-    public void addWeekelyBorrowing(BorrowingModel borrowing) {
+    public void addWeeklyBorrowing(BorrowingModel borrowing) {
         Calendar calendarStart = borrowing.getStartTime();
         int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);
         Calendar calendarEnd = borrowing.getFinishTime();
@@ -178,7 +178,7 @@ public class Borrowing {
         Calendar finishTime = new GregorianCalendar(2016, 3, 21, 9, 00);
         BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah PBD", 50, startTime, finishTime);
         
-        borrowing.addWeekelyBorrowing(borrowingModel);
+        borrowing.addWeeklyBorrowing(borrowingModel);
         
         
     }

@@ -11,6 +11,8 @@ import database.BorrowingModel;
 import database.MaintenanceModel;
 import database.RoomModel;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -37,13 +39,19 @@ public class MaintenanceFrame extends javax.swing.JFrame {
      */
     public MaintenanceFrame() {
         initComponents();
-        maintenanceId = 0;
         mainFrame = MainFrame.getInstance();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
+        
+        maintenanceId = 0;
         roomNameDropdown.setEnabled(true);
     }
     
     public MaintenanceFrame(int maintenanceId, String roomName, Calendar startTime, Calendar finishTime, String description) {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
+        
         this.maintenanceId = maintenanceId;
         mainFrame = MainFrame.getInstance();
         this.roomNameDropdown.setSelectedItem(roomName);
@@ -325,11 +333,8 @@ public class MaintenanceFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Windows look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
