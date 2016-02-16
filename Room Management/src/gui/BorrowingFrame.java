@@ -7,11 +7,19 @@
  */
 package gui;
 
+import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
+import javax.swing.UIManager;
 
 /**
  *
@@ -35,6 +43,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        borrowerStatusButtonGroup = new javax.swing.ButtonGroup();
         borrowerIdLabel = new javax.swing.JLabel();
         borrowerNameLabel = new javax.swing.JLabel();
         borrowerAddressLabel = new javax.swing.JLabel();
@@ -57,14 +66,14 @@ public class BorrowingFrame extends javax.swing.JFrame {
         finishDateField = new org.freixas.jcalendar.JCalendarCombo();
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         timeSeperatorLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        borrowerTitleLabel = new javax.swing.JLabel();
+        purposeTitleLabel = new javax.swing.JLabel();
         roomNameDropdown = new javax.swing.JComboBox();
         lecturerStatusButton = new javax.swing.JRadioButton();
         studentStatusButton = new javax.swing.JRadioButton();
         othersStatusButton = new javax.swing.JRadioButton();
-        jSpinner1 = new javax.swing.JSpinner();
-        totalParticipantLabel1 = new javax.swing.JLabel();
+        totalParticipantField = new javax.swing.JSpinner();
+        peopleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Penambahan Peminjaman Ruangan");
@@ -111,6 +120,11 @@ public class BorrowingFrame extends javax.swing.JFrame {
 
         addBorrowingButton.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         addBorrowingButton.setText("Simpan");
+        addBorrowingButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBorrowingButtonMouseClicked(evt);
+            }
+        });
 
         roomNameLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         roomNameLabel.setText("Nama Ruangan");
@@ -130,28 +144,32 @@ public class BorrowingFrame extends javax.swing.JFrame {
         timeSeperatorLabel.setText("-");
         timeSeperatorLabel.setAlignmentX(0.5F);
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel3.setText("Data Peminjam");
+        borrowerTitleLabel.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        borrowerTitleLabel.setText("Data Peminjam");
 
-        jLabel4.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
-        jLabel4.setText("Tujuan Peminjaman");
+        purposeTitleLabel.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        purposeTitleLabel.setText("Tujuan Peminjaman");
 
         roomNameDropdown.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         roomNameDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        borrowerStatusButtonGroup.add(lecturerStatusButton);
         lecturerStatusButton.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lecturerStatusButton.setSelected(true);
         lecturerStatusButton.setText("Dosen");
 
+        borrowerStatusButtonGroup.add(studentStatusButton);
         studentStatusButton.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         studentStatusButton.setText("Mahasiswa");
 
+        borrowerStatusButtonGroup.add(othersStatusButton);
         othersStatusButton.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         othersStatusButton.setText("Lainnya");
 
-        jSpinner1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        totalParticipantField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
-        totalParticipantLabel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        totalParticipantLabel1.setText("orang");
+        peopleLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        peopleLabel.setText("orang");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,7 +178,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(borrowerTitleLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(borrowerStatusLabel)
@@ -168,7 +186,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
                             .addComponent(borrowerNameLabel)
                             .addComponent(borrowerIdLabel)
                             .addComponent(borrowerAddressLabel)
-                            .addComponent(jLabel4)
+                            .addComponent(purposeTitleLabel)
                             .addComponent(activityNameLabel)
                             .addComponent(organizationNameLabel)
                             .addComponent(totalParticipantLabel)
@@ -180,9 +198,9 @@ public class BorrowingFrame extends javax.swing.JFrame {
                                 .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(activityNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(totalParticipantField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(totalParticipantLabel1))
+                                .addComponent(peopleLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lecturerStatusButton)
                                 .addGap(53, 53, 53)
@@ -228,7 +246,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeLabel))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(borrowerTitleLabel)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(borrowerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,7 +270,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(othersStatusButton)
                     .addComponent(borrowerStatusLabel))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addComponent(purposeTitleLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(activityNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -263,9 +281,9 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(organizationNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalParticipantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalParticipantLabel)
-                    .addComponent(totalParticipantLabel1))
+                    .addComponent(peopleLabel))
                 .addGap(18, 18, 18)
                 .addComponent(addBorrowingButton)
                 .addGap(36, 36, 36))
@@ -284,6 +302,121 @@ public class BorrowingFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addBorrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBorrowingButtonMouseClicked
+        List<JTextField> emptyFields = getEmptyTextFields();
+        if (emptyFields.size() > 0) {
+            for (int i=0; i<emptyFields.size(); i++) {
+                emptyFields.get(i).setBorder(BorderFactory.createLineBorder(Color.red));
+            }
+        }
+        if (!isTotalParticipantValid()) {
+            totalParticipantField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        if(!isDateValid()) {
+            startDateField.setBorder(BorderFactory.createLineBorder(Color.red));
+            startTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
+            finishDateField.setBorder(BorderFactory.createLineBorder(Color.red));
+            finishTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        
+        boolean isBorrowerIdValid;
+        try {
+            int borrowerId = Integer.parseInt(borrowerIdField.getText());
+            isBorrowerIdValid = true;
+        } catch (NumberFormatException e) {
+            isBorrowerIdValid = false;
+        }
+        if (!isBorrowerIdValid) {
+            borrowerIdField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        if ((emptyFields.size()==0) && isTotalParticipantValid() && isDateValid() && isBorrowerIdValid) {
+            // Form valid
+            fields = new ArrayList<>();
+            fields.add(borrowerIdField);
+            fields.add(borrowerNameField);
+            fields.add(borrowerAddressField);
+            fields.add(borrowerPhoneField);
+            fields.add(activityNameField);
+            fields.add(organizationNameField);
+
+            for(int i=0; i<fields.size(); i++) {
+                fields.get(i).setBorder(UIManager.getBorder("TextField.border"));
+            }
+            startDateField.setBorder(UIManager.getBorder("TextField.border"));
+            startTimeField.setBorder(UIManager.getBorder("TextField.border"));
+            finishDateField.setBorder(UIManager.getBorder("TextField.border"));
+            finishTimeField.setBorder(UIManager.getBorder("TextField.border"));
+        }
+    }//GEN-LAST:event_addBorrowingButtonMouseClicked
+
+    private List<JTextField> getEmptyTextFields() {
+        List<JTextField> fields = new ArrayList<>();
+        fields.add(borrowerIdField);
+        fields.add(borrowerNameField);
+        fields.add(borrowerAddressField);
+        fields.add(borrowerPhoneField);
+        fields.add(activityNameField);
+        fields.add(organizationNameField);
+        List<JTextField> emptyFields = new ArrayList<>();
+        
+        for(int i=0; i<fields.size(); i++) {
+            if (fields.get(i).getText().isEmpty()) {
+                emptyFields.add(fields.get(i));
+            }
+        }
+        return emptyFields;
+    }
+    
+    private boolean isTotalParticipantValid() {
+        int participantNumber = (int) totalParticipantField.getValue();
+        return (participantNumber > 0);
+    }
+    
+    /**
+     * Check whether user date and time input are valid or not.
+     * Datetime will be valid if start date is earlier than now and
+     * finish time is later than now.
+     * 
+     * @return true if date is valid
+     */
+    private boolean isDateValid() {
+        Calendar date = startDateField.getCalendar();
+        Calendar time = Calendar.getInstance();
+        time.setTime((Date) startTimeField.getValue());
+        Calendar startTime = convertTimeToCalendar(date, time);
+        
+        date = finishDateField.getCalendar();
+        time = Calendar.getInstance();
+        time.setTime((Date) finishTimeField.getValue());;
+        Calendar finishTime = convertTimeToCalendar(date, time);
+        
+        Calendar nowTime = GregorianCalendar.getInstance();
+        nowTime.setTime(new Date());
+        
+        if (nowTime.before(startTime) && startTime.before(finishTime)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * Convert date and time to become one Calendar data type.
+     * 
+     * @param date date
+     * @param time time
+     * @return date and time in Calendar data type
+     */
+    private Calendar convertTimeToCalendar(Calendar date, Calendar time) {
+        int year = date.get(Calendar.YEAR);
+        int month = date.get(Calendar.MONTH);
+        int day = date.get(Calendar.DATE);
+        int hour = time.get(Calendar.HOUR_OF_DAY);
+        int minute = time.get(Calendar.MINUTE);
+        Calendar calendar = new GregorianCalendar(year, month, day, hour, minute);
+        return calendar;
+    }   
+    
     /**
      * @param args the command line arguments
      */
@@ -325,16 +458,17 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel borrowerNameLabel;
     private javax.swing.JTextField borrowerPhoneField;
     private javax.swing.JLabel borrowerPhoneLabel;
+    private javax.swing.ButtonGroup borrowerStatusButtonGroup;
     private javax.swing.JLabel borrowerStatusLabel;
+    private javax.swing.JLabel borrowerTitleLabel;
     private org.freixas.jcalendar.JCalendarCombo finishDateField;
     private javax.swing.JSpinner finishTimeField;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JRadioButton lecturerStatusButton;
     private javax.swing.JTextField organizationNameField;
     private javax.swing.JLabel organizationNameLabel;
     private javax.swing.JRadioButton othersStatusButton;
+    private javax.swing.JLabel peopleLabel;
+    private javax.swing.JLabel purposeTitleLabel;
     private javax.swing.JComboBox roomNameDropdown;
     private javax.swing.JLabel roomNameLabel;
     private org.freixas.jcalendar.JCalendarCombo startDateField;
@@ -342,7 +476,9 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton studentStatusButton;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JLabel timeSeperatorLabel;
+    private javax.swing.JSpinner totalParticipantField;
     private javax.swing.JLabel totalParticipantLabel;
-    private javax.swing.JLabel totalParticipantLabel1;
     // End of variables declaration//GEN-END:variables
+
+    private List<JTextField> fields;
 }
