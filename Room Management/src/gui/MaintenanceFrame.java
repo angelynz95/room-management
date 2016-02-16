@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
 import maintenance.Maintenance;
@@ -258,7 +259,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                 JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
                 JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
                 bookingInformationPanel.removeAll();
-                bookingInformationPanel.add(new BookingInformationPanel((GregorianCalendar) maintenanceModel.getStartTime()));
+                bookingInformationPanel.add(new BookingInformationPanel(new GregorianCalendar(maintenanceModel.getStartTime().get(Calendar.YEAR), maintenanceModel.getStartTime().get(Calendar.MONTH), maintenanceModel.getStartTime().get(Calendar.DATE))));
                 bookingInformationPanel.repaint();
                 bookingInformationPanel.revalidate();
             }

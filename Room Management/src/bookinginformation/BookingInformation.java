@@ -178,7 +178,7 @@ public class BookingInformation {
 
     public static void main(String[] args) {
         BookingInformation roomsSchedule = new BookingInformation();
-        Calendar date = new GregorianCalendar(2016, 1, 22); // 22 Februari 2016
+        Calendar date = new GregorianCalendar(2016, 2, 8); // 22 Februari 2016
         roomsSchedule.showBookingSchedule(date);
         roomsSchedule.showMaintenanceSchedule(date);
         

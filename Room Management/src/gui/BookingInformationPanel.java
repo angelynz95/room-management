@@ -50,7 +50,6 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         schedules = new ArrayList<String>();
         mainFrame = MainFrame.getInstance();
         
-        dateField.setDate(date.getTime());
         setRooms();
         setSchedules();
         customizeBookingInformationPane();
