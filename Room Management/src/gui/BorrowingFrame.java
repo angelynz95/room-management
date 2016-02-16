@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
 import maintenance.Maintenance;
 import roominformation.RoomInformation;
@@ -25,12 +27,14 @@ import roominformation.RoomInformation;
  * @author angelynz95
  */
 public class BorrowingFrame extends javax.swing.JFrame {
+    private MainFrame mainFrame;
 
     /**
      * Creates new form BorrowingFrame
      */
     public BorrowingFrame() {
         initComponents();
+        mainFrame = MainFrame.getInstance();
     }
 
     /**
@@ -353,8 +357,13 @@ public class BorrowingFrame extends javax.swing.JFrame {
         } else {
             borrowing.addBorrowing(borrowingModel);
             dispose();
-            
-            // Refresh panel organisasi jadwal
+            // Refresh tampilan organisasi jadwal
+            JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+            JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+            bookingInformationPanel.removeAll();
+            bookingInformationPanel.add(new BookingInformationPanel(new GregorianCalendar(borrowingModel.getStartTime().get(Calendar.YEAR), borrowingModel.getStartTime().get(Calendar.MONTH), borrowingModel.getStartTime().get(Calendar.DATE))));
+            bookingInformationPanel.repaint();
+            bookingInformationPanel.revalidate();
         }
     }//GEN-LAST:event_addBorrowingButtonActionPerformed
     
