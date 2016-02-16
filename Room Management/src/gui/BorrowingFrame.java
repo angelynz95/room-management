@@ -18,8 +18,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.GregorianCalendar;
 import java.util.List;
+import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
@@ -30,12 +32,47 @@ import javax.swing.UIManager;
  * @author angelynz95
  */
 public class BorrowingFrame extends javax.swing.JFrame {
-
     /**
      * Creates new form BorrowingFrame
      */
     public BorrowingFrame() {
         initComponents();
+        this.borrowingId = 0;
+    }
+    
+    public BorrowingFrame(BorrowingModel model, String roomName) {
+        initComponents();
+        this.borrowingId = model.getId();
+        mainFrame = MainFrame.getInstance();
+        this.roomNameDropdown.setSelectedItem(roomName);
+        roomNameDropdown.setEnabled(false);
+        
+        Calendar startTime = model.getStartTime();
+        this.startDateField.setDate(startTime.getTime());
+        this.startTimeField.setValue(startTime.getTime());
+        
+        Calendar finishTime = model.getFinishTime();
+        this.finishDateField.setDate(finishTime.getTime());
+        this.finishTimeField.setValue(finishTime.getTime());
+        
+        this.borrowerIdField.setText(Integer.toString(model.getBorrowerId()));
+        this.borrowerNameField.setText(model.getBorrowerName());
+        this.borrowerAddressField.setText(model.getBorrowerAddress());
+        this.borrowerPhoneField.setText(model.getBorrowerPhone());
+        
+        String borrowerStatus = model.getBorrowerStatus();
+        for (Enumeration<AbstractButton> buttons = borrowerStatusButtonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.getText().equals(borrowerStatus)) {
+                borrowerStatusButtonGroup.setSelected(button.getModel(), true);
+                System.out.println(button + "true");
+            }
+        }
+        
+        this.activityNameField.setText(model.getActivityName());
+        this.organizationNameField.setText(model.getOrganizationName());
+        this.totalParticipantField.setValue(model.getTotalParticipant());
     }
 
     /**
@@ -72,13 +109,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         timeSeperatorLabel = new javax.swing.JLabel();
         borrowerTitleLabel = new javax.swing.JLabel();
         purposeTitleLabel = new javax.swing.JLabel();
-        roomNameDropdown = new javax.swing.JComboBox();
-        lecturerStatusButton = new javax.swing.JRadioButton();
-        studentStatusButton = new javax.swing.JRadioButton();
-        othersStatusButton = new javax.swing.JRadioButton();
-        totalParticipantField = new javax.swing.JSpinner();
-        peopleLabel = new javax.swing.JLabel();
-
         RoomInformation roomInformation = new RoomInformation();
         ArrayList<RoomModel> roomsModel = new ArrayList<RoomModel>();
         ArrayList<String> roomsName = new ArrayList<String>();
@@ -86,6 +116,12 @@ public class BorrowingFrame extends javax.swing.JFrame {
         for (int i = 0; i < roomsModel.size(); i++) {
             roomsName.add(roomsModel.get(i).getName());
         }
+        roomNameDropdown = new javax.swing.JComboBox(roomsName.toArray());
+        lecturerStatusButton = new javax.swing.JRadioButton();
+        studentStatusButton = new javax.swing.JRadioButton();
+        othersStatusButton = new javax.swing.JRadioButton();
+        totalParticipantField = new javax.swing.JSpinner();
+        peopleLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Peminjaman Ruangan");
@@ -375,7 +411,14 @@ public class BorrowingFrame extends javax.swing.JFrame {
         String borrowerName = borrowerNameField.getText();
         
         // Nanti diganti sama pilihan combo box
-        String borrowerStatus = "Mahasiswa";
+        String borrowerStatus = "";
+        for (Enumeration<AbstractButton> buttons = borrowerStatusButtonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                borrowerStatus = button.getText();
+            }
+        }
         
         String borrowerAddress = borrowerAddressField.getText();
         String borrowerPhone = borrowerPhoneField.getText();
@@ -401,12 +444,16 @@ public class BorrowingFrame extends javax.swing.JFrame {
         ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
         clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
 
-        if ((clashBorrowing.size() > 0) && (clashMaintenance.size() > 0)) {
+        if ((clashBorrowing.size() > 0) || (clashMaintenance.size() > 0)) {
             ClashBookingFrame frame = new ClashBookingFrame();
             frame.setContentPane(new ClashBorrowingPanel(clashBorrowing, clashMaintenance));
             frame.setVisible(true);
         } else {
-            borrowing.addBorrowing(borrowingModel);
+            if (borrowingId == 0) {
+                borrowing.editBorrowing(borrowingModel);
+            } else {
+                borrowing.addBorrowing(borrowingModel);
+            }
             dispose();
             
             // Refresh panel organisasi jadwal
@@ -545,4 +592,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private List<JTextField> fields;
+    private int borrowingId;
+    private MainFrame mainFrame;
 }

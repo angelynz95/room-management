@@ -272,7 +272,10 @@ public class BookingDetailFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        BorrowingFrame borrowingFrame = new BorrowingFrame(borrowingModel, roomName);
+        borrowingFrame.setVisible(true);
         
+        this.dispose();
     }//GEN-LAST:event_editButtonActionPerformed
 
     /**
