@@ -32,9 +32,10 @@ public class MenuPanel extends javax.swing.JPanel {
      */
     public MenuPanel() {
         initComponents();
+        mainFrame = MainFrame.getInstance();
         // Tampilan Organisasi Jadwal
         bookingInformationContainer.setLayout(new FlowLayout());
-        bookingInformationPanel = new BookingInformationPanel(new GregorianCalendar(2016, 2, 8));
+        bookingInformationPanel = new BookingInformationPanel(new GregorianCalendar());
         bookingInformationContainer.add(bookingInformationPanel);
         
         // Tampilan Info Ruangan
@@ -51,10 +52,12 @@ public class MenuPanel extends javax.swing.JPanel {
         changePasswordContainer.setLayout(new FlowLayout());
         changePasswordPanel = new ChangePasswordPanel();
         changePasswordContainer.add(changePasswordPanel);
-        
-        
     }
-
+    
+    public JPanel getRoomInformationContainer() {
+        return this.roomInformationContainer;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -171,7 +174,6 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
         // TODO add your handling code here:
-        mainFrame = (JFrame) SwingUtilities.getWindowAncestor(this);
         mainFrame.setContentPane(new LoginPanel());
         mainFrame.pack();
     }//GEN-LAST:event_logoutLabelMouseClicked

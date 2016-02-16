@@ -28,7 +28,33 @@ public class Borrowing {
         database = new Database();
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
-
+    
+    public BorrowingModel searchBorrowingById(int id) {
+        BorrowingModel b = new BorrowingModel();
+        database.connect(path);
+        String sql = "SELECT * FROM peminjaman WHERE id_peminjaman = " + id + ";";
+        ResultSet rs = database.fetchData(sql);
+        try { 
+            rs.next();
+            b.setId(rs.getInt("id_peminjaman"));
+            b.setRoomId(rs.getInt("id_ruangan"));
+            b.setBorrowerId(rs.getInt("id_peminjam"));
+            b.setBorrowerName(rs.getString("nama_peminjam"));
+            b.setBorrowerStatus(rs.getString("status_peminjam"));
+            b.setBorrowerAddress(rs.getString("alamat_peminjam"));
+            b.setBorrowerPhone(rs.getString("nomor_telepon_peminjam"));
+            b.setOrganizationName(rs.getString("nama_lembaga"));
+            b.setActivityName(rs.getString("nama_kegiatan"));
+            b.setTotalParticipant(rs.getInt("jumlah_peserta"));
+            b.setPermissionTime( BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_izin")));
+            b.setStart(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")));
+            b.setFinish(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai")));
+        } catch (SQLException ex) {
+            Logger.getLogger(Borrowing.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return b;
+    }
+    
     public String addBorrowing(BorrowingModel borrowing) {
         database.connect(path);
 
@@ -85,7 +111,7 @@ public class Borrowing {
             while (rs.next()) {
                 clashBorrowing.add(new BorrowingModel(rs.getInt("id_peminjaman"), rs.getInt("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_peminjam"),
                       rs.getString("status_peminjam"), rs.getString("alamat_peminjam"), rs.getString("nomor_telepon_peminjam"), rs.getString("nama_lembaga"), rs.getString("nama_kegiatan"), 
-                      rs.getInt("jumlah_peserta"), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_izin")), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")), 
+                      rs.getInt("jumlah_peserta"), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")), 
                       BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"))));
             }
             rs.close();
@@ -128,8 +154,7 @@ public class Borrowing {
         
         Calendar startTime = new GregorianCalendar(2016, 1, 23, 13, 30);
         Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
-        Calendar permissionTime = new GregorianCalendar();
-        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, permissionTime, startTime, finishTime);
+        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, startTime, finishTime);
         
 //        String msg = borrowing.deleteBorrowing(borrowingModel);
 //        System.out.println(msg);

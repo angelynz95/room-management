@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Penambahan Pemeliharaan Ruangan"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
@@ -178,15 +178,11 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Roboto" size="12" style="0"/>
         </Property>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
-          </StringArray>
-        </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(roomsName.toArray())"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="RoomInformation roomInformation = new RoomInformation();&#xa;ArrayList&lt;RoomModel&gt; roomsModel = new ArrayList&lt;RoomModel&gt;();&#xa;ArrayList&lt;String&gt; roomsName = new ArrayList&lt;String&gt;();&#xa;roomsModel = roomInformation.fetchRoomData();&#xa;for (int i = 0; i &lt; roomsModel.size(); i++) {&#xa;roomsName.add(roomsModel.get(i).getName());&#xa;}"/>
+      </AuxValues>
     </Component>
     <Component class="org.freixas.jcalendar.JCalendarCombo" name="finishDateField">
       <Properties>

@@ -41,7 +41,6 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
     private List<List<Object>> clashMaintenanceData;
     private List<Object> clashBorrowingColoumn;
     private List<Object> clashMaintenanceColoumn;
-    private Maintenance maintenance;
     private MaintenanceModel maintenanceModel;
     private JPanel clashBorrowingPanel;
     private JPanel clashMaintenancePanel;
@@ -51,7 +50,7 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
     /**
      * Creates new form ClashMaintenancePanel
      */
-    public ClashMaintenancePanel(MaintenanceModel _maintenanceModel) {
+    public ClashMaintenancePanel(ArrayList<BorrowingModel> clashBorrowing, ArrayList<MaintenanceModel> clashMaintenance) {
         initComponents();
         
         BoxLayout layoutPanel = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -61,8 +60,6 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
         clashMaintenanceData = new ArrayList<List<Object>>();
         clashBorrowingColoumn = new ArrayList<Object>();
         clashMaintenanceColoumn = new ArrayList<Object>();
-        maintenance = new Maintenance();
-        maintenanceModel = _maintenanceModel;
         
         clashBorrowingPanel = new JPanel();
         BoxLayout layoutClashBorrowingPanel = new BoxLayout(clashBorrowingPanel, BoxLayout.Y_AXIS);
@@ -73,11 +70,11 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
         
         // Tabel Peminjaman yang bertabrakan
         setClashBorrowingColoumn();
-        setClashBorrowingData();
+        setClashBorrowingData(clashBorrowing);
         
         // Tabel Pemeliharaan yang bertabrakan
         setClashMaintenanceColoumn();
-        setClashMaintenanceData();
+        setClashMaintenanceData(clashMaintenance);
         customizeTable();
         
         add(Box.createRigidArea(new Dimension(0,50)));
@@ -115,9 +112,8 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
         clashMaintenanceColoumn.add("Deskripsi Pemeliharaan");
     }
     
-    private void setClashBorrowingData() {
-        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
-        clashBorrowing = maintenance.getClashBorrowing(maintenanceModel);
+    private void setClashBorrowingData(ArrayList<BorrowingModel> clashBorrowing) {
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < clashBorrowing.size(); i++) {
             List<Object> temp = new ArrayList<Object>();
@@ -129,9 +125,8 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
         }
     }
     
-    private void setClashMaintenanceData() {
-        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
-        clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
+    private void setClashMaintenanceData(ArrayList<MaintenanceModel> clashMaintenance) {
+        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < clashMaintenance.size(); i++) {
             List<Object> temp = new ArrayList<Object>();
@@ -237,14 +232,20 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
     
     public static void main(String[] args) {
         ClashBookingFrame frame = new ClashBookingFrame();
-        
+        Maintenance maintenance = new Maintenance();
         int idMaintenance = 5;
         int roomId = 1;
         String description = "Papan tulis rusak";
         Calendar startTime = new GregorianCalendar(2016, 1, 23, 13, 30);
         Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
         MaintenanceModel maintenanceModel = new MaintenanceModel(idMaintenance, roomId, description, startTime, finishTime);
-        frame.setContentPane(new ClashMaintenancePanel(maintenanceModel));
+        
+        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
+        clashBorrowing = maintenance.getClashBorrowing(maintenanceModel);
+
+        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
+        clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
+        frame.setContentPane(new ClashMaintenancePanel(clashBorrowing, clashMaintenance));
         frame.setVisible(true);
     }
 }

@@ -7,25 +7,51 @@
  */
 package gui;
 
+import database.BorrowingModel;
+import database.MaintenanceModel;
+import database.RoomModel;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
+import maintenance.Maintenance;
+import roominformation.RoomInformation;
 
 /**
  *
  * @author angelynz95
  */
 public class MaintenanceFrame extends javax.swing.JFrame {
-
+    private int maintenanceId;
+    private MainFrame mainFrame;
+    
     /**
      * Creates new form MaintenanceFrame
      */
     public MaintenanceFrame() {
         initComponents();
+        maintenanceId = 0;
+        mainFrame = MainFrame.getInstance();
+        roomNameDropdown.setEnabled(true);
+    }
+    
+    public MaintenanceFrame(int maintenanceId, String roomName, Calendar startTime, Calendar finishTime, String description) {
+        initComponents();
+        this.maintenanceId = maintenanceId;
+        mainFrame = MainFrame.getInstance();
+        this.roomNameDropdown.setSelectedItem(roomName);
+        this.startDateField.setDate(startTime.getTime());
+        this.startTimeField.setValue(startTime.getTime());
+        this.finishDateField.setDate(finishTime.getTime());
+        this.finishTimeField.setValue(finishTime.getTime());
+        this.descriptionField.setText(description);
+        roomNameDropdown.setEnabled(false);
     }
 
     /**
@@ -45,12 +71,19 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         timeSeperatorLabel = new javax.swing.JLabel();
         startDateField = new org.freixas.jcalendar.JCalendarCombo();
         startTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
-        roomNameDropdown = new javax.swing.JComboBox();
+        RoomInformation roomInformation = new RoomInformation();
+        ArrayList<RoomModel> roomsModel = new ArrayList<RoomModel>();
+        ArrayList<String> roomsName = new ArrayList<String>();
+        roomsModel = roomInformation.fetchRoomData();
+        for (int i = 0; i < roomsModel.size(); i++) {
+            roomsName.add(roomsModel.get(i).getName());
+        }
+        roomNameDropdown = new javax.swing.JComboBox(roomsName.toArray());
         finishDateField = new org.freixas.jcalendar.JCalendarCombo();
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         timeLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Pemeliharaan Ruangan");
         setResizable(false);
 
@@ -84,7 +117,6 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         startTimeField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         roomNameDropdown.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        roomNameDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         finishDateField.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
         finishDateField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -187,6 +219,49 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         }
         if(isDateValid && isDescriptionValid) {
             // Form valid, check for clash booking schedule in database
+            Maintenance maintenance = new Maintenance();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            
+            Calendar date = startDateField.getCalendar();
+            Calendar time = Calendar.getInstance();
+            time.setTime((Date) startTimeField.getValue());
+            Calendar startTime = convertTimeToCalendar(date, time);
+            
+            date = finishDateField.getCalendar();
+            time = Calendar.getInstance();
+            time.setTime((Date) finishTimeField.getValue());;
+            Calendar finishTime = convertTimeToCalendar(date, time);
+            
+            RoomInformation roomInformation = new RoomInformation();
+            int roomId = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getId();
+            
+            MaintenanceModel maintenanceModel = new MaintenanceModel(maintenanceId, roomId, descriptionField.getText(), startTime, finishTime);
+            
+            ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
+            clashBorrowing = maintenance.getClashBorrowing(maintenanceModel);
+            
+            ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
+            clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
+            
+            if ((clashBorrowing.size() > 0) && (clashMaintenance.size() > 0)) {
+                ClashBookingFrame frame = new ClashBookingFrame();
+                frame.setContentPane(new ClashMaintenancePanel(clashBorrowing, clashMaintenance));
+                frame.setVisible(true);
+            } else {
+                if (maintenanceId == 0) {
+                    maintenance.addMaintenance(maintenanceModel);
+                } else {
+                    maintenance.editMaintenance(maintenanceModel);
+                }
+                dispose();
+                // Refresh tampilan organisasi jadwal
+                JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+                JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+                bookingInformationPanel.removeAll();
+                bookingInformationPanel.add(new BookingInformationPanel((GregorianCalendar) maintenanceModel.getStartTime()));
+                bookingInformationPanel.repaint();
+                bookingInformationPanel.revalidate();
+            }
         }
     }//GEN-LAST:event_addMaintenanceButtonMouseClicked
     

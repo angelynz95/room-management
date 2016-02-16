@@ -8,14 +8,18 @@
 package gui;
 
 import java.awt.Color;
+import borrowing.Borrowing;
+import database.BorrowingModel;
+import database.MaintenanceModel;
+import database.RoomModel;
+import roominformation.RoomInformation;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
@@ -75,7 +79,15 @@ public class BorrowingFrame extends javax.swing.JFrame {
         totalParticipantField = new javax.swing.JSpinner();
         peopleLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        RoomInformation roomInformation = new RoomInformation();
+        ArrayList<RoomModel> roomsModel = new ArrayList<RoomModel>();
+        ArrayList<String> roomsName = new ArrayList<String>();
+        roomsModel = roomInformation.fetchRoomData();
+        for (int i = 0; i < roomsModel.size(); i++) {
+            roomsName.add(roomsModel.get(i).getName());
+        }
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Peminjaman Ruangan");
         setResizable(false);
 
@@ -151,7 +163,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         purposeTitleLabel.setText("Tujuan Peminjaman");
 
         roomNameDropdown.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        roomNameDropdown.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         borrowerStatusButtonGroup.add(lecturerStatusButton);
         lecturerStatusButton.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -330,7 +341,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
             borrowerIdField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
         if ((emptyFields.size()==0) && isTotalParticipantValid() && isDateValid() && isBorrowerIdValid) {
-            // Form valid
+            // Ubah border menjadi default kembali
             fields = new ArrayList<>();
             fields.add(borrowerIdField);
             fields.add(borrowerNameField);
@@ -346,8 +357,61 @@ public class BorrowingFrame extends javax.swing.JFrame {
             startTimeField.setBorder(UIManager.getBorder("TextField.border"));
             finishDateField.setBorder(UIManager.getBorder("TextField.border"));
             finishTimeField.setBorder(UIManager.getBorder("TextField.border"));
+            sendToDatabase();
         }
     }//GEN-LAST:event_addBorrowingButtonMouseClicked
+
+    private void sendToDatabase() {
+        // Jika form valid
+        Borrowing borrowing = new Borrowing();
+        
+        int id = 0;
+        int borrowerId = Integer.parseInt(borrowerIdField.getText());
+        
+        RoomInformation roomInformation = new RoomInformation();
+        
+        int roomId = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getId();
+        
+        String borrowerName = borrowerNameField.getText();
+        
+        // Nanti diganti sama pilihan combo box
+        String borrowerStatus = "Mahasiswa";
+        
+        String borrowerAddress = borrowerAddressField.getText();
+        String borrowerPhone = borrowerPhoneField.getText();
+        String organizationName = organizationNameField.getText();
+        String activityName = activityNameField.getText();
+        
+        Calendar date = startDateField.getCalendar();
+        Calendar time = Calendar.getInstance();
+        time.setTime((Date) startTimeField.getValue());
+        Calendar startTime = convertTimeToCalendar(date, time);
+
+        date = finishDateField.getCalendar();
+        time = Calendar.getInstance();
+        time.setTime((Date) finishTimeField.getValue());
+        Calendar finishTime = convertTimeToCalendar(date, time);
+        int totalParticipant = Integer.parseInt(totalParticipantField.getValue().toString());
+        BorrowingModel borrowingModel = new BorrowingModel(id, borrowerId, roomId, borrowerName, borrowerStatus, borrowerAddress,
+                borrowerPhone, organizationName, activityName, totalParticipant, startTime, finishTime);
+
+        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
+        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
+
+        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
+        clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
+
+        if ((clashBorrowing.size() > 0) && (clashMaintenance.size() > 0)) {
+            ClashBookingFrame frame = new ClashBookingFrame();
+            frame.setContentPane(new ClashBorrowingPanel(clashBorrowing, clashMaintenance));
+            frame.setVisible(true);
+        } else {
+            borrowing.addBorrowing(borrowingModel);
+            dispose();
+            
+            // Refresh panel organisasi jadwal
+        }
+    }
 
     private List<JTextField> getEmptyTextFields() {
         List<JTextField> fields = new ArrayList<>();
@@ -384,10 +448,10 @@ public class BorrowingFrame extends javax.swing.JFrame {
         Calendar time = Calendar.getInstance();
         time.setTime((Date) startTimeField.getValue());
         Calendar startTime = convertTimeToCalendar(date, time);
-        
+
         date = finishDateField.getCalendar();
         time = Calendar.getInstance();
-        time.setTime((Date) finishTimeField.getValue());;
+        time.setTime((Date) finishTimeField.getValue());
         Calendar finishTime = convertTimeToCalendar(date, time);
         
         Calendar nowTime = GregorianCalendar.getInstance();
@@ -415,7 +479,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         int minute = time.get(Calendar.MINUTE);
         Calendar calendar = new GregorianCalendar(year, month, day, hour, minute);
         return calendar;
-    }   
+    }
     
     /**
      * @param args the command line arguments

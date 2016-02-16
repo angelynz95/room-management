@@ -50,7 +50,7 @@ public class ClashBorrowingPanel extends javax.swing.JPanel {
     /**
      * Creates new form ClashBorrowingPanel
      */
-    public ClashBorrowingPanel(BorrowingModel _borrowingModel) {
+    public ClashBorrowingPanel(ArrayList<BorrowingModel> clashBorrowing, ArrayList<MaintenanceModel> clashMaintenance) {
         initComponents();
         
         BoxLayout layoutPanel = new BoxLayout(this, BoxLayout.Y_AXIS);
@@ -60,8 +60,6 @@ public class ClashBorrowingPanel extends javax.swing.JPanel {
         clashMaintenanceData = new ArrayList<List<Object>>();
         clashBorrowingColoumn = new ArrayList<Object>();
         clashMaintenanceColoumn = new ArrayList<Object>();
-        borrowing = new Borrowing();
-        borrowingModel = _borrowingModel;
         
         clashBorrowingPanel = new JPanel();
         BoxLayout layoutClashBorrowingPanel = new BoxLayout(clashBorrowingPanel, BoxLayout.Y_AXIS);
@@ -72,11 +70,11 @@ public class ClashBorrowingPanel extends javax.swing.JPanel {
         
         // Tabel Peminjaman yang bertabrakan
         setClashBorrowingColoumn();
-        setClashBorrowingData();
+        setClashBorrowingData(clashBorrowing);
         
         // Tabel Pemeliharaan yang bertabrakan
         setClashMaintenanceColoumn();
-        setClashMaintenanceData();
+        setClashMaintenanceData(clashMaintenance);
         customizeTable();
         
         add(Box.createRigidArea(new Dimension(0,50)));
@@ -114,9 +112,7 @@ public class ClashBorrowingPanel extends javax.swing.JPanel {
         clashMaintenanceColoumn.add("Deskripsi Pemeliharaan");
     }
     
-    private void setClashBorrowingData() {
-        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
-        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
+    private void setClashBorrowingData(ArrayList<BorrowingModel> clashBorrowing) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < clashBorrowing.size(); i++) {
             List<Object> temp = new ArrayList<Object>();
@@ -128,9 +124,7 @@ public class ClashBorrowingPanel extends javax.swing.JPanel {
         }
     }
     
-    private void setClashMaintenanceData() {
-        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
-        clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
+    private void setClashMaintenanceData(ArrayList<MaintenanceModel> clashMaintenance) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         for (int i = 0; i < clashMaintenance.size(); i++) {
             List<Object> temp = new ArrayList<Object>();
@@ -237,10 +231,17 @@ public class ClashBorrowingPanel extends javax.swing.JPanel {
         
         Calendar startTime = new GregorianCalendar(2016, 1, 23, 13, 30);
         Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
-        Calendar permissionTime = new GregorianCalendar();
-        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, permissionTime, startTime, finishTime);
+        BorrowingModel borrowingModel = new BorrowingModel(16, 22222222, 1, "Nina", "Dosen", "JL Cisitu", "0823133224333", "Informatika ITB", "kuliah", 50, startTime, finishTime);
         
-        frame.setContentPane(new ClashBorrowingPanel(borrowingModel));
+        Borrowing borrowing = new Borrowing();
+        
+        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
+        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
+
+        ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
+        clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
+        
+        frame.setContentPane(new ClashBorrowingPanel(clashBorrowing, clashMaintenance));
         frame.setVisible(true);
     }
 }

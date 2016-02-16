@@ -31,7 +31,24 @@ public class Maintenance {
         database = new Database();
         sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
-
+    
+    public MaintenanceModel searchMaintenanceById(int id) {
+        MaintenanceModel model = new MaintenanceModel();
+        database.connect(path);
+        String sql = "SELECT * FROM pemeliharaan WHERE id_pemeliharaan = " + id + ";";
+        ResultSet rs = database.fetchData(sql);
+        try {
+            rs.next();
+            model.setId(rs.getInt("id_pemeliharaan"));
+            model.setRoomId(rs.getInt("id_ruangan"));
+            model.setStartTime(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")));
+            model.setFinishTime(BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai")));
+        } catch (SQLException ex) {
+            Logger.getLogger(Maintenance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+    
     public String addMaintenance(MaintenanceModel maintenance) {
         database.connect(path);
         
@@ -85,7 +102,7 @@ public class Maintenance {
           while(rs.next()) {
               clashBorrowing.add(new BorrowingModel(rs.getInt("id_peminjaman"), rs.getInt("id_peminjam"), rs.getInt("id_ruangan"), rs.getString("nama_peminjam"),
                       rs.getString("status_peminjam"), rs.getString("alamat_peminjam"), rs.getString("nomor_telepon_peminjam"), rs.getString("nama_lembaga"), rs.getString("nama_kegiatan"), 
-                      rs.getInt("jumlah_peserta"), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_izin")), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")), 
+                      rs.getInt("jumlah_peserta"), BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_mulai")), 
                       BorrowingModel.convertTimestampToCalendar(rs.getTimestamp("waktu_selesai"))));
           }
         } catch (SQLException ex) {
@@ -98,6 +115,7 @@ public class Maintenance {
     public String editMaintenance(MaintenanceModel maintenance) {
         database.connect(path);
         
+        System.out.println(maintenance.getRoomId() + " " + maintenance.getId());
         String sql = "UPDATE pemeliharaan SET id_ruangan = '" + maintenance.getRoomId() + "', deskripsi = '" + 
                 maintenance.getDescription() + "', waktu_mulai = '"  + sdf.format(maintenance.getStartTime().getTime()) + "', waktu_selesai = '" + sdf.format(maintenance.getFinishTime().getTime()) + 
                 "' WHERE id_pemeliharaan = '" + maintenance.getId() + "'";
