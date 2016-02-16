@@ -92,10 +92,10 @@ public class Maintenance {
 
         database.connect(path);
 
-        String sql = "SELECT * FROM peminjaman WHERE id_pemeliharaan <> " + maintenance.getId() + " AND id_ruangan = '" + maintenance.getRoomId() + "' AND ((waktu_mulai >= '" +
+        String sql = "SELECT * FROM pemeliharaan WHERE id_pemeliharaan <> " + maintenance.getId() + " AND id_ruangan = '" + maintenance.getRoomId() + "' AND ((waktu_mulai >= '" +
                 sdf.format(maintenance.getStartTime().getTime()) + "' AND waktu_mulai <= '" + sdf.format(maintenance.getFinishTime().getTime()) + "') OR (waktu_selesai >= '" +
                 sdf.format(maintenance.getStartTime().getTime()) + "' AND waktu_selesai <= '" + sdf.format(maintenance.getFinishTime().getTime()) + "'))";
-        
+        System.out.println(sql);
         ResultSet rs = database.fetchData(sql);
 
         try {

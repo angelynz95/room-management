@@ -234,8 +234,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
             bookingInformationPanel.add(timeLabel);
             
             for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
-                scheduleLabel = new JLabel();
-                
+                scheduleLabel = new JLabel();                
                 customizeLabel(scheduleLabel);
                 if (roomSchedule.getValue().size() > 0) {
                     if (roomSchedule.getValue().containsKey(i + 7)) {

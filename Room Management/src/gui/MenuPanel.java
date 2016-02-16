@@ -7,6 +7,7 @@
  */
 package gui;
 
+import java.awt.Cursor;
 import java.awt.FlowLayout;
 import java.util.GregorianCalendar;
 import javax.swing.JFrame;
@@ -52,10 +53,16 @@ public class MenuPanel extends javax.swing.JPanel {
         changePasswordContainer.setLayout(new FlowLayout());
         changePasswordPanel = new ChangePasswordPanel();
         changePasswordContainer.add(changePasswordPanel);
+        
+        logoutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     
     public JPanel getRoomInformationContainer() {
         return this.roomInformationContainer;
+    }
+    
+    public JPanel getBookingInformationContainer() {
+        return this.bookingInformationContainer;
     }
     
     /**

@@ -10,6 +10,7 @@ package gui;
 import database.BorrowingModel;
 import database.RoomModel;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -184,7 +185,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
                 ArrayList<BorrowingModel> clashBooking = new ArrayList<>();
                 int column = table.columnAtPoint(evt.getPoint());
                 if (table.getValueAt(row, column).equals("OK")) {
-                    table.setValueAt("rusak", row, column);
+                    table.setValueAt("rusak", row, column);    
                     clashBooking = roomInformation.changeRoomStatus(table.getValueAt(row, 0).toString());
                 } else if (table.getValueAt(row, column).equals("rusak")) {
                     table.setValueAt("OK", row, column);
