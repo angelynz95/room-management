@@ -39,12 +39,23 @@ public class BorrowingFrame extends javax.swing.JFrame {
     /**
      * Creates new form BorrowingFrame
      */
-    public BorrowingFrame() {
-        initComponents();mainFrame = MainFrame.getInstance();
+    public BorrowingFrame(Calendar defaultDate) {
+        initComponents();
+        mainFrame = MainFrame.getInstance();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
         
+        roomNameDropdown.setEnabled(true);
+        startDateField.setDate(defaultDate.getTime());
+        finishDateField.setDate(defaultDate.getTime());
+        
         this.borrowingId = 0;
+        textFields = new ArrayList<>();
+        textFields.add(borrowerIdField);
+        textFields.add(borrowerNameField);
+        textFields.add(borrowerPhoneField);
+        textFields.add(activityNameField);
+        textFields.add(organizationNameField);
     }
     
     public BorrowingFrame(BorrowingModel model, String roomName) {
@@ -53,9 +64,16 @@ public class BorrowingFrame extends javax.swing.JFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
         
+        roomNameDropdown.setEnabled(false);
         this.borrowingId = model.getId();
         this.roomNameDropdown.setSelectedItem(roomName);
-        roomNameDropdown.setEnabled(false);
+        
+        textFields = new ArrayList<>();
+        textFields.add(borrowerIdField);
+        textFields.add(borrowerNameField);
+        textFields.add(borrowerPhoneField);
+        textFields.add(activityNameField);
+        textFields.add(organizationNameField);
         
         Calendar startTime = model.getStartTime();
         this.startDateField.setDate(startTime.getTime());
@@ -107,7 +125,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         totalParticipantLabel = new javax.swing.JLabel();
         borrowerIdField = new javax.swing.JTextField();
         borrowerNameField = new javax.swing.JTextField();
-        borrowerAddressField = new javax.swing.JTextField();
         borrowerPhoneField = new javax.swing.JTextField();
         activityNameField = new javax.swing.JTextField();
         organizationNameField = new javax.swing.JTextField();
@@ -134,6 +151,8 @@ public class BorrowingFrame extends javax.swing.JFrame {
         totalParticipantField = new javax.swing.JSpinner();
         peopleLabel = new javax.swing.JLabel();
         isWeeklyCheckBox = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        borrowerAddressField = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Peminjaman Ruangan");
@@ -169,8 +188,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         borrowerIdField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         borrowerNameField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-
-        borrowerAddressField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         borrowerPhoneField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
@@ -233,6 +250,11 @@ public class BorrowingFrame extends javax.swing.JFrame {
         isWeeklyCheckBox.setFont(new java.awt.Font("Roboto", 0, 10)); // NOI18N
         isWeeklyCheckBox.setText("Ulangi tiap minggu");
 
+        borrowerAddressField.setColumns(20);
+        borrowerAddressField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        borrowerAddressField.setRows(2);
+        jScrollPane1.setViewportView(borrowerAddressField);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -240,65 +262,60 @@ public class BorrowingFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(borrowerStatusLabel)
-                                        .addComponent(borrowerPhoneLabel)
-                                        .addComponent(borrowerNameLabel)
-                                        .addComponent(borrowerIdLabel)
-                                        .addComponent(borrowerAddressLabel)
-                                        .addComponent(purposeTitleLabel)
-                                        .addComponent(activityNameLabel)
-                                        .addComponent(organizationNameLabel)
-                                        .addComponent(totalParticipantLabel))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(organizationNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(activityNameField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(totalParticipantField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(peopleLabel))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(lecturerStatusButton)
-                                            .addGap(53, 53, 53)
-                                            .addComponent(studentStatusButton)
-                                            .addGap(42, 42, 42)
-                                            .addComponent(othersStatusButton))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(borrowerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(borrowerNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(borrowerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(borrowerPhoneField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addBorrowingButton)
-                                    .addGap(2, 2, 2)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(timeLabel)
-                                    .addComponent(roomNameLabel))
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(isWeeklyCheckBox)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(roomNameDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(timeSeperatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(borrowerTitleLabel)))
+                                    .addComponent(borrowerStatusLabel)
+                                    .addComponent(borrowerPhoneLabel)
+                                    .addComponent(borrowerNameLabel)
+                                    .addComponent(borrowerIdLabel)
+                                    .addComponent(borrowerAddressLabel)
+                                    .addComponent(purposeTitleLabel)
+                                    .addComponent(activityNameLabel)
+                                    .addComponent(organizationNameLabel)
+                                    .addComponent(totalParticipantLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(organizationNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                                    .addComponent(activityNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(totalParticipantField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(peopleLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lecturerStatusButton)
+                                        .addGap(53, 53, 53)
+                                        .addComponent(studentStatusButton)
+                                        .addGap(42, 42, 42)
+                                        .addComponent(othersStatusButton))
+                                    .addComponent(borrowerIdField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                                    .addComponent(borrowerNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                                    .addComponent(borrowerPhoneField, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(addBorrowingButton)
+                                .addGap(2, 2, 2)))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(timeLabel)
+                                .addComponent(roomNameLabel))
+                            .addGap(39, 39, 39)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(isWeeklyCheckBox)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(roomNameDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(timeSeperatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(borrowerTitleLabel))
                 .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
@@ -330,8 +347,8 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(borrowerNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(borrowerAddressField, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(borrowerAddressLabel))
+                    .addComponent(borrowerAddressLabel)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(borrowerPhoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,7 +374,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(totalParticipantField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(totalParticipantLabel)
                     .addComponent(peopleLabel))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addBorrowingButton)
                 .addGap(36, 36, 36))
         );
@@ -376,53 +393,56 @@ public class BorrowingFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBorrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBorrowingButtonMouseClicked
-        List<JTextField> emptyFields = getEmptyTextFields();
-        if (emptyFields.size() > 0) {
-            for (int i=0; i<emptyFields.size(); i++) {
-                emptyFields.get(i).setBorder(BorderFactory.createLineBorder(Color.red));
+        boolean isTextFieldValid = true;
+        for(int i=0; i<textFields.size(); i++) {
+            if (textFields.get(i).getText().isEmpty()) {
+                isTextFieldValid = false;
+                textFields.get(i).setBorder(BorderFactory.createLineBorder(Color.red));
+            } else {
+                textFields.get(i).setBorder(UIManager.getBorder("TextField.border"));
             }
         }
-        if (!isTotalParticipantValid()) {
+        if (isTotalParticipantValid()) {
+            totalParticipantField.setBorder(UIManager.getBorder("Spinner.border"));
+        } else {
             totalParticipantField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
-        if(!isDateValid()) {
+        if (isDateValid()) {
+            startDateField.setBorder(UIManager.getBorder("Spinner.border"));
+            startTimeField.setBorder(UIManager.getBorder("Spinner.border"));
+            finishDateField.setBorder(UIManager.getBorder("Spinner.border"));
+            finishTimeField.setBorder(UIManager.getBorder("Spinner.border"));
+        } else {
             startDateField.setBorder(BorderFactory.createLineBorder(Color.red));
             startTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
             finishDateField.setBorder(BorderFactory.createLineBorder(Color.red));
             finishTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
         
-        boolean isBorrowerIdValid;
+        boolean isBorrowerIdValid = true;
         try {
             int borrowerId = Integer.parseInt(borrowerIdField.getText());
-            isBorrowerIdValid = true;
         } catch (NumberFormatException e) {
             isBorrowerIdValid = false;
         }
-        if (!isBorrowerIdValid) {
+        if (isBorrowerIdValid) {
+            borrowerIdField.setBorder(UIManager.getBorder("TextField.border"));
+        } else {
             borrowerIdField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
-        if ((emptyFields.size()==0) && isTotalParticipantValid() && isDateValid() && isBorrowerIdValid) {
-            // Ubah border menjadi default kembali
-            fields = new ArrayList<>();
-            fields.add(borrowerIdField);
-            fields.add(borrowerNameField);
-            fields.add(borrowerAddressField);
-            fields.add(borrowerPhoneField);
-            fields.add(activityNameField);
-            fields.add(organizationNameField);
-
-            for(int i=0; i<fields.size(); i++) {
-                fields.get(i).setBorder(UIManager.getBorder("TextField.border"));
-            }
-            startDateField.setBorder(UIManager.getBorder("TextField.border"));
-            startTimeField.setBorder(UIManager.getBorder("TextField.border"));
-            finishDateField.setBorder(UIManager.getBorder("TextField.border"));
-            finishTimeField.setBorder(UIManager.getBorder("TextField.border"));
+        
+        boolean isBorrowerAddressValid = !borrowerAddressField.getText().isEmpty();
+        if (isBorrowerAddressValid) {
+            borrowerAddressField.setBorder(UIManager.getBorder("TextField.border"));
+        } else {
+            borrowerAddressField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        
+        if (isTextFieldValid && isTotalParticipantValid() && isDateValid() && isBorrowerIdValid && isBorrowerAddressValid) {
             sendToDatabase();
         }
     }//GEN-LAST:event_addBorrowingButtonMouseClicked
-
+    
     private void sendToDatabase() {
         // Jika form valid
         Borrowing borrowing = new Borrowing();
@@ -431,7 +451,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         int borrowerId = Integer.parseInt(borrowerIdField.getText());
         
         RoomInformation roomInformation = new RoomInformation();
-        
         int roomId = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getId();
         
         String borrowerName = borrowerNameField.getText();
@@ -494,28 +513,13 @@ public class BorrowingFrame extends javax.swing.JFrame {
             bookingInformationPanel.revalidate();
         }
     }
-
-    private List<JTextField> getEmptyTextFields() {
-        List<JTextField> fields = new ArrayList<>();
-        fields.add(borrowerIdField);
-        fields.add(borrowerNameField);
-        fields.add(borrowerAddressField);
-        fields.add(borrowerPhoneField);
-        fields.add(activityNameField);
-        fields.add(organizationNameField);
-        List<JTextField> emptyFields = new ArrayList<>();
-        
-        for(int i=0; i<fields.size(); i++) {
-            if (fields.get(i).getText().isEmpty()) {
-                emptyFields.add(fields.get(i));
-            }
-        }
-        return emptyFields;
-    }
-    
+   
     private boolean isTotalParticipantValid() {
         int participantNumber = (int) totalParticipantField.getValue();
-        return (participantNumber > 0);
+        
+        RoomInformation roomInformation = new RoomInformation();
+        int roomCapacity = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getCapacity();
+        return (0<participantNumber && participantNumber>=roomCapacity);
     }
     
     /**
@@ -584,7 +588,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BorrowingFrame().setVisible(true);
+                new BorrowingFrame(new GregorianCalendar()).setVisible(true);
             }
         });
     }
@@ -593,7 +597,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JTextField activityNameField;
     private javax.swing.JLabel activityNameLabel;
     private javax.swing.JButton addBorrowingButton;
-    private javax.swing.JTextField borrowerAddressField;
+    private javax.swing.JTextArea borrowerAddressField;
     private javax.swing.JLabel borrowerAddressLabel;
     private javax.swing.JTextField borrowerIdField;
     private javax.swing.JLabel borrowerIdLabel;
@@ -607,6 +611,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private org.freixas.jcalendar.JCalendarCombo finishDateField;
     private javax.swing.JSpinner finishTimeField;
     private javax.swing.JCheckBox isWeeklyCheckBox;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton lecturerStatusButton;
     private javax.swing.JTextField organizationNameField;
     private javax.swing.JLabel organizationNameLabel;
@@ -624,7 +629,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel totalParticipantLabel;
     // End of variables declaration//GEN-END:variables
 
-    private List<JTextField> fields;
+    private List<JTextField> textFields;
     private int borrowingId;
     private MainFrame mainFrame;
 }

@@ -28,7 +28,7 @@ public class BookingDetailFrame extends javax.swing.JFrame {
     }
 
     private void setComponent() {
-        jumlahPesertaLabel.setText(borrowingModel.getTotalParticipant() + "");
+        jumlahPesertaLabel.setText(Integer.toString(borrowingModel.getTotalParticipant()));
         namaKegiatanLabel.setText(borrowingModel.getActivityName());
         namaLembagaLabel.setText(borrowingModel.getOrganizationName());
         namaPeminjamLabel.setText(borrowingModel.getBorrowerName());

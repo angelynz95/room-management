@@ -37,14 +37,17 @@ public class MaintenanceFrame extends javax.swing.JFrame {
     /**
      * Creates new form MaintenanceFrame
      */
-    public MaintenanceFrame() {
+    public MaintenanceFrame(Calendar defaultDate) {
         initComponents();
         mainFrame = MainFrame.getInstance();
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
         
-        maintenanceId = 0;
+        startDateField.setDate(defaultDate.getTime());
+        finishDateField.setDate(defaultDate.getTime());
         roomNameDropdown.setEnabled(true);
+        
+        maintenanceId = 0;
     }
     
     public MaintenanceFrame(int maintenanceId, String roomName, Calendar startTime, Calendar finishTime, String description) {
@@ -238,7 +241,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
             
             date = finishDateField.getCalendar();
             time = Calendar.getInstance();
-            time.setTime((Date) finishTimeField.getValue());;
+            time.setTime((Date) finishTimeField.getValue());
             Calendar finishTime = convertTimeToCalendar(date, time);
             
             RoomInformation roomInformation = new RoomInformation();
@@ -263,6 +266,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                     maintenance.editMaintenance(maintenanceModel);
                 }
                 dispose();
+                
                 // Refresh tampilan organisasi jadwal
                 JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
                 JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
@@ -352,7 +356,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MaintenanceFrame().setVisible(true);
+                new MaintenanceFrame(new GregorianCalendar()).setVisible(true);
             }
         });
     }

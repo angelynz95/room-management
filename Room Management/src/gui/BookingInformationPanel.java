@@ -160,13 +160,13 @@ public class BookingInformationPanel extends javax.swing.JPanel {
 
     private void borrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowingButtonMouseClicked
         // TODO add your handling code here:
-        BorrowingFrame borrowingFrame = new BorrowingFrame();
+        BorrowingFrame borrowingFrame = new BorrowingFrame(date);
         borrowingFrame.setVisible(true);
     }//GEN-LAST:event_borrowingButtonMouseClicked
 
     private void maintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceButtonMouseClicked
         // TODO add your handling code here:
-        MaintenanceFrame maintenanceFrame = new MaintenanceFrame();
+        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(new GregorianCalendar());
         maintenanceFrame.setVisible(true);
     }//GEN-LAST:event_maintenanceButtonMouseClicked
 
