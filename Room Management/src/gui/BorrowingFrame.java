@@ -407,7 +407,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         
         boolean isBorrowerIdValid = true;
         try {
-            int borrowerId = Integer.parseInt(borrowerIdField.getText());
+            Long borrowerId = Long.parseLong(borrowerIdField.getText());
         } catch (NumberFormatException e) {
             isBorrowerIdValid = false;
         }
@@ -440,7 +440,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
             totalParticipantField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
         
-        if (isDateValid() && isBorrowerIdValid &&  isBorrowerAddressValid && isTextFieldValid && isTotalParticipantValid()) {
+        if (isDateValid() && isBorrowerIdValid && isBorrowerAddressValid && isTextFieldValid && isTotalParticipantValid()) {
             sendToDatabase();
         }
     }//GEN-LAST:event_addBorrowingButtonMouseClicked
@@ -521,7 +521,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         
         RoomInformation roomInformation = new RoomInformation();
         int roomCapacity = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getCapacity();
-        return (0<participantNumber && participantNumber>=roomCapacity);
+        return (0<participantNumber && participantNumber<=roomCapacity);
     }
     
     /**
@@ -535,17 +535,21 @@ public class BorrowingFrame extends javax.swing.JFrame {
         Calendar date = startDateField.getCalendar();
         Calendar time = Calendar.getInstance();
         time.setTime((Date) startTimeField.getValue());
+        int startHour = time.get(Calendar.HOUR_OF_DAY);
         Calendar startTime = convertTimeToCalendar(date, time);
 
         date = finishDateField.getCalendar();
         time = Calendar.getInstance();
         time.setTime((Date) finishTimeField.getValue());
+        int finishHour = time.get(Calendar.HOUR_OF_DAY);
         Calendar finishTime = convertTimeToCalendar(date, time);
         
         Calendar nowTime = GregorianCalendar.getInstance();
         nowTime.setTime(new Date());
         
-        if (nowTime.before(startTime) && startTime.before(finishTime)) {
+        boolean isDateTimeValid = nowTime.before(startTime) && startTime.before(finishTime);
+        boolean isWorkingHourValid = (startHour>=7) && (finishHour<=23);
+        if (isDateTimeValid && isWorkingHourValid) {
             return true;
         } else {
             return false;

@@ -5,16 +5,14 @@
  */
 package gui;
 
-import borrowing.Borrowing;
-import database.BorrowingModel;
 import database.MaintenanceModel;
+import maintenance.Maintenance;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
 import java.util.GregorianCalendar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import maintenance.Maintenance;
 
 /**
  *
@@ -177,6 +175,7 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
         JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
         JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
         bookingInformationPanel.removeAll();
+        
         bookingInformationPanel.add(new BookingInformationPanel((GregorianCalendar) model.getStartTime()));
         bookingInformationPanel.repaint();
         bookingInformationPanel.revalidate();

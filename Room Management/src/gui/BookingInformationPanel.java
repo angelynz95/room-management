@@ -50,7 +50,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         rooms = new ArrayList<String>();
         schedules = new ArrayList<String>();
         mainFrame = MainFrame.getInstance();
-//        dateField.setDate(date.getTime());
+        dateField.setDate(date.getTime());
         setRooms();
         setSchedules();
         customizeBookingInformationPane();
@@ -158,7 +158,6 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_dateFieldActionPerformed
 
     private void borrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowingButtonMouseClicked
-        // TODO add your handling code here:
         BorrowingFrame borrowingFrame = new BorrowingFrame(date);
         borrowingFrame.setVisible(true);
     }//GEN-LAST:event_borrowingButtonMouseClicked
@@ -245,7 +244,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
-                                    BookingDetailFrame bookingDetailFrame = new BookingDetailFrame(borrowing, roomSchedule.getKey().getName());
+                                    BorrowingDetailFrame bookingDetailFrame = new BorrowingDetailFrame(borrowing, roomSchedule.getKey().getName());
                                     bookingDetailFrame.setVisible(true);
                                 }
                             });
@@ -269,7 +268,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }
     
     private void customizeLabel(JLabel label) {
-        label.setPreferredSize(new Dimension(200, 16));
+        label.setPreferredSize(new Dimension(175, 16));
         label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setVerticalAlignment(SwingConstants.CENTER);
