@@ -11,10 +11,19 @@ import database.BorrowingModel;
 import database.RoomModel;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.BorderFactory;
+import static javax.swing.BorderFactory.createEmptyBorder;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -28,7 +37,7 @@ import roominformation.RoomInformation;
  */
 public class RoomInformationPanel extends javax.swing.JPanel {
     private JTable table;
-    private List<List<Object>> data;
+    private ArrayList<RoomModel> data;
     private List<Object> columns;
     private RoomInformation roomInformation;
     /**
@@ -41,7 +50,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
         // Inisialisasi columns
         columns = new ArrayList<Object>();
         // Inisialisasi data
-        data = new ArrayList<List<Object>>();
+        data = new ArrayList<RoomModel>();
         // Menampilkan tabel
         setColumns();
         setData();
@@ -55,7 +64,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
         // Inisialisasi columns
         columns = new ArrayList<Object>();
         // Inisialisasi data
-        data = new ArrayList<List<Object>>();
+        data = new ArrayList<RoomModel>();
         // Menampilkan tabel
         setColumns();
         this.setSearchedData(searchedText);
@@ -130,76 +139,69 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     private void setData() {
         List<RoomModel> rooms = roomInformation.fetchRoomData();
         for(int i=0; i<rooms.size(); i++) {
-            data.add(new ArrayList<Object>());
-            data.get(i).add(rooms.get(i).getName());
-            data.get(i).add(rooms.get(i).getCapacity());
-            data.get(i).add(rooms.get(i).getStatus());
+            data.add(rooms.get(i));
         }
     }
     
     private void setSearchedData(String text) {
         ArrayList<RoomModel> rooms = roomInformation.searchRoomData(text);
         for(int i=0; i<rooms.size(); i++) {
-            data.add(new ArrayList<Object>());
-            data.get(i).add(rooms.get(i).getName());
-            data.get(i).add(rooms.get(i).getCapacity());
-            data.get(i).add(rooms.get(i).getStatus());
+            data.add(rooms.get(i));
         }
     }
     
     private void showTable() {
-        Object[] temp = new Object[columns.size()];
-        Object[][] temp2 = new Object[data.size()][columns.size()];
-        ArrayList<Object[]> rows = new ArrayList<Object[]>();
-        for (List<Object> datum : data) {
-            rows.add((Object[]) datum.toArray());
+        JPanel table = new JPanel();
+        GridLayout tabelLayout = new GridLayout(data.size() + 1, columns.size());
+        System.out.println(data.size());
+        table.setLayout(tabelLayout);
+        
+        // Menambah header kolom
+        for (int i = 0; i < columns.size(); i++) {
+            JLabel columnLabel = new JLabel((String) columns.get(i));
+            customizeLabel(columnLabel);
+            columnLabel.setBackground(Color.lightGray);
+            table.add(columnLabel);
         }
         
-        table = new JTable(rows.toArray(temp2), columns.toArray(temp));
-        table.setFillsViewportHeight(true);
-        table.setEnabled(false);
-        table.getTableHeader().setReorderingAllowed(false);
-        // Meng-customize table
-        DefaultTableCellRenderer headerRenderer = new DefaultTableCellRenderer();
-        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
-        // Membuat alignment center
-        cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        cellRenderer.setVerticalAlignment(SwingConstants.CENTER);
-        headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        headerRenderer.setVerticalAlignment(SwingConstants.CENTER);
-        // Membuat warna berbeda pada header
-        headerRenderer.setBackground(Color.lightGray);
-        // Menerapkan customization
-        table.getTableHeader().setDefaultRenderer(headerRenderer);
-        for (int i = 0; i < table.getColumnCount(); i++) {
-            table.getColumnModel().getColumn(i).setCellRenderer(cellRenderer);
-        }
-        // Mengatur font
-        table.setFont(new Font("Roboto", Font.PLAIN, 16));
-        
-        // Menambahkan mouse listener
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int row = table.rowAtPoint(evt.getPoint());
-                ArrayList<BorrowingModel> clashBooking = new ArrayList<>();
-                int column = table.columnAtPoint(evt.getPoint());
-                if (table.getValueAt(row, column).equals("OK")) {
-                    table.setValueAt("rusak", row, column);    
-                    clashBooking = roomInformation.changeRoomStatus(table.getValueAt(row, 0).toString());
-                } else if (table.getValueAt(row, column).equals("rusak")) {
-                    table.setValueAt("OK", row, column);
-                    clashBooking = roomInformation.changeRoomStatus(table.getValueAt(row, 0).toString());
-                }
-                if(clashBooking.size() != 0) {
-                    // Tampilkan booking yang bentrok
-                }
+        // Menambah data
+        for (int i = 0; i < data.size(); i++) {
+            JLabel roomName = new JLabel(data.get(i).getName());
+            customizeLabel(roomName);
+            table.add(roomName);
+            JLabel roomCapacity = new JLabel(Integer.toString(data.get(i).getCapacity()));
+            customizeLabel(roomCapacity);
+            table.add(roomCapacity);
+            String[] roomStatusStrings = {"OK", "rusak"};
+            JComboBox roomStatus = new JComboBox(roomStatusStrings);
+            DefaultListCellRenderer dlcr = new DefaultListCellRenderer(); 
+            dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER); 
+            roomStatus.setRenderer(dlcr); 
+            if (data.get(i).getStatus().equals("OK")) {
+                roomStatus.setSelectedIndex(0);
+            } else {
+                roomStatus.setSelectedIndex(1);
             }
-        });
-        
+            table.add(roomStatus);
+            roomStatus.addActionListener(new ActionListener() {@Override
+                public void actionPerformed(ActionEvent e) {
+                    roomInformation.changeRoomStatus(roomName.getText());
+                }
+            });
+        }
+        roomInformationPane.setBorder(createEmptyBorder());
         roomInformationPane.getViewport().add(table);
     }
 
+    private void customizeLabel(JLabel label) {
+        label.setPreferredSize(new Dimension(200, 16));
+        label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setFont(new Font("Roboto", Font.PLAIN, 16));
+        label.setOpaque(true);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane roomInformationPane;
     private javax.swing.JButton searchButton;

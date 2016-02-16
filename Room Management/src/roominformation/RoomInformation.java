@@ -88,7 +88,6 @@ public class RoomInformation {
     private ArrayList<BorrowingModel> fetchBorrowingByIdRoomAndTime(int id, Timestamp time) {
         ArrayList<BorrowingModel> result = new ArrayList<>();
         String sql = "SELECT * FROM peminjaman WHERE id_ruangan = " + id + " AND waktu_mulai > '" + time.toString() + "';";
-        System.out.println(sql);
         ResultSet rs = database.fetchData(sql);
         Calendar cal = Calendar.getInstance();
         try {
