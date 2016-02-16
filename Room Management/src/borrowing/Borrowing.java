@@ -102,7 +102,7 @@ public class Borrowing {
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         database.connect(path);
 
-        String sql = "SELECT * FROM peminjaman WHERE id_ruangan = '" + borrowing.getRoomId()+ "' AND ((waktu_mulai >= '" + sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_mulai <= '"
+        String sql = "SELECT * FROM peminjaman WHERE id_peminjaman <> " + borrowing.getId() + " AND id_ruangan = '" + borrowing.getRoomId()+ "' AND ((waktu_mulai >= '" + sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_mulai <= '"
                 + sdf.format(borrowing.getFinishTime().getTime()) + "') OR (waktu_selesai >= '" + sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_selesai <= '" + sdf.format(borrowing.getFinishTime().getTime()) + "'))";
         
         ResultSet rs = database.fetchData(sql);
@@ -129,7 +129,7 @@ public class Borrowing {
 
         database.connect(path);
 
-        String sql = "SELECT * FROM pemeliharaan WHERE id_ruangan = '" + borrowing.getRoomId() + "' AND ((waktu_mulai >= '" +
+        String sql = "SELECT * FROM pemeliharaan WHERE id_peminjaman <> " + borrowing.getId() + " AND id_ruangan = '" + borrowing.getRoomId() + "' AND ((waktu_mulai >= '" +
                 sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_mulai <= '" + sdf.format(borrowing.getFinishTime().getTime()) + "') OR (waktu_selesai >= '" +
                 sdf.format(borrowing.getStartTime().getTime()) + "' AND waktu_selesai <= '" + sdf.format(borrowing.getFinishTime().getTime()) + "'))";
         

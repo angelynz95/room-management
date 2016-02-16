@@ -212,7 +212,7 @@ public class ClashMaintenancePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setPreferredSize(new java.awt.Dimension(836, 811));
+        setPreferredSize(new java.awt.Dimension(836, 500));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

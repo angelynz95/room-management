@@ -34,7 +34,7 @@ public class ClashBookingFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pesan Peringatan");
-        setPreferredSize(new java.awt.Dimension(836, 811));
+        setPreferredSize(new java.awt.Dimension(836, 500));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

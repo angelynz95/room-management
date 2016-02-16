@@ -255,7 +255,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
-                                    MaintenanceDetail maintenanceDetailFrame = new MaintenanceDetail(maintenance, roomSchedule.getKey().getName());
+                                    MaintenanceDetailFrame maintenanceDetailFrame = new MaintenanceDetailFrame(maintenance, roomSchedule.getKey().getName());
                                     maintenanceDetailFrame.setVisible(true);
                                 }
                             });

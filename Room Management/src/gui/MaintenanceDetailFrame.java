@@ -18,13 +18,13 @@ import maintenance.Maintenance;
  *
  * @author William Sentosa
  */
-public class MaintenanceDetail extends javax.swing.JFrame {
+public class MaintenanceDetailFrame extends javax.swing.JFrame {
     private MainFrame mainFrame;
     private MaintenanceModel model;
     private String roomName;
     private Maintenance maintenance;
      
-    public MaintenanceDetail(MaintenanceModel model, String roomName) {
+    public MaintenanceDetailFrame(MaintenanceModel model, String roomName) {
         initComponents();
         mainFrame = MainFrame.getInstance();
         this.model = model;
@@ -202,14 +202,22 @@ public class MaintenanceDetail extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MaintenanceDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MaintenanceDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MaintenanceDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MaintenanceDetail.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MaintenanceDetailFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -223,7 +231,7 @@ public class MaintenanceDetail extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Maintenance m = new Maintenance();
-                new MaintenanceDetail(m.searchMaintenanceById(1), "R 7606").setVisible(true);
+                new MaintenanceDetailFrame(m.searchMaintenanceById(1), "R 7606").setVisible(true);
             }
         });
     }
