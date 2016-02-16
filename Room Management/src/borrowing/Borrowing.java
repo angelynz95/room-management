@@ -120,6 +120,42 @@ public class Borrowing {
         database.closeDatabase();
     }
     
+    public ArrayList<BorrowingModel> getClashWeeklyBorrowing(BorrowingModel borrowing) {
+        ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
+        Calendar calendarStart = borrowing.getStartTime();
+        int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);
+        Calendar calendarEnd = borrowing.getFinishTime();
+        int endHour = calendarEnd.get(Calendar.HOUR_OF_DAY);
+        database.connect(path);
+        Calendar tempStart = new GregorianCalendar();
+        Calendar tempEnd = new GregorianCalendar();
+        int day = borrowing.getStartTime().get(Calendar.DAY_OF_WEEK);
+        while (calendarStart.before(calendarEnd)) {
+            tempStart.set(calendarStart.get(Calendar.YEAR), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.DATE), startHour, 0, 0);
+            tempEnd.set(calendarStart.get(Calendar.YEAR), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.DATE), endHour, 0, 0);
+            if (calendarStart.get(Calendar.DAY_OF_WEEK) == day) {
+                BorrowingModel b = new BorrowingModel();
+                b.setId(borrowing.getId());
+                b.setRoomId(borrowing.getRoomId());
+                b.setBorrowerId(borrowing.getBorrowerId());
+                b.setBorrowerName(borrowing.getBorrowerName());
+                b.setBorrowerStatus(borrowing.getBorrowerStatus());
+                b.setBorrowerAddress(borrowing.getBorrowerAddress());
+                b.setBorrowerPhone(borrowing.getBorrowerPhone());
+                b.setOrganizationName(borrowing.getOrganizationName());
+                b.setActivityName(borrowing.getActivityName());
+                b.setTotalParticipant(borrowing.getTotalParticipant());
+                b.setPermissionTime(borrowing.getPermissionTime());
+                b.setStart(tempStart);
+                b.setFinish(tempEnd);
+                clashBorrowing.addAll(getClashBorrowing(b));
+            }
+            calendarStart.add(Calendar.DATE, 1);
+        }
+        database.closeDatabase(); 
+        return clashBorrowing;
+    }
+    
     public ArrayList<BorrowingModel> getClashBorrowing(BorrowingModel borrowing) {
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
         database.connect(path);
