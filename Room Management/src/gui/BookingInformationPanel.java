@@ -145,7 +145,6 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dateFieldDateChanged(org.freixas.jcalendar.DateEvent evt) {//GEN-FIRST:event_dateFieldDateChanged
-        // TODO add your handling code here:
         bookingInformationPanel.removeAll();
         date = (GregorianCalendar) evt.getSelectedDate();
         bookingInformation = new BookingInformation();
@@ -165,8 +164,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_borrowingButtonMouseClicked
 
     private void maintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceButtonMouseClicked
-        // TODO add your handling code here:
-        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(new GregorianCalendar());
+        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(date);
         maintenanceFrame.setVisible(true);
     }//GEN-LAST:event_maintenanceButtonMouseClicked
 

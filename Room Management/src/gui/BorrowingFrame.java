@@ -393,20 +393,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBorrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBorrowingButtonMouseClicked
-        boolean isTextFieldValid = true;
-        for(int i=0; i<textFields.size(); i++) {
-            if (textFields.get(i).getText().isEmpty()) {
-                isTextFieldValid = false;
-                textFields.get(i).setBorder(BorderFactory.createLineBorder(Color.red));
-            } else {
-                textFields.get(i).setBorder(UIManager.getBorder("TextField.border"));
-            }
-        }
-        if (isTotalParticipantValid()) {
-            totalParticipantField.setBorder(UIManager.getBorder("Spinner.border"));
-        } else {
-            totalParticipantField.setBorder(BorderFactory.createLineBorder(Color.red));
-        }
         if (isDateValid()) {
             startDateField.setBorder(UIManager.getBorder("Spinner.border"));
             startTimeField.setBorder(UIManager.getBorder("Spinner.border"));
@@ -438,7 +424,23 @@ public class BorrowingFrame extends javax.swing.JFrame {
             borrowerAddressField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
         
-        if (isTextFieldValid && isTotalParticipantValid() && isDateValid() && isBorrowerIdValid && isBorrowerAddressValid) {
+        boolean isTextFieldValid = true;
+        for(int i=0; i<textFields.size(); i++) {
+            if (textFields.get(i).getText().isEmpty()) {
+                isTextFieldValid = false;
+                textFields.get(i).setBorder(BorderFactory.createLineBorder(Color.red));
+            } else {
+                textFields.get(i).setBorder(UIManager.getBorder("TextField.border"));
+            }
+        }
+        
+        if (isTotalParticipantValid()) {
+            totalParticipantField.setBorder(UIManager.getBorder("Spinner.border"));
+        } else {
+            totalParticipantField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        
+        if (isDateValid() && isBorrowerIdValid &&  isBorrowerAddressValid && isTextFieldValid && isTotalParticipantValid()) {
             sendToDatabase();
         }
     }//GEN-LAST:event_addBorrowingButtonMouseClicked

@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
+import javax.swing.UIManager;
 import maintenance.Maintenance;
 import roominformation.RoomInformation;
 
@@ -211,28 +212,35 @@ public class MaintenanceFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Validate maintenance form. 
+     * Validate maintenance form and send data to database.
      * Form is valid if there are no empty field and input date is valid.
      * 
      * @param evt mouse event
      */
     private void addMaintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addMaintenanceButtonMouseClicked
-        boolean isDescriptionValid = isDescriptionValid();
         boolean isDateValid = isDateValid();
-        
-        if(!isDescriptionValid) {
-            descriptionField.setBorder(BorderFactory.createLineBorder(Color.red));
-        }
-        if(!isDateValid) {
+        if(isDateValid) {
+            startDateField.setBorder(UIManager.getBorder("Spinner.border"));
+            startTimeField.setBorder(UIManager.getBorder("Spinner.border"));
+            finishDateField.setBorder(UIManager.getBorder("Spinner.border"));
+            finishTimeField.setBorder(UIManager.getBorder("Spinner.border"));
+        } else {
             startDateField.setBorder(BorderFactory.createLineBorder(Color.red));
             startTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
             finishDateField.setBorder(BorderFactory.createLineBorder(Color.red));
             finishTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
+        
+        boolean isDescriptionValid = isDescriptionValid();
+        if(isDescriptionValid) {
+            descriptionField.setBorder(UIManager.getBorder("TextArea.border"));
+        } else {
+            descriptionField.setBorder(BorderFactory.createLineBorder(Color.red));
+        }
+        
         if(isDateValid && isDescriptionValid) {
             // Form valid, check for clash booking schedule in database
             Maintenance maintenance = new Maintenance();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             
             Calendar date = startDateField.getCalendar();
             Calendar time = Calendar.getInstance();
