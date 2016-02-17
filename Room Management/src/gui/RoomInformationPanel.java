@@ -7,10 +7,10 @@
  */
 package gui;
 
-import database.BorrowingModel;
 import database.RoomModel;
+import roominformation.RoomInformation;
+
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -28,8 +28,6 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableCellRenderer;
-import roominformation.RoomInformation;
 
 /**
  *
@@ -44,13 +42,14 @@ public class RoomInformationPanel extends javax.swing.JPanel {
      * Creates new form RoomInformation
      */
     public RoomInformationPanel() {
-        
         initComponents();
+        
         roomInformation = new RoomInformation();
         // Inisialisasi columns
         columns = new ArrayList<Object>();
         // Inisialisasi data
         data = new ArrayList<RoomModel>();
+        
         // Menampilkan tabel
         setColumns();
         setData();
@@ -172,7 +171,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
             JLabel roomCapacity = new JLabel(Integer.toString(data.get(i).getCapacity()));
             customizeLabel(roomCapacity);
             table.add(roomCapacity);
-            String[] roomStatusStrings = {"OK", "rusak"};
+            String[] roomStatusStrings = {"OK", "Rusak"};
             JComboBox roomStatus = new JComboBox(roomStatusStrings);
             DefaultListCellRenderer dlcr = new DefaultListCellRenderer(); 
             dlcr.setHorizontalAlignment(DefaultListCellRenderer.CENTER); 

@@ -8,6 +8,7 @@
 package gui;
 
 import administrator.Administrator;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -148,7 +149,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                 if (newPassword.equals(newPasswordConfirmed)) {
                     if (!newPassword.equals(oldPassword)) {
                         administrator.changePassword(newPassword);
-                        PasswordChangedFrame passwordChangedFrame = new PasswordChangedFrame();
+                        JOptionPane.showMessageDialog(MainFrame.getInstance(), "Kata sandi berhasil diubah", "Pesan", JOptionPane.INFORMATION_MESSAGE);
                         resetTextField();
                     } else {
                         oldPasswordMessage.setText("");

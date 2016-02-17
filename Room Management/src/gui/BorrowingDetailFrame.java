@@ -7,6 +7,13 @@ package gui;
 
 import borrowing.Borrowing;
 import database.BorrowingModel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -15,12 +22,17 @@ import database.BorrowingModel;
 public class BorrowingDetailFrame extends javax.swing.JFrame {
     
     private BorrowingModel borrowingModel;
+    private MainFrame mainFrame;
     private String roomName;
     private Borrowing borrowing;
      
     public BorrowingDetailFrame(BorrowingModel borrowingModel, String roomName) {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
+        
         this.borrowingModel = borrowingModel;
+        mainFrame = MainFrame.getInstance();
         this.roomName = roomName;
         borrowing = new Borrowing();
         setComponent();
@@ -37,7 +49,7 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
         waktuIzinLabel.setText(borrowingModel.getPermissionTime().getTime().toString());
         waktuMulaiLabel.setText(borrowingModel.getStartTime().getTime().toString());
         waktuSelesaiLabel.setText(borrowingModel.getFinishTime().getTime().toString());
-        idPeminjamLabel.setText(Integer.toString(borrowingModel.getBorrowerId()));
+        idPeminjamLabel.setText(Long.toString(borrowingModel.getBorrowerId()));
         alamatLabel.setText(borrowingModel.getBorrowerAddress());
     }
     
@@ -81,7 +93,7 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel1.setText("Detail Pemesanan");
+        jLabel1.setText("Detail Peminjaman");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jLabel2.setText("Nama Ruangan ");
@@ -166,9 +178,9 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
                 .addComponent(deleteButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76))
+                .addGap(94, 94, 94))
             .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
@@ -199,12 +211,12 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
                             .addComponent(waktuMulaiLabel)
                             .addComponent(waktuSelesaiLabel)
                             .addComponent(waktuIzinLabel))))
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,16 +270,28 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
                     .addComponent(editButton))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        borrowing.deleteBorrowing(borrowingModel);
-        DeleteSuccessFrame successFrame = new DeleteSuccessFrame();
-        successFrame.setVisible(true);
+        
+        int reply = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus jadwal ini?", "Pesan", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+          borrowing.deleteBorrowing(borrowingModel);
+        }
+        
+        // Refresh tampilan organisasi jadwal
+        JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+        JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+        bookingInformationPanel.removeAll();
+        bookingInformationPanel.add(new BookingInformationPanel(new GregorianCalendar(borrowingModel.getStartTime().get(Calendar.YEAR), borrowingModel.getStartTime().get(Calendar.MONTH), borrowingModel.getStartTime().get(Calendar.DATE))));
+        bookingInformationPanel.repaint();
+        bookingInformationPanel.revalidate();
+        
+        this.dispose();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed

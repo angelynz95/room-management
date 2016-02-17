@@ -15,7 +15,7 @@ public class BorrowingModel {
     public static final int MAX_BORROW_HOUR = 23;
     private int id;
     private int roomId;
-    private int borrowerId;
+    private long borrowerId;
     private String borrowerName;
     private String borrowerStatus;
     private String borrowerAddress;
@@ -31,7 +31,7 @@ public class BorrowingModel {
         
     }
 
-    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar startTime, Calendar finishTime) {
+    public BorrowingModel(int id, long borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar startTime, Calendar finishTime) {
         this.id = id;
         this.borrowerId = borrowerId;
         this.roomId = roomID;
@@ -46,7 +46,7 @@ public class BorrowingModel {
         this.finishTime = finishTime;
     }
     
-    public BorrowingModel(int id, int borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar permissionTime, Calendar startTime, Calendar finishTime) {
+    public BorrowingModel(int id, long borrowerId, int roomID, String borrowerName, String borrowerStatus, String borrowerAddress, String borrowerPhone, String organizationName, String activityName, int totalParticipant, Calendar permissionTime, Calendar startTime, Calendar finishTime) {
         this.id = id;
         this.borrowerId = borrowerId;
         this.roomId = roomID;
@@ -66,7 +66,7 @@ public class BorrowingModel {
         return id;
     }
 
-    public int getBorrowerId() {
+    public long getBorrowerId() {
         return borrowerId;
     }
 
@@ -118,7 +118,7 @@ public class BorrowingModel {
         this.id = id;
     }
 
-    public void setBorrowerId(int borrowerId) {
+    public void setBorrowerId(long borrowerId) {
         this.borrowerId = borrowerId;
     }
 

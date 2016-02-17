@@ -59,6 +59,21 @@ public class RoomInformation {
         return result;
     }
     
+    public String getRoomStatus(int id) {
+        database.connect(path);
+        String status = "";
+        String sql = "SELECT status FROM ruangan WHERE id_ruangan = '" + id + "'";
+        ResultSet rs = database.fetchData(sql);
+        try {
+            while (rs.next()) {
+                status = rs.getString("status");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomInformation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
+    
     /**
      * Search room with namaRuangan as the name
      * @param namaRuangan the name of the room which meant to be searched
@@ -163,6 +178,9 @@ public class RoomInformation {
         String name = "R 7606";
         rooms = roomInformation.searchRoomData(name);
         System.out.println(rooms.size());
+        
+        String status = roomInformation.getRoomStatus(1);
+        System.out.println(status);
     }
     
     

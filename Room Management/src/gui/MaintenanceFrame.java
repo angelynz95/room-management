@@ -19,6 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -269,7 +270,10 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                 frame.setVisible(true);
             } else {
                 if (maintenanceId == 0) {
-                    maintenance.addMaintenance(maintenanceModel);
+                    String msg = maintenance.addMaintenance(maintenanceModel);
+                    if (msg.equals("Maintenance can't be done")) {
+                        JOptionPane.showMessageDialog(this, "Ruangan tidak rusak",  "Pesan Kesalahan", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
                     maintenance.editMaintenance(maintenanceModel);
                 }
