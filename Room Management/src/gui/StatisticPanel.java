@@ -8,6 +8,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -273,8 +274,6 @@ public class StatisticPanel extends javax.swing.JPanel {
     private void showRoomBorrowedFrequencyStatistic() {
         JFreeChart barChart = showRoomBorrowedFrequencyChart("Frekuensi Penggunaan Ruangan", "Nama Ruangan", "Frekuensi Peminjaman");
         ChartPanel chartPanel = new ChartPanel(barChart);
-//        chartPanel.setPreferredSize(new java.awt.Dimension(1000,300));
-//        roomBorrowedFrequencyPane.setLayout(new BoxLayout(roomBorrowedFrequencyPane, BoxLayout.PAGE_AXIS));
         
         JTable table = showRoomBorrowedFrequencyTable();
         
@@ -341,6 +340,7 @@ public class StatisticPanel extends javax.swing.JPanel {
         roomBorrowedFrequencyPane.setSize(1000, 200);
 //        roomBorrowedFrequencyPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         roomBorrowedFrequencyPanel.setBackground(Color.red);
+//        roomBorrowedFrequencyPanel.setSize(new Dimension(1000,200));
         
         roomBrokenFrequencyPane.setOpaque(false);
         roomBrokenFrequencyPane.getViewport().setOpaque(false);

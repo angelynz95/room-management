@@ -53,7 +53,7 @@ public class Statistic {
      */
     public void generateRoomUsageStatistics() {
         database.connect(path);
-        String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT id_ruangan, count(id_ruangan) AS frequency from peminjaman group by id_ruangan ) AS tabel;";
+        String sql = "SELECT nama, frequency FROM ruangan LEFT OUTER JOIN ( SELECT id_ruangan, count(id_ruangan) AS frequency from peminjaman group by id_ruangan ) AS tabel_frek ON ruangan.id_ruangan = tabel_frek.id_ruangan;";
         ResultSet rs = database.fetchData(sql);
         resetList();
         try {
@@ -77,7 +77,7 @@ public class Statistic {
      */
     public void generateRoomMaintenanceStatistics() {
         database.connect(path);
-        String sql = "SELECT nama, frequency FROM ruangan NATURAL JOIN ( SELECT id_ruangan, count(id_ruangan) AS frequency from pemeliharaan group by id_ruangan ) AS tabel;";
+        String sql = "SELECT nama, frequency FROM ruangan LEFT OUTER JOIN ( SELECT id_ruangan, count(id_ruangan) AS frequency from pemeliharaan group by id_ruangan ) AS tabel_frek ON ruangan.id_ruangan = tabel_frek.id_ruangan;";
         ResultSet rs = database.fetchData(sql);
         resetList();
         try {
