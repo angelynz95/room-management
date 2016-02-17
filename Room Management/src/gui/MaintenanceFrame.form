@@ -181,7 +181,7 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(roomsName.toArray())"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="RoomInformation roomInformation = new RoomInformation();&#xa;ArrayList&lt;RoomModel&gt; roomsModel = new ArrayList&lt;RoomModel&gt;();&#xa;ArrayList&lt;String&gt; roomsName = new ArrayList&lt;String&gt;();&#xa;roomsModel = roomInformation.fetchRoomData();&#xa;for (int i = 0; i &lt; roomsModel.size(); i++) {&#xa;  roomsName.add(roomsModel.get(i).getName());&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="RoomInformation roomInformation = new RoomInformation();&#xa;ArrayList&lt;RoomModel&gt; roomsModel = new ArrayList&lt;RoomModel&gt;();&#xa;ArrayList&lt;String&gt; roomsName = new ArrayList&lt;String&gt;();&#xa;roomsModel = roomInformation.fetchRoomData();&#xa;for (int i = 0; i &lt; roomsModel.size(); i++) {&#xa;    if (roomsModel.get(i).getStatus().equals(&quot;rusak&quot;)) {&#xa;        roomsName.add(roomsModel.get(i).getName());&#xa;    }&#xa;}"/>
       </AuxValues>
     </Component>
     <Component class="org.freixas.jcalendar.JCalendarCombo" name="finishDateField">

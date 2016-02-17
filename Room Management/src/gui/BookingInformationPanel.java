@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
@@ -37,6 +38,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     Color defaultColor;
     GregorianCalendar date;
     List<String> rooms;
+    List<String> roomStatus;
     List<String> schedules;
     MainFrame mainFrame;
 
@@ -48,10 +50,12 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         bookingInformation = new BookingInformation();
         this.date = date;
         rooms = new ArrayList<String>();
+        roomStatus = new ArrayList<String>();
         schedules = new ArrayList<String>();
         mainFrame = MainFrame.getInstance();
         dateField.setDate(date.getTime());
         setRooms();
+        setRoomStatus();
         setSchedules();
         customizeBookingInformationPane();
         showBookingInformation();
@@ -158,16 +162,25 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_dateFieldActionPerformed
 
     private void borrowingButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_borrowingButtonMouseClicked
-        BorrowingFrame borrowingFrame = new BorrowingFrame(date);
-        borrowingFrame.setVisible(true);
+        if (roomStatus.contains("OK")) {
+            BorrowingFrame borrowingFrame = new BorrowingFrame(date);
+            borrowingFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada ruangan yang bisa dipinjam", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_borrowingButtonMouseClicked
 
     private void maintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceButtonMouseClicked
-        MaintenanceFrame maintenanceFrame = new MaintenanceFrame(date);
-        maintenanceFrame.setVisible(true);
+        if (roomStatus.contains("rusak")) {
+            MaintenanceFrame maintenanceFrame = new MaintenanceFrame(date);
+            maintenanceFrame.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Tidak ada ruangan yang rusak", "Pesan", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_maintenanceButtonMouseClicked
 
     private void setRooms() {
+        rooms.add("");
         for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
             rooms.add(roomSchedule.getKey().getName());
         }
@@ -187,13 +200,21 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         }
     }
     
+    private void setRoomStatus() {
+        List<RoomModel> roomModels = new ArrayList<>(bookingInformation.getRoomsSchedule().keySet());
+        
+        for (int i = 0; i < roomModels.size(); i++) {
+            roomStatus.add(roomModels.get(i).getStatus());
+        }
+    }
+    
     private void customizeBookingInformationPane() {
         bookingInformationPane.setOpaque(false);
         bookingInformationPane.getViewport().setOpaque(false);
         bookingInformationPane.setBorder(null);
         bookingInformationPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         bookingInformationPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        bookingInformationPanel.setLayout(new GridLayout(0, rooms.size() + 1));
+        bookingInformationPanel.setLayout(new GridLayout(0, rooms.size()));
     }
     
     private void showBookingInformation() {
@@ -205,12 +226,6 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     
     private void customizeRoomCells() {
         JLabel roomLabel;
-        
-        roomLabel = new JLabel();
-        customizeLabel(roomLabel);
-        roomLabel.setBackground(Color.lightGray);
-        roomLabel.setText("");
-        bookingInformationPanel.add(roomLabel);
         
         for (int i = 0; i < rooms.size(); i++) {
             roomLabel = new JLabel();
@@ -224,6 +239,9 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     private void customizeScheduleCells() {
         JLabel scheduleLabel, timeLabel;
         
+        for (int i = 0; i < rooms.size(); i++) {
+        }
+        
         for (int i = 0; i < schedules.size(); i++) {
             timeLabel = new JLabel();
             customizeLabel(timeLabel);
@@ -231,31 +249,34 @@ public class BookingInformationPanel extends javax.swing.JPanel {
             timeLabel.setText(schedules.get(i));
             bookingInformationPanel.add(timeLabel);
             
-            for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
+            for (int j = 1; j < rooms.size(); j++) {
+                String roomName = rooms.get(j);
+                List roomModuls = new ArrayList(bookingInformation.getRoomsSchedule().keySet());
+
                 scheduleLabel = new JLabel();                
                 customizeLabel(scheduleLabel);
-                
-                if (roomSchedule.getValue().size() > 0) {
-                    if (roomSchedule.getValue().containsKey(i + 7)) {
-                        if (roomSchedule.getValue().get(i + 7).getClass().equals(BorrowingModel.class)) {
-                            BorrowingModel borrowing = (BorrowingModel) roomSchedule.getValue().get(i + 7);
+
+                if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).size() > 0) {
+                    if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).containsKey(i + 7)) {
+                        if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7).getClass().equals(BorrowingModel.class)) {
+                            BorrowingModel borrowing = (BorrowingModel) bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7);
                             scheduleLabel.setBackground(new Color(138, 199, 222));
                             scheduleLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
-                                    BorrowingDetailFrame bookingDetailFrame = new BorrowingDetailFrame(borrowing, roomSchedule.getKey().getName());
+                                    BorrowingDetailFrame bookingDetailFrame = new BorrowingDetailFrame(borrowing, roomName);
                                     bookingDetailFrame.setVisible(true);
                                 }
                             });
-                        } else if (roomSchedule.getValue().get(i + 7).getClass().equals(MaintenanceModel.class)) {
-                            MaintenanceModel maintenance = (MaintenanceModel) roomSchedule.getValue().get(i + 7);
+                        } else if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7).getClass().equals(MaintenanceModel.class)) {
+                            MaintenanceModel maintenance = (MaintenanceModel) bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7);
                             scheduleLabel.setBackground(new Color(250, 127, 119));
                             scheduleLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
                                 @Override
                                 public void mouseClicked(MouseEvent mouseEvent) {
-                                    MaintenanceDetailFrame maintenanceDetailFrame = new MaintenanceDetailFrame(maintenance, roomSchedule.getKey().getName());
+                                    MaintenanceDetailFrame maintenanceDetailFrame = new MaintenanceDetailFrame(maintenance, roomName);
                                     maintenanceDetailFrame.setVisible(true);
                                 }
                             });

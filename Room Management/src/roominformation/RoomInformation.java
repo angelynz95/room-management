@@ -134,38 +134,14 @@ public class RoomInformation {
      * @param id room id
      * @return list of borrowing data which was held in this room
      */
-    public ArrayList<BorrowingModel> changeRoomStatus(String name) {
-        ArrayList<BorrowingModel> result = new ArrayList<>();
+    public String changeRoomStatus(String name, String status) {
         database.connect(path);
         int id = -1;
-        String status = "", newStatus = "";
-        String sql = "SELECT * FROM ruangan WHERE nama = '" + name + "';";
-        ResultSet rs = database.fetchData(sql);
-        try {
-            while (rs.next()) {
-                RoomModel room = new RoomModel();
-                status = rs.getString("status");
-                id = rs.getInt("id_ruangan");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(Statistic.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        if (status.compareTo("rusak") == 0) {
-            newStatus = "OK";
-            String query = "UPDATE ruangan SET status = '"+ newStatus +"' WHERE id_ruangan = " + id;
-            String temp = database.changeData(query);
-            System.out.println(temp);
-        } else if (status.compareTo("OK") == 0) {
-            newStatus = "rusak";
-            String query = "UPDATE ruangan SET status = '"+ newStatus +"' WHERE id_ruangan = " + id;
-            database.changeData(query);
-            Date date = new Date();
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(date.getTime());
-            result = fetchBorrowingByIdRoomAndTime(id, new Timestamp(date.getTime()));
-        }
+        String sql = "UPDATE ruangan SET status = '" + status + "' WHERE nama = '" + name + "';";
+        String msg = database.changeData(sql);
+        
         database.closeDatabase();
-        return result;
+        return msg;
     }
     
     public static final void main(String args[]) {

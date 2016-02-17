@@ -139,7 +139,9 @@ public class BorrowingFrame extends javax.swing.JFrame {
         ArrayList<String> roomsName = new ArrayList<String>();
         roomsModel = roomInformation.fetchRoomData();
         for (int i = 0; i < roomsModel.size(); i++) {
-            roomsName.add(roomsModel.get(i).getName());
+            if (roomsModel.get(i).getStatus().equals("OK")) {
+                roomsName.add(roomsModel.get(i).getName());
+            }
         }
         roomNameDropdown = new javax.swing.JComboBox(roomsName.toArray());
         lecturerStatusButton = new javax.swing.JRadioButton();

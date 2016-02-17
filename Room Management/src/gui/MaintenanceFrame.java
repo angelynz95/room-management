@@ -90,7 +90,9 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         ArrayList<String> roomsName = new ArrayList<String>();
         roomsModel = roomInformation.fetchRoomData();
         for (int i = 0; i < roomsModel.size(); i++) {
-            roomsName.add(roomsModel.get(i).getName());
+            if (roomsModel.get(i).getStatus().equals("rusak")) {
+                roomsName.add(roomsModel.get(i).getName());
+            }
         }
         roomNameDropdown = new javax.swing.JComboBox(roomsName.toArray());
         finishDateField = new org.freixas.jcalendar.JCalendarCombo();
@@ -270,10 +272,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                 frame.setVisible(true);
             } else {
                 if (maintenanceId == 0) {
-                    String msg = maintenance.addMaintenance(maintenanceModel);
-                    if (msg.equals("Maintenance can't be done")) {
-                        JOptionPane.showMessageDialog(this, "Ruangan tidak rusak",  "Pesan Kesalahan", JOptionPane.ERROR_MESSAGE);
-                    }
+                    maintenance.addMaintenance(maintenanceModel);
                 } else {
                     maintenance.editMaintenance(maintenanceModel);
                 }

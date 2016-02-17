@@ -17,6 +17,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.BorderFactory;
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -25,6 +27,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -37,6 +40,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     private JTable table;
     private ArrayList<RoomModel> data;
     private List<Object> columns;
+    private MainFrame mainFrame;
     private RoomInformation roomInformation;
     /**
      * Creates new form RoomInformation
@@ -44,6 +48,7 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     public RoomInformationPanel() {
         initComponents();
         
+        mainFrame = MainFrame.getInstance();
         roomInformation = new RoomInformation();
         // Inisialisasi columns
         columns = new ArrayList<Object>();
@@ -184,7 +189,18 @@ public class RoomInformationPanel extends javax.swing.JPanel {
             table.add(roomStatus);
             roomStatus.addActionListener(new ActionListener() {@Override
                 public void actionPerformed(ActionEvent e) {
-                    roomInformation.changeRoomStatus(roomName.getText());
+                    if (roomStatus.getSelectedItem().equals("OK")) {
+                        roomInformation.changeRoomStatus(roomName.getText(), roomStatus.getSelectedItem().toString());
+                    } else {
+                        roomInformation.changeRoomStatus(roomName.getText(), roomStatus.getSelectedItem().toString().toLowerCase());
+                    }
+                    // Refresh tampilan
+                    JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+                    JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+                    bookingInformationPanel.removeAll();
+                    bookingInformationPanel.add(new BookingInformationPanel(new GregorianCalendar()));
+                    bookingInformationPanel.repaint();
+                    bookingInformationPanel.revalidate();
                 }
             });
         }
