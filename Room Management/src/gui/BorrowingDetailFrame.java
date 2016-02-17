@@ -9,6 +9,10 @@ import borrowing.Borrowing;
 import database.BorrowingModel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -17,6 +21,7 @@ import java.awt.Toolkit;
 public class BorrowingDetailFrame extends javax.swing.JFrame {
     
     private BorrowingModel borrowingModel;
+    private MainFrame mainFrame;
     private String roomName;
     private Borrowing borrowing;
      
@@ -26,6 +31,7 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
         
         this.borrowingModel = borrowingModel;
+        mainFrame = MainFrame.getInstance();
         this.roomName = roomName;
         borrowing = new Borrowing();
         setComponent();
@@ -273,6 +279,15 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
         borrowing.deleteBorrowing(borrowingModel);
         DeleteSuccessFrame successFrame = new DeleteSuccessFrame();
         successFrame.setVisible(true);
+        // Refresh tampilan organisasi jadwal
+        JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
+        JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
+        bookingInformationPanel.removeAll();
+        bookingInformationPanel.add(new BookingInformationPanel(new GregorianCalendar(borrowingModel.getStartTime().get(Calendar.YEAR), borrowingModel.getStartTime().get(Calendar.MONTH), borrowingModel.getStartTime().get(Calendar.DATE))));
+        bookingInformationPanel.repaint();
+        bookingInformationPanel.revalidate();
+        
+        this.dispose();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed

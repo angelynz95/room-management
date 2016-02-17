@@ -73,7 +73,7 @@ public class Borrowing {
     public String editBorrowing(BorrowingModel borrowing) {
         database.connect(path);
 
-        String sql = "UPDATE peminjaman SET id_ruangan = '" + borrowing.getId() + "', id_peminjam = '" + borrowing.getBorrowerId()
+        String sql = "UPDATE peminjaman SET id_ruangan = '" + borrowing.getRoomId() + "', id_peminjam = '" + borrowing.getBorrowerId()
                 + "', nama_peminjam = '" + borrowing.getBorrowerName() + "', nomor_telepon_peminjam = '" + borrowing.getBorrowerPhone() + "', status_peminjam = '"
                 + borrowing.getBorrowerStatus() + "', alamat_peminjam = '" + borrowing.getBorrowerAddress() + "', nama_kegiatan = '" + borrowing.getActivityName()
                 + "', nama_lembaga = '" + borrowing.getOrganizationName() + "', waktu_mulai = '" + sdf.format(borrowing.getStartTime().getTime()) + "', waktu_selesai = '" + sdf.format(borrowing.getFinishTime().getTime())
