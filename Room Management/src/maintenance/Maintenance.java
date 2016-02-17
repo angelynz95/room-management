@@ -11,6 +11,7 @@ package maintenance;
 import database.BorrowingModel;
 import database.Database;
 import database.MaintenanceModel;
+import database.RoomModel;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import roominformation.RoomInformation;
 
 public class Maintenance {
 
@@ -51,14 +53,21 @@ public class Maintenance {
     
     public String addMaintenance(MaintenanceModel maintenance) {
         database.connect(path);
+        String message;
         
-        String sql = "INSERT INTO pemeliharaan (id_ruangan, deskripsi, waktu_mulai, waktu_selesai) VALUES ('" +
-                maintenance.getRoomId() + "' , '" + maintenance.getDescription() + "' , '" + sdf.format(maintenance.getStartTime().getTime()) +
-                "' , '" + sdf.format(maintenance.getFinishTime().getTime()) + "')";
-        String message = database.changeData(sql);
+        RoomInformation roomInformation = new RoomInformation();
         
-        database.closeDatabase();
-        
+        String roomStatus = roomInformation.getRoomStatus(maintenance.getRoomId());
+        if (roomStatus.equals("rusak")) {
+            String sql = "INSERT INTO pemeliharaan (id_ruangan, deskripsi, waktu_mulai, waktu_selesai) VALUES ('" +
+                    maintenance.getRoomId() + "' , '" + maintenance.getDescription() + "' , '" + sdf.format(maintenance.getStartTime().getTime()) +
+                    "' , '" + sdf.format(maintenance.getFinishTime().getTime()) + "')";
+            message = database.changeData(sql);
+
+            database.closeDatabase();
+        } else {
+            message = "Maintenance can't be done";
+        }
         return message;
     }
 
@@ -95,7 +104,7 @@ public class Maintenance {
         String sql = "SELECT * FROM peminjaman WHERE id_ruangan = '" + maintenance.getRoomId() + "' AND ((waktu_mulai >= '" +
                 sdf.format(maintenance.getStartTime().getTime()) + "' AND waktu_mulai <= '" + sdf.format(maintenance.getFinishTime().getTime()) + "') OR (waktu_selesai >= '" +
                 sdf.format(maintenance.getStartTime().getTime()) + "' AND waktu_selesai <= '" + sdf.format(maintenance.getFinishTime().getTime()) + "'))";
-        System.out.println(sql);
+        
         ResultSet rs = database.fetchData(sql);
 
         try {
@@ -143,14 +152,14 @@ public class Maintenance {
         Maintenance maintenance = new Maintenance();
         
         int idMaintenance = 5;
-        int roomId = 1;
+        int roomId = 2;
         String description = "Papan tulis rusak";
         Calendar startTime = new GregorianCalendar(2016, 1, 23, 13, 30);
         Calendar finishTime = new GregorianCalendar(2016, 1, 23, 18, 30);
         
         MaintenanceModel maintenanceModel = new MaintenanceModel(idMaintenance, roomId, description, startTime, finishTime);
-//        String msg = maintenance.addMaintenance(maintenanceModel);
-//        System.out.println(msg);
+        String msg = maintenance.addMaintenance(maintenanceModel);
+        System.out.println(msg);
         
         ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
         clashMaintenance = maintenance.getClashMaintenance(maintenanceModel);
