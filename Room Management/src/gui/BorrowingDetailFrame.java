@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -276,9 +277,12 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        borrowing.deleteBorrowing(borrowingModel);
-        DeleteSuccessFrame successFrame = new DeleteSuccessFrame();
-        successFrame.setVisible(true);
+        
+        int reply = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus jadwal ini?", "Pesan", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+          borrowing.deleteBorrowing(borrowingModel);
+        }
+        
         // Refresh tampilan organisasi jadwal
         JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
         JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);

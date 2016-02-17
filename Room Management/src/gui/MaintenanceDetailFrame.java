@@ -11,6 +11,7 @@ import maintenance.Maintenance;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -167,9 +168,11 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        maintenance.deleteMaintenance(model);
-        DeleteSuccessFrame successFrame = new DeleteSuccessFrame();
-        successFrame.setVisible(true);
+        
+        int reply = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus pemeliharaan ini?", "Pesan", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+          maintenance.deleteMaintenance(model);
+        }
         
         // Refresh tampilan organisasi jadwal
         JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
