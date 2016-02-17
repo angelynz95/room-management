@@ -95,9 +95,9 @@ public class Borrowing {
     }
     
     public void addWeeklyBorrowing(BorrowingModel borrowing) {
-        Calendar calendarStart = borrowing.getStartTime();
+        Calendar calendarStart = (Calendar)borrowing.getStartTime().clone();
         int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);
-        Calendar calendarEnd = borrowing.getFinishTime();
+        Calendar calendarEnd = (Calendar)borrowing.getFinishTime().clone();
         int endHour = calendarEnd.get(Calendar.HOUR_OF_DAY);
         database.connect(path);
         Calendar tempStart = new GregorianCalendar();
