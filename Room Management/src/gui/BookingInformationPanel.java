@@ -86,7 +86,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         bookingInformationPane.setViewportView(bookingInformationPanel);
 
         borrowingButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        borrowingButton.setText("Pemesanan");
+        borrowingButton.setText("Peminjaman");
         borrowingButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 borrowingButtonMouseClicked(evt);

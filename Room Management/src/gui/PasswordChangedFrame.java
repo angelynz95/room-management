@@ -42,10 +42,11 @@ public class PasswordChangedFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        passwordChangedLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        passwordChangedLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         passwordChangedLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passwordChangedLabel.setText("Kata sandi berhasil diubah");
 
+        passwordChangedConfirmButton.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         passwordChangedConfirmButton.setText("OK");
         passwordChangedConfirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,23 +58,24 @@ public class PasswordChangedFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(passwordChangedLabel)
-                .addGap(37, 37, 37))
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(passwordChangedConfirmButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(passwordChangedLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(passwordChangedConfirmButton)))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
                 .addComponent(passwordChangedLabel)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordChangedConfirmButton)
-                .addGap(41, 41, 41))
+                .addGap(36, 36, 36))
         );
 
         pack();

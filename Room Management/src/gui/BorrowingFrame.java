@@ -83,7 +83,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         this.finishDateField.setDate(finishTime.getTime());
         this.finishTimeField.setValue(finishTime.getTime());
         
-        this.borrowerIdField.setText(Integer.toString(model.getBorrowerId()));
+        this.borrowerIdField.setText(Long.toString(model.getBorrowerId()));
         this.borrowerNameField.setText(model.getBorrowerName());
         this.borrowerAddressField.setText(model.getBorrowerAddress());
         this.borrowerPhoneField.setText(model.getBorrowerPhone());
@@ -450,7 +450,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         Borrowing borrowing = new Borrowing();
         
         int id = borrowingId;
-        int borrowerId = Integer.parseInt(borrowerIdField.getText());
+        long borrowerId = Long.parseLong(borrowerIdField.getText());
         
         RoomInformation roomInformation = new RoomInformation();
         int roomId = roomInformation.searchRoomData(roomNameDropdown.getSelectedItem().toString()).get(0).getId();

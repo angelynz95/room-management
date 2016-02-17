@@ -5,6 +5,9 @@
  */
 package gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author William Sentosa
@@ -16,6 +19,8 @@ public class DeleteSuccessFrame extends javax.swing.JFrame {
      */
     public DeleteSuccessFrame() {
         initComponents();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2 - 20);
     }
 
     /**
@@ -31,7 +36,7 @@ public class DeleteSuccessFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         jLabel1.setText("Penghapusan data berhasil !");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -39,16 +44,16 @@ public class DeleteSuccessFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
 
         pack();
