@@ -189,11 +189,8 @@ public class RoomInformationPanel extends javax.swing.JPanel {
             table.add(roomStatus);
             roomStatus.addActionListener(new ActionListener() {@Override
                 public void actionPerformed(ActionEvent e) {
-                    if (roomStatus.getSelectedItem().equals("OK")) {
-                        roomInformation.changeRoomStatus(roomName.getText(), roomStatus.getSelectedItem().toString());
-                    } else {
-                        roomInformation.changeRoomStatus(roomName.getText(), roomStatus.getSelectedItem().toString().toLowerCase());
-                    }
+                    roomInformation.changeRoomStatus(roomName.getText(), roomStatus.getSelectedItem().toString());
+                    
                     // Refresh tampilan
                     JTabbedPane menuPane = (JTabbedPane) mainFrame.getContentPane().getComponent(0);
                     JPanel bookingInformationPanel = (JPanel) menuPane.getComponentAt(0);
