@@ -47,7 +47,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         
         roomNameDropdown.setEnabled(true);
         startDateField.setDate(defaultDate.getTime());
-        finishDateField.setDate(defaultDate.getTime());
         
         this.borrowingId = 0;
         textFields = new ArrayList<>();
@@ -80,7 +79,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         this.startTimeField.setValue(startTime.getTime());
         
         Calendar finishTime = model.getFinishTime();
-        this.finishDateField.setDate(finishTime.getTime());
         this.finishTimeField.setValue(finishTime.getTime());
         
         this.borrowerIdField.setText(Long.toString(model.getBorrowerId()));
@@ -132,7 +130,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         roomNameLabel = new javax.swing.JLabel();
         startDateField = new org.freixas.jcalendar.JCalendarCombo();
         startTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
-        finishDateField = new org.freixas.jcalendar.JCalendarCombo();
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         timeSeperatorLabel = new javax.swing.JLabel();
         borrowerTitleLabel = new javax.swing.JLabel();
@@ -210,9 +207,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         startDateField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         startTimeField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-
-        finishDateField.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
-        finishDateField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
         finishTimeField.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
 
@@ -303,16 +297,14 @@ public class BorrowingFrame extends javax.swing.JFrame {
                             .addGap(39, 39, 39)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(isWeeklyCheckBox)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(roomNameDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(roomNameDropdown, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(timeSeperatorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addComponent(borrowerTitleLabel))
@@ -330,7 +322,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
                     .addComponent(timeSeperatorLabel)
                     .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(timeLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -396,12 +387,10 @@ public class BorrowingFrame extends javax.swing.JFrame {
         if (isDateValid()) {
             startDateField.setBorder(UIManager.getBorder("Spinner.border"));
             startTimeField.setBorder(UIManager.getBorder("Spinner.border"));
-            finishDateField.setBorder(UIManager.getBorder("Spinner.border"));
             finishTimeField.setBorder(UIManager.getBorder("Spinner.border"));
         } else {
             startDateField.setBorder(BorderFactory.createLineBorder(Color.red));
             startTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
-            finishDateField.setBorder(BorderFactory.createLineBorder(Color.red));
             finishTimeField.setBorder(BorderFactory.createLineBorder(Color.red));
         }
         
@@ -476,7 +465,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
         time.setTime((Date) startTimeField.getValue());
         Calendar startTime = convertTimeToCalendar(date, time);
 
-        date = finishDateField.getCalendar();
         time = Calendar.getInstance();
         time.setTime((Date) finishTimeField.getValue());
         Calendar finishTime = convertTimeToCalendar(date, time);
@@ -543,7 +531,7 @@ public class BorrowingFrame extends javax.swing.JFrame {
         int startHour = time.get(Calendar.HOUR_OF_DAY);
         Calendar startTime = convertTimeToCalendar(date, time);
 
-        date = finishDateField.getCalendar();
+        date = startDateField.getCalendar();
         time = Calendar.getInstance();
         time.setTime((Date) finishTimeField.getValue());
         int finishHour = time.get(Calendar.HOUR_OF_DAY);
@@ -619,7 +607,6 @@ public class BorrowingFrame extends javax.swing.JFrame {
     private javax.swing.ButtonGroup borrowerStatusButtonGroup;
     private javax.swing.JLabel borrowerStatusLabel;
     private javax.swing.JLabel borrowerTitleLabel;
-    private org.freixas.jcalendar.JCalendarCombo finishDateField;
     private javax.swing.JSpinner finishTimeField;
     private javax.swing.JCheckBox isWeeklyCheckBox;
     private javax.swing.JScrollPane jScrollPane1;
