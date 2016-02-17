@@ -113,7 +113,6 @@ public class Borrowing {
                 + borrowing.getBorrowerStatus() + "','" + borrowing.getBorrowerAddress() + "','" + borrowing.getActivityName() + "','" + borrowing.getOrganizationName() + "', '"
                 + sdf.format(tempStart.getTime()) + "','" + sdf.format(tempEnd.getTime()) + "','" + borrowing.getTotalParticipant() + "')";
                 String message = database.changeData(sql);
-                System.out.println(sdf.format(tempStart.getTime()) + " - " + sdf.format(tempEnd.getTime()));
             }
             calendarStart.add(Calendar.DATE, 1);
         }
@@ -122,9 +121,9 @@ public class Borrowing {
     
     public ArrayList<BorrowingModel> getClashWeeklyBorrowing(BorrowingModel borrowing) {
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
-        Calendar calendarStart = borrowing.getStartTime();
+        Calendar calendarStart = (Calendar) borrowing.getStartTime().clone();
         int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);
-        Calendar calendarEnd = borrowing.getFinishTime();
+        Calendar calendarEnd = (Calendar) borrowing.getFinishTime().clone();
         int endHour = calendarEnd.get(Calendar.HOUR_OF_DAY);
         database.connect(path);
         Calendar tempStart = new GregorianCalendar();
@@ -149,6 +148,42 @@ public class Borrowing {
                 b.setStart(tempStart);
                 b.setFinish(tempEnd);
                 clashBorrowing.addAll(getClashBorrowing(b));
+            }
+            calendarStart.add(Calendar.DATE, 1);
+        }
+        database.closeDatabase(); 
+        return clashBorrowing;
+    }
+    
+    public ArrayList<MaintenanceModel> getClashWeeklyMaintenance(BorrowingModel borrowing) {
+        ArrayList<MaintenanceModel> clashBorrowing = new ArrayList<>();
+        Calendar calendarStart = (Calendar) borrowing.getStartTime().clone();
+        int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);
+        Calendar calendarEnd = (Calendar) borrowing.getFinishTime().clone();
+        int endHour = calendarEnd.get(Calendar.HOUR_OF_DAY);
+        database.connect(path);
+        Calendar tempStart = new GregorianCalendar();
+        Calendar tempEnd = new GregorianCalendar();
+        int day = borrowing.getStartTime().get(Calendar.DAY_OF_WEEK);
+        while (calendarStart.before(calendarEnd)) {
+            tempStart.set(calendarStart.get(Calendar.YEAR), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.DATE), startHour, 0, 0);
+            tempEnd.set(calendarStart.get(Calendar.YEAR), calendarStart.get(Calendar.MONTH), calendarStart.get(Calendar.DATE), endHour, 0, 0);
+            if (calendarStart.get(Calendar.DAY_OF_WEEK) == day) {
+                BorrowingModel b = new BorrowingModel();
+                b.setId(borrowing.getId());
+                b.setRoomId(borrowing.getRoomId());
+                b.setBorrowerId(borrowing.getBorrowerId());
+                b.setBorrowerName(borrowing.getBorrowerName());
+                b.setBorrowerStatus(borrowing.getBorrowerStatus());
+                b.setBorrowerAddress(borrowing.getBorrowerAddress());
+                b.setBorrowerPhone(borrowing.getBorrowerPhone());
+                b.setOrganizationName(borrowing.getOrganizationName());
+                b.setActivityName(borrowing.getActivityName());
+                b.setTotalParticipant(borrowing.getTotalParticipant());
+                b.setPermissionTime(borrowing.getPermissionTime());
+                b.setStart(tempStart);
+                b.setFinish(tempEnd);
+                clashBorrowing.addAll(this.getClashMaintenance(borrowing));
             }
             calendarStart.add(Calendar.DATE, 1);
         }

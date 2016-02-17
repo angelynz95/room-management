@@ -485,16 +485,21 @@ public class BorrowingFrame extends javax.swing.JFrame {
                 borrowerPhone, organizationName, activityName, totalParticipant, startTime, finishTime);
 
         ArrayList<BorrowingModel> clashBorrowing = new ArrayList<>();
-        clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
-
         ArrayList<MaintenanceModel> clashMaintenance = new ArrayList<>();
-        clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
-
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        if(isWeeklyCheckBox.isSelected()) {
+            clashBorrowing = borrowing.getClashWeeklyBorrowing(borrowingModel);
+            clashMaintenance = borrowing.getClashWeeklyMaintenance(borrowingModel);
+        } else {
+            clashBorrowing = borrowing.getClashBorrowing(borrowingModel);
+            clashMaintenance = borrowing.getClashMaintenance(borrowingModel);
+        }
         if ((clashBorrowing.size() > 0) || (clashMaintenance.size() > 0)) {
             ClashBookingFrame frame = new ClashBookingFrame();
             frame.setContentPane(new ClashBorrowingPanel(clashBorrowing, clashMaintenance));
             frame.setVisible(true);
         } else {
+            System.out.println("borrowingId = " + borrowingId);
             if (borrowingId == 0) {
                 if(isWeeklyCheckBox.isSelected()) {
                     borrowing.addWeeklyBorrowing(borrowingModel);
