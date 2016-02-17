@@ -19,9 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.BorderFactory;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
 import javax.swing.UIManager;
@@ -90,7 +88,7 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         ArrayList<String> roomsName = new ArrayList<String>();
         roomsModel = roomInformation.fetchRoomData();
         for (int i = 0; i < roomsModel.size(); i++) {
-            if (roomsModel.get(i).getStatus().equals("rusak")) {
+            if (roomsModel.get(i).getStatus().equals("Rusak")) {
                 roomsName.add(roomsModel.get(i).getName());
             }
         }

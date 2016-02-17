@@ -171,7 +171,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_borrowingButtonMouseClicked
 
     private void maintenanceButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maintenanceButtonMouseClicked
-        if (roomStatus.contains("rusak")) {
+        if (roomStatus.contains("Rusak")) {
             MaintenanceFrame maintenanceFrame = new MaintenanceFrame(date);
             maintenanceFrame.setVisible(true);
         } else {

@@ -92,7 +92,6 @@ public class BookingInformation {
 
                 if (startTime.get(Calendar.DAY_OF_MONTH) == finishTime.get(Calendar.DAY_OF_MONTH)) {
                     for (int i=startTime.get(Calendar.HOUR_OF_DAY); i<finishTime.get(Calendar.HOUR_OF_DAY); i++) {
-                        //System.out.println(i);
                         roomSchedule.put(i, borrowing);
                     }
                 } else {

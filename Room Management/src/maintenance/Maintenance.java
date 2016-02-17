@@ -58,7 +58,7 @@ public class Maintenance {
         RoomInformation roomInformation = new RoomInformation();
         
         String roomStatus = roomInformation.getRoomStatus(maintenance.getRoomId());
-        if (roomStatus.equals("rusak")) {
+        if (roomStatus.equals("Rusak")) {
             String sql = "INSERT INTO pemeliharaan (id_ruangan, deskripsi, waktu_mulai, waktu_selesai) VALUES ('" +
                     maintenance.getRoomId() + "' , '" + maintenance.getDescription() + "' , '" + sdf.format(maintenance.getStartTime().getTime()) +
                     "' , '" + sdf.format(maintenance.getFinishTime().getTime()) + "')";
