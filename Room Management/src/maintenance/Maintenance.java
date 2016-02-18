@@ -124,11 +124,9 @@ public class Maintenance {
     public String editMaintenance(MaintenanceModel maintenance) {
         database.connect(path);
         
-        System.out.println(maintenance.getRoomId() + " " + maintenance.getId());
         String sql = "UPDATE pemeliharaan SET id_ruangan = '" + maintenance.getRoomId() + "', deskripsi = '" + 
                 maintenance.getDescription() + "', waktu_mulai = '"  + sdf.format(maintenance.getStartTime().getTime()) + "', waktu_selesai = '" + sdf.format(maintenance.getFinishTime().getTime()) + 
                 "' WHERE id_pemeliharaan = '" + maintenance.getId() + "'";
-        
         String message = database.changeData(sql);
         
         database.closeDatabase();
@@ -140,7 +138,6 @@ public class Maintenance {
         database.connect(path);
 
         String sql = "DELETE FROM pemeliharaan WHERE id_pemeliharaan = '" + maintenance.getId() + "'";
-
         String message = database.changeData(sql);
         
         database.closeDatabase();
@@ -148,6 +145,16 @@ public class Maintenance {
         return message;
     }
     
+    public String deleteAllMaintenance() {
+        database.connect(path);
+        
+        String sql = "DELETE FROM pemeliharaan";
+        String message = database.changeData(sql);
+        
+        database.closeDatabase();
+        
+        return message;
+    }
     public static final void main(String args[]) {
         Maintenance maintenance = new Maintenance();
         

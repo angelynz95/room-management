@@ -94,6 +94,15 @@ public class Borrowing {
         return message;
     }
     
+    public String deleteAllBorrowing() {
+        database.connect(path);
+        
+        String sql = "DELETE FROM peminjaman";
+        String message = database.changeData(sql);
+        database.closeDatabase();
+        return message;
+    }
+    
     public void addWeeklyBorrowing(BorrowingModel borrowing) {
         Calendar calendarStart = (Calendar)borrowing.getStartTime().clone();
         int startHour = calendarStart.get(Calendar.HOUR_OF_DAY);

@@ -13,7 +13,6 @@ import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -26,7 +25,7 @@ public class MenuPanel extends javax.swing.JPanel {
     private BookingInformationPanel bookingInformationPanel;
     private RoomInformationPanel roomInformationPanel;
     private StatisticPanel statisticPanel;
-    private ChangePasswordPanel changePasswordPanel;
+    private SettingPanel changePasswordPanel;
     
     /**
      * Creates new form MainPanel
@@ -51,7 +50,7 @@ public class MenuPanel extends javax.swing.JPanel {
         
         // Tampilan Ubah Kata Sandi
         changePasswordContainer.setLayout(new FlowLayout());
-        changePasswordPanel = new ChangePasswordPanel();
+        changePasswordPanel = new SettingPanel();
         changePasswordContainer.add(changePasswordPanel);
         
         logoutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -180,18 +179,15 @@ public class MenuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutLabelMouseClicked
-        // TODO add your handling code here:
         mainFrame.setContentPane(new LoginPanel());
         mainFrame.pack();
     }//GEN-LAST:event_logoutLabelMouseClicked
 
     private void menuPaneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPaneMouseClicked
-        // TODO add your handling code here:
         ChangeListener changeListener = new ChangeListener() {
             public void stateChanged(ChangeEvent changeEvent) {
               JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
               int index = sourceTabbedPane.getSelectedIndex();
-              System.out.println("Tab changed to: " + index);
               if (index == 3) {
                   changePasswordPanel.resetTextField();
               } else if (index == 2) {

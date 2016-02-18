@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2016 at 08:27 AM
+-- Generation Time: Feb 18, 2016 at 05:41 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -33,17 +33,19 @@ CREATE TABLE IF NOT EXISTS `pemeliharaan` (
   `waktu_mulai` datetime NOT NULL,
   `waktu_selesai` datetime NOT NULL,
   PRIMARY KEY (`id_pemeliharaan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `pemeliharaan`
 --
 
 INSERT INTO `pemeliharaan` (`id_pemeliharaan`, `id_ruangan`, `deskripsi`, `waktu_mulai`, `waktu_selesai`) VALUES
-(1, 2, 'Pintu rusak', '2016-03-07 15:00:00', '2016-03-10 09:00:00'),
+(1, 2, 'Pintu rusak', '2016-02-22 19:00:00', '2016-02-23 21:00:00'),
 (2, 5, 'Pintu rusak', '2016-03-08 11:00:00', '2016-03-08 19:00:00'),
-(3, 1, 'Bocor', '2016-03-08 11:00:00', '2016-03-09 19:00:00'),
-(4, 8, 'Pintu rusak', '2016-03-08 11:00:00', '2016-03-08 19:00:00');
+(3, 1, 'Bocor', '2016-03-08 11:00:00', '2016-03-08 19:00:00'),
+(4, 8, 'Pintu rusak', '2016-03-08 11:00:00', '2016-03-08 19:00:00'),
+(5, 6, 'Service AC', '2016-02-16 20:00:00', '2016-02-16 21:00:00'),
+(7, 6, 'Service AC', '2016-02-18 10:00:00', '2016-02-18 17:00:00');
 
 -- --------------------------------------------------------
 
@@ -66,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `peminjaman` (
   `waktu_mulai` datetime NOT NULL,
   `waktu_selesai` datetime NOT NULL,
   PRIMARY KEY (`id_peminjaman`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `peminjaman`
@@ -80,12 +82,20 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `id_ruangan`, `id_peminjam`, `nama_pe
 (6, 5, 13513032, 'Angela', 'Mahasiswa', 'JL Soedirman no : 13', '0823133224134', 'HMIF ITB', 'Rapat', 20, '2016-02-13 14:20:25', '2016-02-27 18:00:00', '2016-02-27 21:00:00'),
 (7, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-22 07:00:00', '2016-02-22 09:00:00'),
 (8, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-22 09:00:00', '2016-02-22 11:00:00'),
-(9, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-22 13:00:00', '2016-02-22 15:00:00'),
-(10, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-22 15:00:00', '2016-02-22 17:00:00'),
+(9, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-08 13:00:00', '2016-02-08 15:00:00'),
+(10, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-08 15:00:00', '2016-02-08 17:00:00'),
 (11, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-23 07:00:00', '2016-02-23 09:00:00'),
 (12, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-23 09:00:00', '2016-02-23 11:00:00'),
 (13, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-23 13:00:00', '2016-02-23 15:00:00'),
-(14, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-23 15:00:00', '2016-02-23 17:00:00');
+(14, 1, 22222222, 'Nina', 'Dosen', 'JL Ganesha', '0823133224333', 'Informatika ITB', 'kuliah', 50, '2016-02-13 14:20:25', '2016-02-23 15:00:00', '2016-02-23 17:00:00'),
+(15, 4, 13513002, 'Irene', 'Mahasiswa', 'Tamansari', '0878821372', 'HMIF', 'Demo PPL', 2, '2016-02-16 09:32:00', '2016-02-16 11:00:00', '2016-02-16 12:00:00'),
+(16, 1, 13513026, 'William Sentosa', 'Mahasiswa', 'Cisitu Tegalega', '0229485729', 'HMIF', 'Hearing Divisi Manager Proyek', 30, '2016-02-16 16:07:59', '2016-02-16 18:00:00', '2016-02-16 19:00:00'),
+(17, 1, 13514083, 'Timothy Julianto', 'Mahasiswa', 'Jl. Tubagus Ismail V No. 10', '08628126001', 'Informatika ITB', 'Temu Alumni Angkatan 1970', 79, '2016-02-16 19:10:06', '2016-02-17 20:00:00', '2016-02-17 21:00:00'),
+(20, 1, 15712037, 'Jordhy Silalahi', 'Mahasiswa', 'Cisitu Dalam No. 29', '0812738277', 'HMT', 'Hearing HMT', 40, '2016-02-17 13:10:04', '2016-02-17 14:00:00', '2016-02-17 15:00:00'),
+(21, 3, 13512009, 'Gwenyth John', 'Mahasiswa', 'Jl. Cihampelas No. 22', '08577291726', 'Informatika ITB', 'Briefing Asisten', 20, '2016-02-17 22:50:53', '2016-02-18 14:00:00', '2016-02-18 15:00:00'),
+(23, 1, 15612822, 'Hendy Kurnia', 'Mahasiswa', 'Cihampelas', '0867163712', 'KM-ITB', 'Hearing TPB Cup', 30, '2016-02-18 08:10:40', '2016-02-18 09:00:00', '2016-02-18 10:00:00'),
+(24, 1, 15612822, 'Hendy Kurnia', 'Mahasiswa', 'Cihampelas', '0867163712', 'KM-ITB', 'Hearing TPB Cup', 30, '2016-02-18 08:10:40', '2016-02-25 09:00:00', '2016-02-25 10:00:00'),
+(25, 4, 13513002, 'Irene Wiliudarsan', 'Mahasiswa', 'Jl. Tamansari', '0881238822', 'HMIF', 'Hearing Pemilu 1 HMIF', 50, '2016-02-18 08:43:33', '2016-02-19 08:00:00', '2016-02-19 10:00:00');
 
 -- --------------------------------------------------------
 
@@ -116,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `ruangan` (
   `kapasitas` int(3) NOT NULL DEFAULT '0',
   `status` varchar(5) NOT NULL DEFAULT 'OK',
   PRIMARY KEY (`id_ruangan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `ruangan`
@@ -124,15 +134,14 @@ CREATE TABLE IF NOT EXISTS `ruangan` (
 
 INSERT INTO `ruangan` (`id_ruangan`, `nama`, `kapasitas`, `status`) VALUES
 (1, 'R 7602', 150, 'OK'),
-(2, 'R 7606', 75, 'OK'),
-(3, 'R 7609', 50, 'OK'),
-(4, 'R 7603', 50, 'OK'),
-(5, 'Laboratorium Dasar I', 50, 'OK'),
-(6, 'Laboratorium Dasar IV', 50, 'OK'),
-(7, 'Laboratorium Dasar II', 30, 'OK'),
-(8, 'R Multimedia', 75, 'OK'),
-(9, 'R 7610', 50, 'OK'),
-(10, 'R 7602', 50, 'OK');
+(2, 'R 7606', 75, 'Rusak'),
+(3, 'R 7609', 50, 'Rusak'),
+(4, 'R 7603', 50, 'Rusak'),
+(5, 'Laboratorium Dasar I', 50, 'Rusak'),
+(6, 'Laboratorium Dasar IV', 50, 'Rusak'),
+(7, 'Laboratorium Dasar II', 30, 'Rusak'),
+(8, 'R Multimedia', 75, 'Rusak'),
+(9, 'R 7610', 50, 'Rusak');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

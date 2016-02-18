@@ -10,6 +10,8 @@ package gui;
 import database.BorrowingModel;
 import database.MaintenanceModel;
 import database.RoomModel;
+import maintenance.Maintenance;
+import roominformation.RoomInformation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -23,8 +25,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
 import javax.swing.UIManager;
-import maintenance.Maintenance;
-import roominformation.RoomInformation;
 
 /**
  *
@@ -96,6 +96,9 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         finishDateField = new org.freixas.jcalendar.JCalendarCombo();
         finishTimeField = new javax.swing.JSpinner(new SpinnerDateModel());
         timeLabel = new javax.swing.JLabel();
+        requiredLabel = new javax.swing.JLabel();
+        requiredLabel1 = new javax.swing.JLabel();
+        requiredLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Penambahan Pemeliharaan Ruangan");
@@ -140,6 +143,18 @@ public class MaintenanceFrame extends javax.swing.JFrame {
         timeLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         timeLabel.setText("Waktu Pemeliharaan");
 
+        requiredLabel.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        requiredLabel.setForeground(new java.awt.Color(255, 0, 0));
+        requiredLabel.setText("*");
+
+        requiredLabel1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        requiredLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        requiredLabel1.setText("*");
+
+        requiredLabel2.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        requiredLabel2.setForeground(new java.awt.Color(255, 0, 0));
+        requiredLabel2.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,14 +167,19 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(timeLabel)
-                                    .addComponent(roomNameLabel))
-                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(timeLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(requiredLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(descriptionLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(requiredLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(roomNameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(requiredLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(roomNameDropdown, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -179,9 +199,11 @@ public class MaintenanceFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(roomNameDropdown, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(roomNameLabel))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(roomNameLabel)
+                        .addComponent(requiredLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(timeSeperatorLabel)
@@ -189,10 +211,13 @@ public class MaintenanceFrame extends javax.swing.JFrame {
                     .addComponent(startTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(finishDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(finishTimeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(timeLabel))
+                    .addComponent(timeLabel)
+                    .addComponent(requiredLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(descriptionLabel)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(descriptionLabel)
+                        .addComponent(requiredLabel))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(addMaintenanceButton)
@@ -377,6 +402,9 @@ public class MaintenanceFrame extends javax.swing.JFrame {
     private org.freixas.jcalendar.JCalendarCombo finishDateField;
     private javax.swing.JSpinner finishTimeField;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel requiredLabel;
+    private javax.swing.JLabel requiredLabel1;
+    private javax.swing.JLabel requiredLabel2;
     private javax.swing.JComboBox roomNameDropdown;
     private javax.swing.JLabel roomNameLabel;
     private org.freixas.jcalendar.JCalendarCombo startDateField;

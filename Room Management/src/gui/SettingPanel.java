@@ -8,20 +8,22 @@
 package gui;
 
 import administrator.Administrator;
+import borrowing.Borrowing;
 import javax.swing.JOptionPane;
+import maintenance.Maintenance;
 
 /**
  *
  * @author angelynz95
  */
-public class ChangePasswordPanel extends javax.swing.JPanel {
+public class SettingPanel extends javax.swing.JPanel {
     
     private Administrator administrator;
     
     /**
      * Creates new form ChangePasswordPanel
      */
-    public ChangePasswordPanel() {
+    public SettingPanel() {
         initComponents();
         administrator = new Administrator();
     }
@@ -45,8 +47,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         oldPasswordMessage = new javax.swing.JLabel();
         newPasswordConfirmationMessage = new javax.swing.JLabel();
         newPasswordMessage = new javax.swing.JLabel();
-        newPasswordConfirmationLabel1 = new javax.swing.JLabel();
-        changePasswordButton1 = new javax.swing.JButton();
+        deletePasswordLabel = new javax.swing.JLabel();
+        deletePasswordButton = new javax.swing.JButton();
 
         oldPasswordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         oldPasswordLabel.setText("Kata Sandi Lama");
@@ -71,11 +73,16 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
 
         newPasswordMessage.setForeground(new java.awt.Color(255, 0, 0));
 
-        newPasswordConfirmationLabel1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        newPasswordConfirmationLabel1.setText("Hapus semua data");
+        deletePasswordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        deletePasswordLabel.setText("Hapus semua data");
 
-        changePasswordButton1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        changePasswordButton1.setText("Hapus");
+        deletePasswordButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        deletePasswordButton.setText("Hapus");
+        deletePasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deletePasswordButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,7 +96,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newPasswordConfirmationLabel)
                             .addComponent(oldPasswordLabel)
-                            .addComponent(newPasswordConfirmationLabel1))
+                            .addComponent(deletePasswordLabel))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
@@ -101,7 +108,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                                     .addComponent(changePasswordButton)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addComponent(changePasswordButton1)))))
+                                .addComponent(deletePasswordButton)))))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newPasswordConfirmationMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -132,8 +139,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                 .addComponent(changePasswordButton)
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(newPasswordConfirmationLabel1)
-                    .addComponent(changePasswordButton1))
+                    .addComponent(deletePasswordLabel)
+                    .addComponent(deletePasswordButton))
                 .addGap(144, 144, 144))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -156,9 +163,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
     }
     
     private void changePasswordButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changePasswordButtonActionPerformed
-        // TODO add your handling code here:
         String oldPassword = convertToString(oldPasswordField.getPassword());
-        System.out.println(oldPassword);
         String newPassword = convertToString(newPasswordField.getPassword());
         String newPasswordConfirmed = convertToString(newPasswordConfirmationField.getPassword());
         
@@ -195,17 +200,28 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
             newPasswordConfirmationMessage.setText("");
             oldPasswordMessage.setText("Kata sandi lama salah");
         }
-        
-        
     }//GEN-LAST:event_changePasswordButtonActionPerformed
 
+    private void deletePasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePasswordButtonMouseClicked
+        String message = "Apakah Anda yakin ingin menghapus seluruh jadwal?";
+        String title = "Konfirmasi Penghapusan";
+        Object[] options = {"Ya", "Tidak"};
+        int answerId = JOptionPane.showOptionDialog(this, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        if (options[answerId].equals("Ya")) {
+            Borrowing borrowing = new Borrowing();
+            borrowing.deleteAllBorrowing();
+            Maintenance maintenance = new Maintenance();
+            maintenance.deleteAllMaintenance();
+        }
+        
+    }//GEN-LAST:event_deletePasswordButtonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton changePasswordButton;
-    private javax.swing.JButton changePasswordButton1;
+    private javax.swing.JButton deletePasswordButton;
+    private javax.swing.JLabel deletePasswordLabel;
     private javax.swing.JPasswordField newPasswordConfirmationField;
     private javax.swing.JLabel newPasswordConfirmationLabel;
-    private javax.swing.JLabel newPasswordConfirmationLabel1;
     private javax.swing.JLabel newPasswordConfirmationMessage;
     private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JLabel newPasswordLabel;

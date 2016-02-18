@@ -7,7 +7,6 @@ package gui;
 
 import database.MaintenanceModel;
 import maintenance.Maintenance;
-
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.GregorianCalendar;
@@ -168,10 +167,12 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        
-        int reply = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus pemeliharaan ini?", "Pesan", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-          maintenance.deleteMaintenance(model);
+        String message = "Apakah Anda yakin ingin menghapus pemeliharaan ini?";
+        String title = "Konfirmasi Penghapusan";
+        Object[] options = {"Ya", "Tidak"};
+        int answerId = JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        if (options[answerId].equals("Ya")) {
+            maintenance.deleteMaintenance(model);
         }
         
         // Refresh tampilan organisasi jadwal

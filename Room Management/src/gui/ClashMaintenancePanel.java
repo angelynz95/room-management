@@ -8,7 +8,6 @@
  */
 package gui;
 
-import borrowing.Borrowing;
 import database.BorrowingModel;
 import database.MaintenanceModel;
 import java.awt.Color;

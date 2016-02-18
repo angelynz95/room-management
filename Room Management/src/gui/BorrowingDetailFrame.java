@@ -277,10 +277,12 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        
-        int reply = JOptionPane.showConfirmDialog(this, "Apakah anda yakin ingin menghapus jadwal ini?", "Pesan", JOptionPane.YES_NO_OPTION);
-        if (reply == JOptionPane.YES_OPTION) {
-          borrowing.deleteBorrowing(borrowingModel);
+        String message = "Apakah Anda yakin ingin menghapus jadwal ini?";
+        String title = "Konfirmasi Penghapusan";
+        Object[] options = {"Ya", "Tidak"};
+        int answerId = JOptionPane.showOptionDialog(null, message, title, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+        if (options[answerId].equals("Ya")) {
+            borrowing.deleteBorrowing(borrowingModel);
         }
         
         // Refresh tampilan organisasi jadwal

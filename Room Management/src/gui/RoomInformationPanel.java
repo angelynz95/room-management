@@ -9,7 +9,6 @@ package gui;
 
 import database.RoomModel;
 import roominformation.RoomInformation;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -17,7 +16,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -157,7 +155,6 @@ public class RoomInformationPanel extends javax.swing.JPanel {
     private void showTable() {
         JPanel table = new JPanel();
         GridLayout tabelLayout = new GridLayout(data.size() + 1, columns.size());
-        System.out.println(data.size());
         table.setLayout(tabelLayout);
         
         // Menambah header kolom
