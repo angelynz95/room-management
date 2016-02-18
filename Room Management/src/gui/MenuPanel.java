@@ -142,7 +142,7 @@ public class MenuPanel extends javax.swing.JPanel {
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Ubah Kata Sandi", changePasswordContainer);
+        menuPane.addTab("Pengaturan", changePasswordContainer);
 
         logoutLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         logoutLabel.setText("Keluar");

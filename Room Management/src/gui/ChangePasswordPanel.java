@@ -45,6 +45,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         oldPasswordMessage = new javax.swing.JLabel();
         newPasswordConfirmationMessage = new javax.swing.JLabel();
         newPasswordMessage = new javax.swing.JLabel();
+        newPasswordConfirmationLabel1 = new javax.swing.JLabel();
+        changePasswordButton1 = new javax.swing.JButton();
 
         oldPasswordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         oldPasswordLabel.setText("Kata Sandi Lama");
@@ -69,6 +71,12 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
 
         newPasswordMessage.setForeground(new java.awt.Color(255, 0, 0));
 
+        newPasswordConfirmationLabel1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        newPasswordConfirmationLabel1.setText("Hapus semua data");
+
+        changePasswordButton1.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        changePasswordButton1.setText("Hapus");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,18 +84,24 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(375, 375, 375)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newPasswordLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newPasswordConfirmationLabel)
-                            .addComponent(oldPasswordLabel))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(oldPasswordField)
-                                .addComponent(newPasswordField)
-                                .addComponent(newPasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(changePasswordButton)))
-                    .addComponent(newPasswordLabel))
+                            .addComponent(oldPasswordLabel)
+                            .addComponent(newPasswordConfirmationLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(oldPasswordField)
+                                        .addComponent(newPasswordField)
+                                        .addComponent(newPasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(changePasswordButton)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(changePasswordButton1)))))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newPasswordConfirmationMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,9 +128,13 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
                     .addComponent(newPasswordConfirmationField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(newPasswordConfirmationLabel)
                     .addComponent(newPasswordConfirmationMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(changePasswordButton)
-                .addGap(213, 213, 213))
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(newPasswordConfirmationLabel1)
+                    .addComponent(changePasswordButton1))
+                .addGap(144, 144, 144))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -184,8 +202,10 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton changePasswordButton;
+    private javax.swing.JButton changePasswordButton1;
     private javax.swing.JPasswordField newPasswordConfirmationField;
     private javax.swing.JLabel newPasswordConfirmationLabel;
+    private javax.swing.JLabel newPasswordConfirmationLabel1;
     private javax.swing.JLabel newPasswordConfirmationMessage;
     private javax.swing.JPasswordField newPasswordField;
     private javax.swing.JLabel newPasswordLabel;
