@@ -26,6 +26,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import statistic.Statistic;
 
 /**
@@ -285,6 +286,26 @@ public class StatisticPanel extends javax.swing.JPanel {
         roomUsedStatistic.setFont(new Font("Roboto", Font.PLAIN, 16));
         
         roomUsedPane.getViewport().add(roomUsedStatistic);
+        
+        // Pie chart
+        DefaultPieDataset dataset = new DefaultPieDataset();
+        for (int i=0; i<roomUsedData.size(); i++) {
+            List<Object> datum = roomUsedData.get(i);
+            String user = datum.get(0).toString();
+            int count = (int) datum.get(1);
+            dataset.setValue(user, count);
+        }
+        
+        JFreeChart pieChart = ChartFactory.createPieChart("Penggunaan Ruangan oleh Kelompok User", dataset, true, true, false);
+        ChartPanel chartPanel = new ChartPanel(pieChart);
+        JTable table = showRoomBorrowedFrequencyTable();
+        
+        JPanel scrollPaneContainer = new JPanel();
+        scrollPaneContainer.setLayout(new BoxLayout(scrollPaneContainer, BoxLayout.Y_AXIS));
+        scrollPaneContainer.add(chartPanel);
+//        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,100)));
+        scrollPaneContainer.add(table);
+        roomUsedPane.getViewport().add(scrollPaneContainer);
     }
     
     private void showRoomBorrowedFrequencyStatistic() {
