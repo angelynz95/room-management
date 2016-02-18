@@ -75,6 +75,7 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         borrowingButton = new javax.swing.JButton();
         maintenanceButton = new javax.swing.JButton();
         dateField = new org.freixas.jcalendar.JCalendarCombo();
+        timePanel = new javax.swing.JPanel();
 
         javax.swing.GroupLayout bookingInformationPanelLayout = new javax.swing.GroupLayout(bookingInformationPanel);
         bookingInformationPanel.setLayout(bookingInformationPanelLayout);
@@ -118,20 +119,35 @@ public class BookingInformationPanel extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout timePanelLayout = new javax.swing.GroupLayout(timePanel);
+        timePanel.setLayout(timePanelLayout);
+        timePanelLayout.setHorizontalGroup(
+            timePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 190, Short.MAX_VALUE)
+        );
+        timePanelLayout.setVerticalGroup(
+            timePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 511, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(435, Short.MAX_VALUE)
                         .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(230, 230, 230)
                         .addComponent(borrowingButton)
                         .addGap(18, 18, 18)
                         .addComponent(maintenanceButton))
-                    .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(timePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addGap(27, 27, 27))
         );
         layout.setVerticalGroup(
@@ -143,7 +159,9 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                     .addComponent(maintenanceButton)
                     .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bookingInformationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -180,13 +198,13 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_maintenanceButtonMouseClicked
 
     private void setRooms() {
-        rooms.add("");
         for(Map.Entry<RoomModel, Map<Integer, Object>> roomSchedule: bookingInformation.getRoomsSchedule().entrySet()) {
             rooms.add(roomSchedule.getKey().getName());
         }
     }
     
     private void setSchedules() {
+        schedules.add("");
         for (int i = 7; i < 9; i++) {
             schedules.add("0" + i + ".00 - 0" + (i+1) + ".00");
         }
@@ -215,12 +233,14 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         bookingInformationPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         bookingInformationPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         bookingInformationPanel.setLayout(new GridLayout(0, rooms.size()));
+        timePanel.setLayout(new GridLayout(0, 1));
     }
     
     private void showBookingInformation() {
         bookingInformation.showBookingSchedule(date);
         bookingInformation.showMaintenanceSchedule(date);
         customizeRoomCells();
+        customizeTimeCells();
         customizeScheduleCells();
     }
     
@@ -236,30 +256,39 @@ public class BookingInformationPanel extends javax.swing.JPanel {
         }
     }
     
-    private void customizeScheduleCells() {
-        JLabel scheduleLabel, timeLabel;
-        
-        for (int i = 0; i < rooms.size(); i++) {
-        }
+    private void customizeTimeCells() {
+        JLabel timeLabel;
         
         for (int i = 0; i < schedules.size(); i++) {
             timeLabel = new JLabel();
-            customizeLabel(timeLabel);
-            timeLabel.setBackground(Color.lightGray);
-            timeLabel.setText(schedules.get(i));
-            bookingInformationPanel.add(timeLabel);
             
-            for (int j = 1; j < rooms.size(); j++) {
+            timeLabel.setBackground(Color.lightGray);
+            timeLabel.setPreferredSize(new Dimension(175, 30));
+            timeLabel.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+            timeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            timeLabel.setVerticalAlignment(SwingConstants.CENTER);
+            timeLabel.setFont(new Font("Roboto", Font.PLAIN, 16));
+            timeLabel.setOpaque(true);
+            timeLabel.setText(schedules.get(i));
+            timePanel.add(timeLabel);
+        }
+    }
+    
+    private void customizeScheduleCells() {
+        JLabel scheduleLabel;
+        
+        for (int i = 0; i < schedules.size() - 1; i++) {
+            for (int j = 0; j < rooms.size(); j++) {
                 String roomName = rooms.get(j);
                 List roomModuls = new ArrayList(bookingInformation.getRoomsSchedule().keySet());
 
                 scheduleLabel = new JLabel();                
                 customizeLabel(scheduleLabel);
 
-                if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).size() > 0) {
-                    if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).containsKey(i + 7)) {
-                        if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7).getClass().equals(BorrowingModel.class)) {
-                            BorrowingModel borrowing = (BorrowingModel) bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7);
+                if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j)).size() > 0) {
+                    if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j)).containsKey(i + 7)) {
+                        if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j)).get(i + 7).getClass().equals(BorrowingModel.class)) {
+                            BorrowingModel borrowing = (BorrowingModel) bookingInformation.getRoomsSchedule().get(roomModuls.get(j)).get(i + 7);
                             scheduleLabel.setBackground(new Color(138, 199, 222));
                             scheduleLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
@@ -269,8 +298,8 @@ public class BookingInformationPanel extends javax.swing.JPanel {
                                     bookingDetailFrame.setVisible(true);
                                 }
                             });
-                        } else if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7).getClass().equals(MaintenanceModel.class)) {
-                            MaintenanceModel maintenance = (MaintenanceModel) bookingInformation.getRoomsSchedule().get(roomModuls.get(j - 1)).get(i + 7);
+                        } else if (bookingInformation.getRoomsSchedule().get(roomModuls.get(j)).get(i + 7).getClass().equals(MaintenanceModel.class)) {
+                            MaintenanceModel maintenance = (MaintenanceModel) bookingInformation.getRoomsSchedule().get(roomModuls.get(j)).get(i + 7);
                             scheduleLabel.setBackground(new Color(250, 127, 119));
                             scheduleLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
                             scheduleLabel.addMouseListener(new MouseAdapter() {
@@ -303,5 +332,6 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     private javax.swing.JButton borrowingButton;
     private org.freixas.jcalendar.JCalendarCombo dateField;
     private javax.swing.JButton maintenanceButton;
+    private javax.swing.JPanel timePanel;
     // End of variables declaration//GEN-END:variables
 }
