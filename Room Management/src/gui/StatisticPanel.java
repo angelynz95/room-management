@@ -17,6 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
@@ -90,7 +91,6 @@ public class StatisticPanel extends javax.swing.JPanel {
         statisticPane = new javax.swing.JTabbedPane();
         roomBorrowedFrequencyPanel = new javax.swing.JPanel();
         roomBorrowedFrequencyPane = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
         roomBrokenFrequencyPanel = new javax.swing.JPanel();
         roomBrokenFrequencyPane = new javax.swing.JScrollPane();
         roomUsedPanel = new javax.swing.JPanel();
@@ -101,19 +101,6 @@ public class StatisticPanel extends javax.swing.JPanel {
         roomBorrowedFrequencyPane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         roomBorrowedFrequencyPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         roomBorrowedFrequencyPane.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1188, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 591, Short.MAX_VALUE)
-        );
-
-        roomBorrowedFrequencyPane.setViewportView(jPanel1);
 
         javax.swing.GroupLayout roomBorrowedFrequencyPanelLayout = new javax.swing.GroupLayout(roomBorrowedFrequencyPanel);
         roomBorrowedFrequencyPanel.setLayout(roomBorrowedFrequencyPanelLayout);
@@ -259,8 +246,8 @@ public class StatisticPanel extends javax.swing.JPanel {
         JPanel scrollPaneContainer = new JPanel();
         scrollPaneContainer.setLayout(new BoxLayout(scrollPaneContainer, BoxLayout.Y_AXIS));
         scrollPaneContainer.add(chartPanel);
-//        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        scrollPaneContainer.add(roomBrokenFrequencyStatistic);
+        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,50)));
+        scrollPaneContainer.add(new JScrollPane(roomBrokenFrequencyStatistic));
         roomBrokenFrequencyPane.getViewport().add(scrollPaneContainer);
     }
     
@@ -284,7 +271,6 @@ public class StatisticPanel extends javax.swing.JPanel {
         }
         // Mengatur font
         roomUsedStatistic.setFont(new Font("Roboto", Font.PLAIN, 16));
-        
         roomUsedPane.getViewport().add(roomUsedStatistic);
         
         // Pie chart
@@ -298,13 +284,12 @@ public class StatisticPanel extends javax.swing.JPanel {
         
         JFreeChart pieChart = ChartFactory.createPieChart("Penggunaan Ruangan oleh Kelompok User", dataset, true, true, false);
         ChartPanel chartPanel = new ChartPanel(pieChart);
-        JTable table = showRoomBorrowedFrequencyTable();
         
         JPanel scrollPaneContainer = new JPanel();
         scrollPaneContainer.setLayout(new BoxLayout(scrollPaneContainer, BoxLayout.Y_AXIS));
         scrollPaneContainer.add(chartPanel);
-//        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        scrollPaneContainer.add(table);
+        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,50)));
+        scrollPaneContainer.add(new JScrollPane(roomUsedStatistic));
         roomUsedPane.getViewport().add(scrollPaneContainer);
     }
     
@@ -316,8 +301,8 @@ public class StatisticPanel extends javax.swing.JPanel {
         JPanel scrollPaneContainer = new JPanel();
         scrollPaneContainer.setLayout(new BoxLayout(scrollPaneContainer, BoxLayout.Y_AXIS));
         scrollPaneContainer.add(chartPanel);
-//        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,100)));
-        scrollPaneContainer.add(table);
+        scrollPaneContainer.add(Box.createRigidArea(new Dimension(0,50)));
+        scrollPaneContainer.add(new JScrollPane(table));
         roomBorrowedFrequencyPane.getViewport().add(scrollPaneContainer);
     }
     
@@ -381,7 +366,6 @@ public class StatisticPanel extends javax.swing.JPanel {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane roomBorrowedFrequencyPane;
     private javax.swing.JPanel roomBorrowedFrequencyPanel;
     private javax.swing.JScrollPane roomBrokenFrequencyPane;
