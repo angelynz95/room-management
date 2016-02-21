@@ -167,11 +167,14 @@ public class BookingInformationPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void dateFieldDateChanged(org.freixas.jcalendar.DateEvent evt) {//GEN-FIRST:event_dateFieldDateChanged
+        timePanel.removeAll();
         bookingInformationPanel.removeAll();
         date = (GregorianCalendar) evt.getSelectedDate();
         bookingInformation = new BookingInformation();
         showBookingInformation();
+        timePanel.repaint();
         bookingInformationPanel.repaint();
+        timePanel.revalidate();
         bookingInformationPanel.revalidate();
     }//GEN-LAST:event_dateFieldDateChanged
 
