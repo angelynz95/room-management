@@ -12,10 +12,6 @@ import borrowing.Borrowing;
 import javax.swing.JOptionPane;
 import maintenance.Maintenance;
 
-/**
- *
- * @author angelynz95
- */
 public class SettingPanel extends javax.swing.JPanel {
     
     private Administrator administrator;

@@ -21,10 +21,6 @@ import java.util.logging.Logger;
 import java.util.Date;
 import java.util.Calendar;
 
-/**
- *
- * @author William Sentosa
- */
 public class RoomInformation {
     /* Atribute */
     private Database database;

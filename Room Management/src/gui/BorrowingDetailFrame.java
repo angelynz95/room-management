@@ -15,10 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-/**
- *
- * @author William Sentosa
- */
 public class BorrowingDetailFrame extends javax.swing.JFrame {
     
     private BorrowingModel borrowingModel;

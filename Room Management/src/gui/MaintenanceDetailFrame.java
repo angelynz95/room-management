@@ -14,10 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-/**
- *
- * @author William Sentosa
- */
 public class MaintenanceDetailFrame extends javax.swing.JFrame {
     private MainFrame mainFrame;
     private MaintenanceModel model;

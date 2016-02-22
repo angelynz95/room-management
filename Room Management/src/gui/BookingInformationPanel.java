@@ -29,10 +29,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
-/**
- *
- * @author angelynz95
- */
 public class BookingInformationPanel extends javax.swing.JPanel {
     BookingInformation bookingInformation;
     Color defaultColor;

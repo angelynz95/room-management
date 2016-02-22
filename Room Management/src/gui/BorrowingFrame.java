@@ -31,10 +31,6 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.UIManager;
 
-/**
- *
- * @author angelynz95
- */
 public class BorrowingFrame extends javax.swing.JFrame {
     /**
      * Creates new form BorrowingFrame

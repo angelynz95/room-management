@@ -19,9 +19,6 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by User on 2/4/2016.
- */
 public class BookingInformation {
     // Atribut
     private LinkedHashMap<RoomModel, Map<Integer, Object>> tableSchedule;

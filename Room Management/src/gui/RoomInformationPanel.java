@@ -30,10 +30,6 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
-/**
- *
- * @author angelynz95
- */
 public class RoomInformationPanel extends javax.swing.JPanel {
     private JTable table;
     private ArrayList<RoomModel> data;

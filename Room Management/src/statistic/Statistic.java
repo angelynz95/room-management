@@ -15,10 +15,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author William Sentosa
- */
 public class Statistic {
     /* Atribute */
     private ArrayList<Integer> numbers;

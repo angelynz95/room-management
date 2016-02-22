@@ -16,10 +16,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-/**
- *
- * @author angelynz95
- */
 public class MenuPanel extends javax.swing.JPanel {
     private JFrame mainFrame;
     private BookingInformationPanel bookingInformationPanel;

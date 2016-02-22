@@ -14,9 +14,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by User on 2/4/2016.
- */
 public class Administrator {
     private final String path = "jdbc:mysql://localhost:3306/room_management";
     private Database database;

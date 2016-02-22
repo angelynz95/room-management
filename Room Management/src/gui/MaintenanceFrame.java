@@ -26,10 +26,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.SpinnerDateModel;
 import javax.swing.UIManager;
 
-/**
- *
- * @author angelynz95
- */
 public class MaintenanceFrame extends javax.swing.JFrame {
     private int maintenanceId;
     private MainFrame mainFrame;

@@ -16,10 +16,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author William Sentosa
- */
 public class Database {
     private final String username = "root";
     private final String password = "";

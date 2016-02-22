@@ -12,10 +12,6 @@ import administrator.Administrator;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-/**
- *
- * @author angelynz95
- */
 public class LoginPanel extends javax.swing.JPanel {
     private Administrator administrator;
     private MainFrame frame;

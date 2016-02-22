@@ -10,10 +10,6 @@ package gui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-/**
- *
- * @author angelynz95
- */
 public class MainFrame extends javax.swing.JFrame {
     // Atribut
     private static MainFrame frame = new MainFrame();

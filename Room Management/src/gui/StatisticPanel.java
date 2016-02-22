@@ -28,10 +28,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
-/**
- *
- * @author angelynz95
- */
 public class StatisticPanel extends javax.swing.JPanel {
     private DefaultTableCellRenderer headerRenderer;
     private DefaultTableCellRenderer cellRenderer;
