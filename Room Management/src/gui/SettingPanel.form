@@ -24,7 +24,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="newPasswordConfirmationLabel" min="-2" max="-2" attributes="0"/>
                           <Component id="oldPasswordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="deletePasswordLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="deleteAllDataLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -40,7 +40,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="deletePasswordButton" min="-2" max="-2" attributes="0"/>
+                              <Component id="deleteAllDataButton" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -82,8 +82,8 @@
               <Component id="changePasswordButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="deletePasswordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="deletePasswordButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteAllDataLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteAllDataButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="144" max="-2" attributes="0"/>
           </Group>
@@ -153,7 +153,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="deletePasswordLabel">
+    <Component class="javax.swing.JLabel" name="deleteAllDataLabel">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Roboto" size="16" style="0"/>
@@ -161,7 +161,7 @@
         <Property name="text" type="java.lang.String" value="Hapus semua data"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="deletePasswordButton">
+    <Component class="javax.swing.JButton" name="deleteAllDataButton">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Roboto" size="16" style="0"/>
@@ -169,7 +169,7 @@
         <Property name="text" type="java.lang.String" value="Hapus"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deletePasswordButtonMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="deleteAllDataButtonMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

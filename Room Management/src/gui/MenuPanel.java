@@ -45,9 +45,9 @@ public class MenuPanel extends javax.swing.JPanel {
         statisticContainer.add(statisticPanel);
         
         // Tampilan Ubah Kata Sandi
-        changePasswordContainer.setLayout(new FlowLayout());
+        settingContainer.setLayout(new FlowLayout());
         changePasswordPanel = new SettingPanel();
-        changePasswordContainer.add(changePasswordPanel);
+        settingContainer.add(changePasswordPanel);
         
         logoutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
@@ -73,7 +73,7 @@ public class MenuPanel extends javax.swing.JPanel {
         bookingInformationContainer = new javax.swing.JPanel();
         roomInformationContainer = new javax.swing.JPanel();
         statisticContainer = new javax.swing.JPanel();
-        changePasswordContainer = new javax.swing.JPanel();
+        settingContainer = new javax.swing.JPanel();
         logoutLabel = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
 
@@ -126,18 +126,18 @@ public class MenuPanel extends javax.swing.JPanel {
 
         menuPane.addTab("Statistik", statisticContainer);
 
-        javax.swing.GroupLayout changePasswordContainerLayout = new javax.swing.GroupLayout(changePasswordContainer);
-        changePasswordContainer.setLayout(changePasswordContainerLayout);
-        changePasswordContainerLayout.setHorizontalGroup(
-            changePasswordContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout settingContainerLayout = new javax.swing.GroupLayout(settingContainer);
+        settingContainer.setLayout(settingContainerLayout);
+        settingContainerLayout.setHorizontalGroup(
+            settingContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 1195, Short.MAX_VALUE)
         );
-        changePasswordContainerLayout.setVerticalGroup(
-            changePasswordContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        settingContainerLayout.setVerticalGroup(
+            settingContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 626, Short.MAX_VALUE)
         );
 
-        menuPane.addTab("Pengaturan", changePasswordContainer);
+        menuPane.addTab("Pengaturan", settingContainer);
 
         logoutLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         logoutLabel.setText("Keluar");
@@ -201,10 +201,10 @@ public class MenuPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bookingInformationContainer;
-    private javax.swing.JPanel changePasswordContainer;
     private javax.swing.JLabel logoutLabel;
     private javax.swing.JTabbedPane menuPane;
     private javax.swing.JPanel roomInformationContainer;
+    private javax.swing.JPanel settingContainer;
     private javax.swing.JPanel statisticContainer;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables

@@ -43,8 +43,8 @@ public class SettingPanel extends javax.swing.JPanel {
         oldPasswordMessage = new javax.swing.JLabel();
         newPasswordConfirmationMessage = new javax.swing.JLabel();
         newPasswordMessage = new javax.swing.JLabel();
-        deletePasswordLabel = new javax.swing.JLabel();
-        deletePasswordButton = new javax.swing.JButton();
+        deleteAllDataLabel = new javax.swing.JLabel();
+        deleteAllDataButton = new javax.swing.JButton();
 
         oldPasswordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
         oldPasswordLabel.setText("Kata Sandi Lama");
@@ -69,14 +69,14 @@ public class SettingPanel extends javax.swing.JPanel {
 
         newPasswordMessage.setForeground(new java.awt.Color(255, 0, 0));
 
-        deletePasswordLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        deletePasswordLabel.setText("Hapus semua data");
+        deleteAllDataLabel.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        deleteAllDataLabel.setText("Hapus semua data");
 
-        deletePasswordButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
-        deletePasswordButton.setText("Hapus");
-        deletePasswordButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        deleteAllDataButton.setFont(new java.awt.Font("Roboto", 0, 16)); // NOI18N
+        deleteAllDataButton.setText("Hapus");
+        deleteAllDataButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                deletePasswordButtonMouseClicked(evt);
+                deleteAllDataButtonMouseClicked(evt);
             }
         });
 
@@ -92,7 +92,7 @@ public class SettingPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(newPasswordConfirmationLabel)
                             .addComponent(oldPasswordLabel)
-                            .addComponent(deletePasswordLabel))
+                            .addComponent(deleteAllDataLabel))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(37, 37, 37)
@@ -104,7 +104,7 @@ public class SettingPanel extends javax.swing.JPanel {
                                     .addComponent(changePasswordButton)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
-                                .addComponent(deletePasswordButton)))))
+                                .addComponent(deleteAllDataButton)))))
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(newPasswordConfirmationMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,8 +135,8 @@ public class SettingPanel extends javax.swing.JPanel {
                 .addComponent(changePasswordButton)
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(deletePasswordLabel)
-                    .addComponent(deletePasswordButton))
+                    .addComponent(deleteAllDataLabel)
+                    .addComponent(deleteAllDataButton))
                 .addGap(144, 144, 144))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -198,7 +198,7 @@ public class SettingPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_changePasswordButtonActionPerformed
 
-    private void deletePasswordButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deletePasswordButtonMouseClicked
+    private void deleteAllDataButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteAllDataButtonMouseClicked
         String message = "Apakah Anda yakin ingin menghapus seluruh jadwal?";
         String title = "Konfirmasi Penghapusan";
         Object[] options = {"Ya", "Tidak"};
@@ -210,12 +210,12 @@ public class SettingPanel extends javax.swing.JPanel {
             maintenance.deleteAllMaintenance();
         }
         
-    }//GEN-LAST:event_deletePasswordButtonMouseClicked
+    }//GEN-LAST:event_deleteAllDataButtonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton changePasswordButton;
-    private javax.swing.JButton deletePasswordButton;
-    private javax.swing.JLabel deletePasswordLabel;
+    private javax.swing.JButton deleteAllDataButton;
+    private javax.swing.JLabel deleteAllDataLabel;
     private javax.swing.JPasswordField newPasswordConfirmationField;
     private javax.swing.JLabel newPasswordConfirmationLabel;
     private javax.swing.JLabel newPasswordConfirmationMessage;
