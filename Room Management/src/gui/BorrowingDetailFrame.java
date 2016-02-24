@@ -58,19 +58,19 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        borrowingDetailLabel = new javax.swing.JLabel();
+        roomNameLabel = new javax.swing.JLabel();
+        borrowerNameLabel = new javax.swing.JLabel();
+        borrowerStatusLabel = new javax.swing.JLabel();
+        borrowerIdLabel = new javax.swing.JLabel();
+        borrowerAddressLabel = new javax.swing.JLabel();
+        borrowerPhoneLabel = new javax.swing.JLabel();
+        organizationNameLabel = new javax.swing.JLabel();
+        activityNameLabel = new javax.swing.JLabel();
+        totalParticipantLabel = new javax.swing.JLabel();
+        permissionTimeLabel = new javax.swing.JLabel();
+        startTimeLabel = new javax.swing.JLabel();
+        finishTimeLabel = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         namaRuanganLabel = new javax.swing.JLabel();
@@ -88,44 +88,44 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel1.setText("Detail Peminjaman");
+        borrowingDetailLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        borrowingDetailLabel.setText("Detail Peminjaman");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel2.setText("Nama Ruangan ");
+        roomNameLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        roomNameLabel.setText("Nama Ruangan ");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel3.setText("Nama Peminjam ");
+        borrowerNameLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        borrowerNameLabel.setText("Nama Peminjam ");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel4.setText("Status Peminjam ");
+        borrowerStatusLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        borrowerStatusLabel.setText("Status Peminjam ");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel5.setText("NIM / NIP ");
+        borrowerIdLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        borrowerIdLabel.setText("NIM / NIP ");
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel6.setText("Alamat Peminjam ");
+        borrowerAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        borrowerAddressLabel.setText("Alamat Peminjam ");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel7.setText("Nomor Telepon Peminjam ");
+        borrowerPhoneLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        borrowerPhoneLabel.setText("Nomor Telepon Peminjam ");
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel8.setText("Nama Lembaga");
+        organizationNameLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        organizationNameLabel.setText("Nama Lembaga");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel9.setText("Nama Kegiatan");
+        activityNameLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        activityNameLabel.setText("Nama Kegiatan");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel10.setText("Jumlah Peserta");
+        totalParticipantLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        totalParticipantLabel.setText("Jumlah Peserta");
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel11.setText("Waktu izin");
+        permissionTimeLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        permissionTimeLabel.setText("Waktu izin");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel12.setText("Waktu mulai");
+        startTimeLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        startTimeLabel.setText("Waktu mulai");
 
-        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel13.setText("Waktu selesai");
+        finishTimeLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        finishTimeLabel.setText("Waktu selesai");
 
         deleteButton.setText("Hapus");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -178,21 +178,21 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addComponent(borrowingDetailLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13))
+                            .addComponent(borrowerPhoneLabel)
+                            .addComponent(borrowerAddressLabel)
+                            .addComponent(borrowerStatusLabel)
+                            .addComponent(borrowerNameLabel)
+                            .addComponent(roomNameLabel)
+                            .addComponent(borrowerIdLabel)
+                            .addComponent(organizationNameLabel)
+                            .addComponent(activityNameLabel)
+                            .addComponent(totalParticipantLabel)
+                            .addComponent(permissionTimeLabel)
+                            .addComponent(startTimeLabel)
+                            .addComponent(finishTimeLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(namaRuanganLabel)
@@ -213,54 +213,54 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+                .addComponent(borrowingDetailLabel)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(roomNameLabel)
                     .addComponent(namaRuanganLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addComponent(borrowerNameLabel)
                     .addComponent(namaPeminjamLabel))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addComponent(borrowerStatusLabel)
                     .addComponent(statusPeminjamLabel))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(borrowerIdLabel)
                     .addComponent(idPeminjamLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addComponent(borrowerAddressLabel)
                     .addComponent(alamatLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
+                    .addComponent(borrowerPhoneLabel)
                     .addComponent(noTelpLabel))
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
+                    .addComponent(organizationNameLabel)
                     .addComponent(namaLembagaLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
+                    .addComponent(activityNameLabel)
                     .addComponent(namaKegiatanLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
+                    .addComponent(totalParticipantLabel)
                     .addComponent(jumlahPesertaLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel11)
+                    .addComponent(permissionTimeLabel)
                     .addComponent(waktuIzinLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12)
+                    .addComponent(startTimeLabel)
                     .addComponent(waktuMulaiLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel13)
+                    .addComponent(finishTimeLabel)
                     .addComponent(waktuSelesaiLabel))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -334,30 +334,30 @@ public class BorrowingDetailFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel activityNameLabel;
     private javax.swing.JLabel alamatLabel;
+    private javax.swing.JLabel borrowerAddressLabel;
+    private javax.swing.JLabel borrowerIdLabel;
+    private javax.swing.JLabel borrowerNameLabel;
+    private javax.swing.JLabel borrowerPhoneLabel;
+    private javax.swing.JLabel borrowerStatusLabel;
+    private javax.swing.JLabel borrowingDetailLabel;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JLabel finishTimeLabel;
     private javax.swing.JLabel idPeminjamLabel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jumlahPesertaLabel;
     private javax.swing.JLabel namaKegiatanLabel;
     private javax.swing.JLabel namaLembagaLabel;
     private javax.swing.JLabel namaPeminjamLabel;
     private javax.swing.JLabel namaRuanganLabel;
     private javax.swing.JLabel noTelpLabel;
+    private javax.swing.JLabel organizationNameLabel;
+    private javax.swing.JLabel permissionTimeLabel;
+    private javax.swing.JLabel roomNameLabel;
+    private javax.swing.JLabel startTimeLabel;
     private javax.swing.JLabel statusPeminjamLabel;
+    private javax.swing.JLabel totalParticipantLabel;
     private javax.swing.JLabel waktuIzinLabel;
     private javax.swing.JLabel waktuMulaiLabel;
     private javax.swing.JLabel waktuSelesaiLabel;

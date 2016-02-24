@@ -48,11 +48,11 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        maintenanceDetailLabel = new javax.swing.JLabel();
+        roomNameLabel = new javax.swing.JLabel();
+        descriptionLabel = new javax.swing.JLabel();
+        startTimeLabel = new javax.swing.JLabel();
+        finishTimeLabel = new javax.swing.JLabel();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         namaRuanganLabel = new javax.swing.JLabel();
@@ -62,20 +62,20 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel1.setText("Detail Pemeliharaan");
+        maintenanceDetailLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        maintenanceDetailLabel.setText("Detail Pemeliharaan");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel2.setText("Nama Ruangan ");
+        roomNameLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        roomNameLabel.setText("Nama Ruangan ");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel3.setText("Deskripsi :");
+        descriptionLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        descriptionLabel.setText("Deskripsi :");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel4.setText("Waktu Mulai");
+        startTimeLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        startTimeLabel.setText("Waktu Mulai");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        jLabel5.setText("Waktu Selesai");
+        finishTimeLabel.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        finishTimeLabel.setText("Waktu Selesai");
 
         deleteButton.setText("Hapus");
         deleteButton.addActionListener(new java.awt.event.ActionListener() {
@@ -110,9 +110,9 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(deleteButton)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)))
+                                .addComponent(startTimeLabel)
+                                .addComponent(descriptionLabel)
+                                .addComponent(roomNameLabel)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
@@ -127,29 +127,29 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(deskripsiLabel)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5))
+                            .addComponent(maintenanceDetailLabel)
+                            .addComponent(finishTimeLabel))
                         .addContainerGap(143, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addComponent(jLabel1)
+                .addComponent(maintenanceDetailLabel)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(roomNameLabel)
                     .addComponent(namaRuanganLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
+                    .addComponent(startTimeLabel)
                     .addComponent(waktuMulaiLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
+                    .addComponent(finishTimeLabel)
                     .addComponent(waktuSelesaiLabel))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(descriptionLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(deskripsiLabel)
                 .addGap(69, 69, 69)
@@ -242,14 +242,14 @@ public class MaintenanceDetailFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
+    private javax.swing.JLabel descriptionLabel;
     private javax.swing.JLabel deskripsiLabel;
     private javax.swing.JButton editButton;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel finishTimeLabel;
+    private javax.swing.JLabel maintenanceDetailLabel;
     private javax.swing.JLabel namaRuanganLabel;
+    private javax.swing.JLabel roomNameLabel;
+    private javax.swing.JLabel startTimeLabel;
     private javax.swing.JLabel waktuMulaiLabel;
     private javax.swing.JLabel waktuSelesaiLabel;
     // End of variables declaration//GEN-END:variables
