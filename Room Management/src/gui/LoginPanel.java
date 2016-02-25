@@ -52,7 +52,7 @@ public class LoginPanel extends javax.swing.JPanel {
         passwordLabel = new javax.swing.JLabel();
         loginButton = new javax.swing.JButton();
         messageLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        logoLabel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1200, 700));
         setRequestFocusEnabled(false);
@@ -82,7 +82,7 @@ public class LoginPanel extends javax.swing.JPanel {
         messageLabel.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         messageLabel.setForeground(new java.awt.Color(255, 0, 0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/logo.png"))); // NOI18N
+        logoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,7 +101,7 @@ public class LoginPanel extends javax.swing.JPanel {
                 .addContainerGap(342, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(362, 362, 362)
-                .addComponent(jLabel1)
+                .addComponent(logoLabel)
                 .addGap(25, 25, 25)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -111,7 +111,7 @@ public class LoginPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(207, 207, 207)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel1)
+                    .addComponent(logoLabel)
                     .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -147,8 +147,8 @@ public class LoginPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton loginButton;
+    private javax.swing.JLabel logoLabel;
     private javax.swing.JLabel messageLabel;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
