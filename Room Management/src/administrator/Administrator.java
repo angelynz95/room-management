@@ -42,16 +42,14 @@ public class Administrator {
         ResultSet rs = database.fetchData(query);
         try {
             rs.next();
-            byte[] dbPassword = rs.getString("password").getBytes();
+            String dbPassword = rs.getString("password");
             byte[] dbSalt = rs.getString("salt").getBytes();
             database.closeDatabase();
             
             // Hash password masukkan pengguna dengan salt database
             Base64.Encoder enc = Base64.getEncoder();
             String hashedPassword = enc.encodeToString(hashPassword(password, dbSalt));
-            System.out.println("hash pass user:" + hashedPassword);
             
-            //            return (hashedPassword.compareTo(dbPassword) == 0);
             return authenticate(password, dbPassword, dbSalt);
         } catch(SQLException e) {
             database.closeDatabase();
@@ -70,8 +68,9 @@ public class Administrator {
         random.nextBytes(salt);
         
         Base64.Encoder enc = Base64.getEncoder();
-        String newHashedPassword = enc.encodeToString(hashPassword(newPassword, salt));
         String newSalt = enc.encodeToString(salt);
+        String newHashedPassword = enc.encodeToString(hashPassword(newPassword, newSalt.getBytes()));
+        
         String query = "UPDATE pengguna SET password = '" + newHashedPassword + "', salt = '" + newSalt + "';";
         database.changeData(query);
         database.closeDatabase();
@@ -91,22 +90,18 @@ public class Administrator {
         }
     }
     
-    public boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt) {
+    public boolean authenticate(String attemptedPassword, String encryptedPassword, byte[] salt) {
         byte[] hashedAttemptedPassword = hashPassword(attemptedPassword, salt);
         Base64.Encoder enc = Base64.getEncoder();
-        System.out.println(enc.encodeToString(hashedAttemptedPassword));
         
         Arrays.fill(attemptedPassword.toCharArray(), Character.MIN_VALUE);
-        if (hashedAttemptedPassword.length != encryptedPassword.length) return false;
-        for (int i = 0; i < hashedAttemptedPassword.length; i++) {
-            if (hashedAttemptedPassword[i] != encryptedPassword[i]) return false;
-        }
+        if (!enc.encodeToString(hashedAttemptedPassword).equals(encryptedPassword)) return false;
         return true;
     }
 
     public static void main(String args[]) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Administrator a = new Administrator();
-//        a.changePassword("admin");
+        a.changePassword("admin");
         if (a.validateLogin("admin")) {
             System.out.println("ok");
         } else {
