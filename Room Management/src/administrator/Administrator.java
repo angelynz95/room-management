@@ -42,7 +42,7 @@ public class Administrator {
         ResultSet rs = database.fetchData(query);
         try {
             rs.next();
-            String dbPassword = rs.getString("password");
+            byte[] dbPassword = rs.getString("password").getBytes();
             byte[] dbSalt = rs.getString("salt").getBytes();
             database.closeDatabase();
             
@@ -50,7 +50,9 @@ public class Administrator {
             Base64.Encoder enc = Base64.getEncoder();
             String hashedPassword = enc.encodeToString(hashPassword(password, dbSalt));
             System.out.println("hash pass user:" + hashedPassword);
-            return (hashedPassword.compareTo(dbPassword) == 0);
+            
+            //            return (hashedPassword.compareTo(dbPassword) == 0);
+            return authenticate(password, dbPassword, dbSalt);
         } catch(SQLException e) {
             database.closeDatabase();
             Logger.getLogger(Administrator.class.getName()).log(Level.SEVERE, null, e);
@@ -89,7 +91,7 @@ public class Administrator {
         }
     }
     
-    public boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public boolean authenticate(String attemptedPassword, byte[] encryptedPassword, byte[] salt) {
         byte[] hashedAttemptedPassword = hashPassword(attemptedPassword, salt);
         Base64.Encoder enc = Base64.getEncoder();
         System.out.println(enc.encodeToString(hashedAttemptedPassword));
@@ -100,7 +102,7 @@ public class Administrator {
             if (hashedAttemptedPassword[i] != encryptedPassword[i]) return false;
         }
         return true;
- }
+    }
 
     public static void main(String args[]) throws NoSuchAlgorithmException, InvalidKeySpecException {
         Administrator a = new Administrator();
@@ -111,6 +113,11 @@ public class Administrator {
             System.out.println("yah");
         }
         
+//        SecureRandom random = new SecureRandom();
+//        byte[] salt = new byte[8];
+//        random.nextBytes(salt);
+//        String hash = a.hashPassword("admin", salt)
+//        
 //        String userPassword = "admin";
 //        Administrator admin = new Administrator();
 //        if (admin.validateLogin(userPassword)) {

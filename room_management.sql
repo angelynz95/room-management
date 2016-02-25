@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2016 at 05:41 AM
+-- Generation Time: Feb 25, 2016 at 04:57 PM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -94,7 +94,6 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `id_ruangan`, `id_peminjam`, `nama_pe
 (20, 1, 15712037, 'Jordhy Silalahi', 'Mahasiswa', 'Cisitu Dalam No. 29', '0812738277', 'HMT', 'Hearing HMT', 40, '2016-02-17 13:10:04', '2016-02-17 14:00:00', '2016-02-17 15:00:00'),
 (21, 3, 13512009, 'Gwenyth John', 'Mahasiswa', 'Jl. Cihampelas No. 22', '08577291726', 'Informatika ITB', 'Briefing Asisten', 20, '2016-02-17 22:50:53', '2016-02-18 14:00:00', '2016-02-18 15:00:00'),
 (23, 1, 15612822, 'Hendy Kurnia', 'Mahasiswa', 'Cihampelas', '0867163712', 'KM-ITB', 'Hearing TPB Cup', 30, '2016-02-18 08:10:40', '2016-02-18 09:00:00', '2016-02-18 10:00:00'),
-(24, 1, 15612822, 'Hendy Kurnia', 'Mahasiswa', 'Cihampelas', '0867163712', 'KM-ITB', 'Hearing TPB Cup', 30, '2016-02-18 08:10:40', '2016-02-25 09:00:00', '2016-02-25 10:00:00'),
 (25, 4, 13513002, 'Irene Wiliudarsan', 'Mahasiswa', 'Jl. Tamansari', '0881238822', 'HMIF', 'Hearing Pemilu 1 HMIF', 50, '2016-02-18 08:43:33', '2016-02-19 08:00:00', '2016-02-19 10:00:00');
 
 -- --------------------------------------------------------
@@ -104,15 +103,16 @@ INSERT INTO `peminjaman` (`id_peminjaman`, `id_ruangan`, `id_peminjam`, `nama_pe
 --
 
 CREATE TABLE IF NOT EXISTS `pengguna` (
-  `password` varchar(30) NOT NULL DEFAULT 'administrator'
+  `password` varchar(30) NOT NULL DEFAULT 'administrator',
+  `salt` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` (`password`) VALUES
-('admin');
+INSERT INTO `pengguna` (`password`, `salt`) VALUES
+('UBHj+9bwj7j4c5DnRvn4HQ==', 'UI/1XqrmHwU=');
 
 -- --------------------------------------------------------
 
@@ -134,14 +134,14 @@ CREATE TABLE IF NOT EXISTS `ruangan` (
 
 INSERT INTO `ruangan` (`id_ruangan`, `nama`, `kapasitas`, `status`) VALUES
 (1, 'R 7602', 150, 'OK'),
-(2, 'R 7606', 75, 'Rusak'),
-(3, 'R 7609', 50, 'Rusak'),
-(4, 'R 7603', 50, 'Rusak'),
-(5, 'Laboratorium Dasar I', 50, 'Rusak'),
-(6, 'Laboratorium Dasar IV', 50, 'Rusak'),
-(7, 'Laboratorium Dasar II', 30, 'Rusak'),
-(8, 'R Multimedia', 75, 'Rusak'),
-(9, 'R 7610', 50, 'Rusak');
+(2, 'R 7606', 75, 'OK'),
+(3, 'R 7609', 50, 'OK'),
+(4, 'R 7603', 50, 'OK'),
+(5, 'Laboratorium Dasar I', 50, 'OK'),
+(6, 'Laboratorium Dasar IV', 50, 'OK'),
+(7, 'Laboratorium Dasar II', 30, 'OK'),
+(8, 'R Multimedia', 75, 'OK'),
+(9, 'R 7610', 50, 'OK');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
